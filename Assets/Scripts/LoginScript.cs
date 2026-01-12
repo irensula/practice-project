@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using TMPro;
+using System.Text.RegularExpressions;
 
 [System.Serializable]
 public class UserData
@@ -23,11 +24,17 @@ public class LoginScript : MonoBehaviour
     private string defaultEmail;
     private string defaultPassword;
 
+    public TMP_Text txtMessage;
     void Start()
     {
         LoadUserData();
-    }
+        // hide error message when user types in the input fields
+        inputEmail.onValueChanged.AddListener(delegate { ClearMessage(); });
+        inputPassword.onValueChanged.AddListener(delegate { ClearMessage(); });
 
+        txtMessage.gameObject.SetActive(false);
+    }
+    // load default email and password from db.json
     void LoadUserData()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "db.json");
@@ -45,19 +52,52 @@ public class LoginScript : MonoBehaviour
             Debug.LogError("db.json not found!");    
         }
     }
-
+    // validate user's email and password
     public void ReadData()
     {
-        string email = inputEmail.text;
-        string password = inputPassword.text;
+        string email = inputEmail.text.Trim();
+        string password = inputPassword.text.Trim();
 
-        if (email == defaultEmail && password == defaultPassword)
+        if (!IsValidEmail(email)) 
         {
-            SceneManager.LoadScene("MenuScene");
+            ShowMessage("The email address is invalid");
+            return;
+        }
+        else if (email == defaultEmail && password == defaultPassword) 
+        {
+            SceneManager.LoadScene("MainMenuScene");
         }
         else
         {
-            Debug.Log("The wrong email or password.");
+            ShowMessage("Incorrect email address or password");
         }
+    }
+    // check if email is valid
+    bool IsValidEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email)) return false;
+
+        string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(email.Trim(), pattern);
+    }
+    // display error message in UI and start auto-hide timer
+    void ShowMessage(string message)
+    {
+        txtMessage.text = message;
+        txtMessage.gameObject.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(HideMessageAfterDelay(5f));
+    }
+    // hide message after delay 
+    System.Collections.IEnumerator HideMessageAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        txtMessage.gameObject.SetActive(false);
+    }
+    // hide error message immediately when user types
+    void ClearMessage()
+    {
+        txtMessage.gameObject.SetActive(false);
+        StopAllCoroutines();
     }
 }

@@ -3,25 +3,10 @@
 // using System.IO;
 // using TMPro;
 
-// [System.Serializable]
-// public class UserData
-// {
-//     public string email;
-//     public string password;
-// }
-
-// [System.Serializable]
-// public class Database
-// {
-//     public UserData user;
-// }
 // public class RegistrationScript : MonoBehaviour
 // {
 //     public TMP_InputField inputEmail;
 //     public TMP_InputField inputPassword;
-
-//     private string defaultEmail;
-//     private string defaultPassword;
 
 //     void Start()
 //     {
@@ -37,8 +22,7 @@
 //             string json = File.ReadAllText(path);
 //             Database db = JsonUtility.FromJson<Database>(json);
 
-//             defaultEmail = db.user.email;
-//             defaultPassword = db.user.password;
+            
 //         } 
 //         else
 //         {
@@ -51,7 +35,7 @@
 //         string email = inputEmail.text;
 //         string password = inputPassword.text;
 
-//         if (email == defaultEmail && password == defaultPassword)
+//         if (true)
 //         {
 //             SceneManager.LoadScene("MenuScene");
 //         }
