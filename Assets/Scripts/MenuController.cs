@@ -68,7 +68,17 @@ public class MenuController : MonoBehaviour
             newCourseObj.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
 
             Button btn = newCourseObj.GetComponent<Button>();
-            btn.onClick.AddListener(() => SelectCourse(course));
+
+            if(course.locked == false)
+            {
+                btn.interactable = true;
+                btn.onClick.AddListener(() => SelectCourse(course));
+            }
+            else
+            {
+                btn.interactable = false;
+                Debug.Log("Button is dosabled. The course is locked");
+            }
         }
     }
     public void ShowCourseLessons()

@@ -36,15 +36,18 @@
     "courses": [
         {
             "courseID": 1,
-            "courseName": "Customer Service"
+            "courseName": "Customer Service",
+            "locked": false
         },
         {
             "courseID": 2,
-            "courseName": "Hospitality"
+            "courseName": "Hospitality",
+            "locked": true
         },
         {
             "courseID": 3,
-            "courseName": "Health Care"
+            "courseName": "Health Care",
+            "locked": true
         }
     ],
     "lessons": [

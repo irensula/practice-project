@@ -522,9 +522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bad9c27e39abf4abc02daf64a9494c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegistrationScript
+  txtMessage: {fileID: 1499551044}
   inputEmail: {fileID: 1452626806}
   inputPassword: {fileID: 1066166428}
-  txtMessage: {fileID: 1499551044}
 --- !u!4 &182233358
 Transform:
   m_ObjectHideFlags: 0
