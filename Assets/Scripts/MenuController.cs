@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Security.Cryptography;
 using System.Linq;
+using UnityEditor.Rendering;
 
 public class MenuController : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class MenuController : MonoBehaviour
     public GameObject lessonsPanel;
     public GameObject optionsPanel;
 
+    public GameObject courseButtonPrefab;
     public GameObject lessonButtonPrefab;
+    public Transform coursesContainer;
     public Transform lessonsContainer; 
 
     private Database db;
@@ -50,6 +53,23 @@ public class MenuController : MonoBehaviour
     {
         HideAll();
         coursesPanel.SetActive(true);
+
+        // clear the previous buttons
+        foreach (Transform child in coursesContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // create new buttons
+        foreach (var course in db.courses)
+        {
+            GameObject newCourseObj = Instantiate(courseButtonPrefab, coursesContainer);
+
+            newCourseObj.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
+
+            Button btn = newCourseObj.GetComponent<Button>();
+            btn.onClick.AddListener(() => SelectCourse(course));
+        }
     }
     public void ShowCourseLessons()
     {
@@ -63,24 +83,18 @@ public class MenuController : MonoBehaviour
         }
 
         // create new buttons
-        foreach (var lessonData in db.lessons) // !!! add filter !!!
+        foreach (var lesson in db.lessons) // !!! add filter !!!
         {
-            var currentLesson = lessonData;
-
             GameObject newLessonObj = Instantiate(lessonButtonPrefab, lessonsContainer);
             
-            newLessonObj.GetComponentInChildren<TextMeshProUGUI>().text = currentLesson.title;
+            newLessonObj.GetComponentInChildren<TextMeshProUGUI>().text = lesson.title;
 
             Button btn = newLessonObj.GetComponent<Button>();
 
-            btn.onClick.AddListener(() => OnLessonClicked(currentLesson));
+            btn.onClick.AddListener(() => OnLessonClicked(lesson));
         }
     }
 
-    private void OnLessonClicked(LessonData lesson)
-    {
-        Debug.Log("The lesson opened: " + lesson.title);
-    }
     public void ShowOptions()
     {
         HideAll();
@@ -93,9 +107,14 @@ public class MenuController : MonoBehaviour
         ShowMainMenu();
     }
 
-    public void SelectCourse(string course)
+    public void SelectCourse(CourseData course)
     {
-        MenuBootstrap.Instance.CourseSelected = course;
+        MenuBootstrap.Instance.CourseSelected = course.courseName;
         ShowCourseLessons();
+    }
+
+    private void OnLessonClicked(LessonData lesson)
+    {
+        Debug.Log("The lesson opened: " + lesson.title);
     }
 }
