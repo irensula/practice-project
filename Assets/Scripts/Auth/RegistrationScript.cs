@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 
 public class RegistrationScript : AuthUIHelper
 {
@@ -10,20 +10,13 @@ public class RegistrationScript : AuthUIHelper
     public TMP_InputField inputPassword;
     public TMP_InputField inputConfirmPassword;
 
-    Database db;
-    string dbPath;
+    private Database db;
 
     void Start()
     {
-        string persistentPath = Path.Combine(Application.persistentDataPath, "db.json");
-        string streamingPath = Path.Combine(Application.streamingAssetsPath, "db.json");
-
-        if (!File.Exists(persistentPath))
-        {
-            File.Copy(streamingPath, persistentPath);
-        }
-        dbPath = persistentPath;
-
+        DatabaseService.Init();
+        db = DatabaseService.Load();
+        
         // hide error message when user types in the input fields
         inputEmail.onValueChanged.AddListener(delegate { ClearMessage(); });
         inputPassword.onValueChanged.AddListener(delegate { ClearMessage(); });
@@ -50,25 +43,14 @@ public class RegistrationScript : AuthUIHelper
             ShowMessage("Passwords must be at least 8 characters long.");
             return;
         }
-        // load db.json
-        string json = File.ReadAllText(dbPath);
-        db = JsonUtility.FromJson<Database>(json);
-        if (db == null || db.users == null)
-        {
-            db = new Database();
-            db.users = new UserData[0];
-        }
-
-        // create new user
-        UserData newUser = new UserData();
-        newUser.email = inputEmail.text.Trim();
-        newUser.password = inputPassword.text.Trim();
         
+        string email = inputEmail.text.Trim().ToLower();
+        string password = inputPassword.text;
 
         // check email if exists
         foreach (var user in db.users)
         {
-            if (user.email.ToLower() == newUser.email.ToLower())
+            if (user.email.ToLower() == email)
             {
                 Debug.Log("This email is already registered.");
                 return;
@@ -78,20 +60,24 @@ public class RegistrationScript : AuthUIHelper
         // add id
         int newId = 1;
         if (db.users.Length > 0)
-            newId = db.users[db.users.Length - 1].id + 1;
+            newId = db.users[db.users.Length - 1].userID + 1;
 
-        newUser.id = newId;
+        
+        UserData newUser = new UserData
+        {
+            userID = newId,
+            email = email,
+            password = password
+        };
 
         // add user to array
-        var tempList = new List<UserData>(db.users);
-        tempList.Add(newUser);
-        db.users = tempList.ToArray();
+        var userList = new List<UserData>(db.users);
+        userList.Add(newUser);
+        db.users = userList.ToArray();
 
         // save to db.json
-        string newJson = JsonUtility.ToJson(db, true);
-        File.WriteAllText(dbPath, newJson);
-        Debug.Log("RegisterUser called");
-        Debug.Log("DB path: " + dbPath);
+        DatabaseService.Save(db);
+
         // go to the next scene
         SceneManager.LoadScene("MainMenuScene");
     }

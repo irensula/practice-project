@@ -38,7 +38,7 @@ public class MenuController : MonoBehaviour
         HideAll();
         coursesPanel.SetActive(true);
     }
-    public void ShowLessons()
+    public void ShowCourseLessons()
     {
         HideAll();
         lessonsPanel.SetActive(true);
@@ -58,6 +58,6 @@ public class MenuController : MonoBehaviour
     public void SelectCourse(string course)
     {
         MenuBootstrap.Instance.CourseSelected = course;
-        ShowLessons();
+        ShowCourseLessons();
     }
 }

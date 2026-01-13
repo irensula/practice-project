@@ -1,7 +1,77 @@
 {
-  "users":
-    [
-      { "id": 1, "email": "user@gmail.com", "password": "password" },
-      { "id": 2, "email": "test1@gmail.com", "password": "password1" }
-    ] 
+    "users": [
+        {
+            "userID": 1,
+            "email": "user@gmail.com",
+            "password": "password"
+        },
+        {
+            "userID": 2,
+            "email": "test1@gmail.com",
+            "password": "password1"
+        },
+        {
+            "userID": 3,
+            "email": "test2@gmail.com",
+            "password": "password"
+        }
+    ],
+    "languages": [
+        {
+            "languageID": 1,
+            "code": "fi",
+            "languageName": "Finnish"
+        },
+        {
+            "languageID": 2,
+            "code": "en-US",
+            "languageName": "US English"
+        },
+        {
+            "languageID": 3,
+            "code": "en-GB",
+            "languageName": "UK English"
+        }
+    ],
+    "courses": [
+        {
+            "courseID": 1,
+            "courseName": "Customer Service"
+        },
+        {
+            "courseID": 2,
+            "courseName": "Hospitality"
+        },
+        {
+            "courseID": 3,
+            "courseName": "Health Care"
+        }
+    ],
+    "lessons": [
+        {
+            "lessonID": 1,
+            "courseID": 1,
+            "title": "Lesson 1"
+        },
+        {
+            "lessonID": 2,
+            "courseID": 1,
+            "title": "Lesson 2"
+        },
+        {
+            "lessonID": 3,
+            "courseID": 1,
+            "title": "Lesson 3"
+        },
+        {
+            "lessonID": 4,
+            "courseID": 1,
+            "title": "Lesson 4"
+        },
+        {
+            "lessonID": 5,
+            "courseID": 1,
+            "title": "Lesson 5"
+        }
+    ]
 }
