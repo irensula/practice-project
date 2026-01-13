@@ -1,4 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Security.Cryptography;
+using System.Linq;
 
 public class MenuController : MonoBehaviour
 {
@@ -8,8 +13,16 @@ public class MenuController : MonoBehaviour
     public GameObject lessonsPanel;
     public GameObject optionsPanel;
 
+    public GameObject lessonButtonPrefab;
+    public Transform lessonsContainer; 
+
+    private Database db;
+
     void Start()
     {
+        DatabaseService.Init();
+        db = DatabaseService.Load();
+
         ShowLanguage();
     }
 
@@ -42,6 +55,31 @@ public class MenuController : MonoBehaviour
     {
         HideAll();
         lessonsPanel.SetActive(true);
+
+        // clear the previous buttons
+        foreach (Transform child in lessonsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // create new buttons
+        foreach (var lessonData in db.lessons) // !!! add filter !!!
+        {
+            var currentLesson = lessonData;
+
+            GameObject newLessonObj = Instantiate(lessonButtonPrefab, lessonsContainer);
+            
+            newLessonObj.GetComponentInChildren<TextMeshProUGUI>().text = currentLesson.title;
+
+            Button btn = newLessonObj.GetComponent<Button>();
+
+            btn.onClick.AddListener(() => OnLessonClicked(currentLesson));
+        }
+    }
+
+    private void OnLessonClicked(LessonData lesson)
+    {
+        Debug.Log("The lesson opened: " + lesson.title);
     }
     public void ShowOptions()
     {
