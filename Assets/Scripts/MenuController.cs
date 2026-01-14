@@ -1,10 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Security.Cryptography;
-using System.Linq;
-using UnityEditor.Rendering;
+using System.Collections.Generic;
 
 public class MenuController : MonoBehaviour
 {
@@ -13,6 +10,8 @@ public class MenuController : MonoBehaviour
     public GameObject coursesPanel;
     public GameObject lessonsPanel;
     public GameObject optionsPanel;
+
+    private Stack<GameObject> panelStack = new Stack<GameObject>();
 
     public GameObject courseButtonPrefab;
     public GameObject lessonButtonPrefab;
@@ -26,33 +25,26 @@ public class MenuController : MonoBehaviour
         DatabaseService.Init();
         db = DatabaseService.Load();
 
-        ShowLanguage();
+        ShowPanel(languagePanel);
     }
 
     // Update is called once per frame
-    void HideAll()
-    {
-        languagePanel.SetActive(false);
-        mainMenuPanel.SetActive(false);
-        coursesPanel.SetActive(false);
-        lessonsPanel.SetActive(false);
-        optionsPanel.SetActive(false);
-    }
 
     public void ShowLanguage()
     {
-        HideAll();
-        languagePanel.SetActive(true);
+        ShowPanel(languagePanel); 
+        panelStack.Clear();
+        ShowPanel(mainMenuPanel);
     }
     public void ShowMainMenu()
     {
-        HideAll();
-        mainMenuPanel.SetActive(true);
+       
+        ShowPanel(mainMenuPanel);
     }
     public void ShowCourses()
     {
-        HideAll();
-        coursesPanel.SetActive(true);
+        
+        ShowPanel(coursesPanel); 
 
         // clear the previous buttons
         foreach (Transform child in coursesContainer)
@@ -83,8 +75,7 @@ public class MenuController : MonoBehaviour
     }
     public void ShowCourseLessons()
     {
-        HideAll();
-        lessonsPanel.SetActive(true);
+        ShowPanel(lessonsPanel);   
 
         // clear the previous buttons
         foreach (Transform child in lessonsContainer)
@@ -107,8 +98,7 @@ public class MenuController : MonoBehaviour
 
     public void ShowOptions()
     {
-        HideAll();
-        optionsPanel.SetActive(true);
+        ShowPanel(optionsPanel);
     }
 
     public void SelectLanguage(string lang)
@@ -126,5 +116,31 @@ public class MenuController : MonoBehaviour
     private void OnLessonClicked(LessonData lesson)
     {
         Debug.Log("The lesson opened: " + lesson.title);
+    }
+
+    // go back to the previos menu panel
+    public void ShowPanel(GameObject panel)
+    {
+        if (panelStack.Count > 0)
+            panelStack.Peek().SetActive(false);
+
+        panelStack.Push(panel);
+        panel.SetActive(true);
+    }
+
+    public void GoBack()
+    {
+        if (panelStack.Count <= 1)
+            return;
+            
+        GameObject current = panelStack.Pop();
+        current.SetActive(false);
+
+        panelStack.Peek().SetActive(true);
+    }
+
+    public void OnBackButton()
+    {
+        GoBack();
     }
 }
