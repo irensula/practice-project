@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -137,7 +138,7 @@ public class MenuController : MonoBehaviour
 
     private void OnLessonClicked(LessonData lesson)
     {
-        Debug.Log("The lesson opened: " + lesson.title);
+        SceneManager.LoadScene("LessonScene");
     }
 
     // go back to the previos menu panel
