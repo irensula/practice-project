@@ -94,7 +94,6 @@ public class MenuController : MonoBehaviour
             else
             {
                 btn.interactable = false;
-                Debug.Log("Button is dosabled. The course is locked");
             }
         }
     }

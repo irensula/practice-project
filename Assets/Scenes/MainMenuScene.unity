@@ -599,11 +599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 365
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -84.59677
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -873,7 +873,6 @@ GameObject:
   - component: {fileID: 463726812}
   - component: {fileID: 463726814}
   - component: {fileID: 463726813}
-  - component: {fileID: 463726815}
   m_Layer: 5
   m_Name: LessonsPanel
   m_TagString: Untagged
@@ -940,32 +939,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463726811}
   m_CullTransparentMesh: 1
---- !u!114 &463726815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463726811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &485269826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,11 +1258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 365
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -84.5
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 4900956010875616360, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3947,7 +3920,6 @@ GameObject:
   - component: {fileID: 1896888766}
   - component: {fileID: 1896888768}
   - component: {fileID: 1896888767}
-  - component: {fileID: 1896888769}
   m_Layer: 5
   m_Name: CoursesPanel
   m_TagString: Untagged
@@ -4014,32 +3986,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896888765}
   m_CullTransparentMesh: 1
---- !u!114 &1896888769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896888765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &1919957640
 GameObject:
   m_ObjectHideFlags: 0
@@ -4305,6 +4251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnGoBack
       objectReference: {fileID: 0}
+    - target: {fileID: 9078487766864793476, guid: 3ae7c5d98039cf946af4854cf9c2a51d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4348,7 +4298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 961, y: -238.5}
+  m_AnchoredPosition: {x: 960, y: -238.5}
   m_SizeDelta: {x: 600, y: 800}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1975198439
