@@ -13,11 +13,14 @@ public class MenuController : MonoBehaviour
 
     private Stack<GameObject> panelStack = new Stack<GameObject>();
 
+    public GameObject languageButtonPrefab;
     public GameObject courseButtonPrefab;
     public GameObject lessonButtonPrefab;
+    public Transform languagesContainer;
     public Transform coursesContainer;
     public Transform lessonsContainer; 
 
+    public List<LanguageData> languages;
     private Database db;
 
     void Start()
@@ -25,16 +28,35 @@ public class MenuController : MonoBehaviour
         DatabaseService.Init();
         db = DatabaseService.Load();
 
-        ShowPanel(languagePanel);
+        ShowLanguage();
     }
 
     // Update is called once per frame
 
     public void ShowLanguage()
     {
-        ShowPanel(languagePanel); 
         panelStack.Clear();
-        ShowPanel(mainMenuPanel);
+        ShowPanel(languagePanel); 
+
+        // clear the previous buttons
+        foreach (Transform child in languagesContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // create new buttons
+        foreach (var language in languages)
+        {
+            GameObject newLanguageObj = Instantiate(languageButtonPrefab, languagesContainer);
+
+            Image img = newLanguageObj.GetComponent<Image>();
+            img.sprite = language.languageFlag;
+
+            Button btn = newLanguageObj.GetComponent<Button>();
+            string langCode = language.code;
+            btn.onClick.AddListener(() => SelectLanguage(langCode));
+        }
+
     }
     public void ShowMainMenu()
     {

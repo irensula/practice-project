@@ -25,17 +25,20 @@
         {
             "languageID": 1,
             "code": "fi",
-            "languageName": "Finnish"
+            "languageName": "Finnish",
+            "languageFlag": "finnish-flag.png"
         },
         {
             "languageID": 2,
             "code": "en-US",
-            "languageName": "US English"
+            "languageName": "US English",
+            "languageFlag": "finnish-flag.png"
         },
         {
             "languageID": 3,
             "code": "en-GB",
-            "languageName": "UK English"
+            "languageName": "UK English",
+            "languageFlag": "american-flag.png"
         }
     ],
     "courses": [
