@@ -54,6 +54,7 @@ public class MenuController : MonoBehaviour
             img.sprite = language.languageFlag;
 
             Button btn = newLanguageObj.GetComponent<Button>();
+            UIAudioManager.Instance.RegisterButton(btn);
             string langCode = language.code;
             btn.onClick.AddListener(() => SelectLanguage(langCode));
         }
@@ -83,6 +84,7 @@ public class MenuController : MonoBehaviour
             newCourseObj.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
 
             Button btn = newCourseObj.GetComponent<Button>();
+            UIAudioManager.Instance.RegisterButton(btn);
 
             if(course.locked == false)
             {
@@ -114,6 +116,7 @@ public class MenuController : MonoBehaviour
             newLessonObj.GetComponentInChildren<TextMeshProUGUI>().text = lesson.title;
 
             Button btn = newLessonObj.GetComponent<Button>();
+            UIAudioManager.Instance.RegisterButton(btn);
 
             btn.onClick.AddListener(() => OnLessonClicked(lesson));
         }
