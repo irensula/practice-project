@@ -14,6 +14,11 @@
             "userID": 3,
             "email": "test2@gmail.com",
             "password": "password"
+        },
+        {
+            "userID": 4,
+            "email": "user1@gmail.com",
+            "password": "password1"
         }
     ],
     "languages": [
