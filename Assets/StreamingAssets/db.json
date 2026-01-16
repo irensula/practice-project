@@ -19,6 +19,11 @@
             "userID": 4,
             "email": "user1@gmail.com",
             "password": "password1"
+        },
+        {
+            "userID": 5,
+            "email": "test4@gmail.com",
+            "password": "password"
         }
     ],
     "languages": [
@@ -26,19 +31,25 @@
             "languageID": 1,
             "code": "fi",
             "languageName": "Finnish",
-            "languageFlag": "finnish-flag.png"
+            "languageFlag": {
+                "instanceID": 0
+            }
         },
         {
             "languageID": 2,
             "code": "en-US",
             "languageName": "US English",
-            "languageFlag": "finnish-flag.png"
+            "languageFlag": {
+                "instanceID": 0
+            }
         },
         {
             "languageID": 3,
             "code": "en-GB",
             "languageName": "UK English",
-            "languageFlag": "american-flag.png"
+            "languageFlag": {
+                "instanceID": 0
+            }
         }
     ],
     "courses": [

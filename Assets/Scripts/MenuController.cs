@@ -22,6 +22,9 @@ public class MenuController : MonoBehaviour
     public Transform lessonsContainer; 
 
     public List<LanguageData> languages;
+
+    public TextMeshProUGUI languageText;
+
     private Database db;
 
     void Start()
@@ -129,6 +132,7 @@ public class MenuController : MonoBehaviour
     public void SelectLanguage(string lang)
     {
         MenuBootstrap.Instance.LanguageSelected = lang;
+        UpdateProgressUI();
         ShowMainMenu();
     }
 
@@ -136,6 +140,20 @@ public class MenuController : MonoBehaviour
     {
         MenuBootstrap.Instance.CourseSelected = course.courseName;
         ShowCourseLessons();
+    }
+
+    public string GetLanguageNameByCode(string code)
+    {
+        LanguageData lang = languages.Find(l => l.code == code);
+        if (lang != null)
+            return lang.languageName;
+        return code;
+    }
+
+    public void UpdateProgressUI()
+    {
+        if (languageText != null)
+            languageText.text = "Language: " + GetLanguageNameByCode(MenuBootstrap.Instance.LanguageSelected);
     }
 
     private void OnLessonClicked(LessonData lesson)
@@ -151,6 +169,8 @@ public class MenuController : MonoBehaviour
 
         panelStack.Push(panel);
         panel.SetActive(true);
+
+        UpdateProgressUI();
     }
 
     public void GoBack()
