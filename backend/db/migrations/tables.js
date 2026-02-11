@@ -4,12 +4,17 @@
  */
 exports.up = function(knex) {
     return knex.schema
-    
+    .createTable('users', t => {
+        t.increments('id').primary()
+        t.string('useremail').notNullable()
+        t.string('password').notNullable()
+    })
     .createTable('vocabulary', t => {
         t.increments('id').primary()
         t.string('word').notNullable()
         t.string('translation').notNullable()
-    })    
+    })
+
   };
 
 /**
@@ -19,5 +24,6 @@ exports.up = function(knex) {
 // child tables first before parent tables
 exports.down = function(knex) {
 return knex.schema
-.dropTableIfExists('vocabulary')
+  .dropTableIfExists('vocabulary')
+  .dropTableIfExists('users')
 };

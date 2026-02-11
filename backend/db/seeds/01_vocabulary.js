@@ -2,12 +2,6 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
-const testPassword = "salasana"
-
-var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
-var hashedpassword = bcrypt.hashSync(testPassword, salt);
-
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('vocabulary').del()
@@ -15,12 +9,16 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('vocabulary').insert([
         {  
-          word: 'menu', 
-          translation: 'ruokalista',
+          word: 'ruoka', 
+          translation: 'food',
+        },
+        {  
+          word: 'ruokalista', 
+          translation: 'menu',
         },
         { 
-          word: 'table', 
-          translation: 'pöytä',
+          word: 'pöytä', 
+          translation: 'table',
         },
       ]);
     });
