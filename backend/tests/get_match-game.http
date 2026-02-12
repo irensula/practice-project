@@ -1,0 +1,2 @@
+GET http://localhost:3001/match-game/lang/fi
+Accept: application/json

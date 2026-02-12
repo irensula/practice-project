@@ -4,18 +4,46 @@
  */
 exports.up = function(knex) {
     return knex.schema
-    .createTable('users', t => {
-        t.increments('id').primary()
-        t.string('useremail').notNullable()
-        t.string('password').notNullable()
-    })
-    .createTable('vocabulary', t => {
-        t.increments('id').primary()
-        t.string('word').notNullable()
-        t.string('translation').notNullable()
-    })
+      .createTable('languages', t => {
+          t.increments('id').primary();
+          t.string('lang_code').notNullable().unique();
+          t.string('lang_name').notNullable();
+      })
+      .createTable('words', t => {
+          t.increments('id').primary();
+          t.integer('base_language_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('languages')
+            .onDelete('CASCADE');
+          t.string('base_word').notNullable();
+          t.string('image');
+      })
+      .createTable('word_translations', t => {
+          t.increments('id').primary();
+          t.integer('word_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('words')
+            .onDelete('CASCADE');
+          t.integer('language_id')
+            .unsigned()
+            .notNullable()
+            .references('id')
+            .inTable('languages')
+            .onDelete('CASCADE');
+          t.string('text').notNullable();
+          t.string('audio');
+      })
+      .createTable('users', t => {
+          t.increments('id').primary()
+          t.string('useremail').notNullable().unique();
+          t.string('password').notNullable()
+      })
 
-  };
+    };
 
 /**
  * @param { import("knex").Knex } knex
@@ -23,7 +51,9 @@ exports.up = function(knex) {
  */
 // child tables first before parent tables
 exports.down = function(knex) {
-return knex.schema
-  .dropTableIfExists('vocabulary')
-  .dropTableIfExists('users')
-};
+  return knex.schema
+    .dropTableIfExists('word_translations')
+    .dropTableIfExists('words')
+    .dropTableIfExists('languages')
+    .dropTableIfExists('users')
+  };

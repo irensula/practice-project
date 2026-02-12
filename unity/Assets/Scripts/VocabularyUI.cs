@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using TMPro;
-
 
 [System.Serializable]
 public class VocabularyItem
 {
     public int id;
     public string word;
+    public string image;
 }
 public class VocabularyUI : MonoBehaviour
 {
-    public string url = "http://localhost:3000/vocabulary";
-    public GameObject cardPrefab;
-    public Transform contentParent;
+    public string url = "http://localhost:3001/match-game/lang/fi";
+    private string imageBaseUrl = "http://localhost:3001/cdn-assets/";
+    public GameObject wordPrefab;
+    public GameObject imagePrefab;
+    public Transform wordsRow;
+    public Transform imagesRow;
     void Start()
     {
         StartCoroutine(LoadVocabulary());
@@ -26,41 +30,51 @@ public class VocabularyUI : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
-
-            if(request.result != UnityWebRequest.Result.Success)
+            Debug.Log("Requesting: " + url);
+            if(request.result == UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Request error: " + request.error);
+                string json = request.downloadHandler.text;
+                List<VocabularyItem> items = JsonHelper.FromJson<VocabularyItem>(json);
+
+                foreach (var item in items)
+                {
+                    CreateWord(item);
+                    StartCoroutine(CreateImage(item));
+                }
             }
             else
             {
-                VocabularyItem[] words = JsonHelper.FromJson<VocabularyItem>(request.downloadHandler.text);
-
-                foreach (var w in words)
-                {
-                    GameObject card = Instantiate(cardPrefab, contentParent);
-                    Debug.Log("Word: " + w.word);
-                    TMP_Text wordText = card.transform.Find("WordText").GetComponent<TMP_Text>();
-                    if (wordText != null)
-                        wordText.text = w.word;
-                }
+                Debug.LogError(request.error);
             }
         }
     }
-}
 
-// Helper class for deserializing a JSON array
-public static class JsonHelper
-{
-    public static T[] FromJson<T>(string json)
+    void CreateWord(VocabularyItem item)
     {
-        json = "{\"Items\":" + json + "}";
-        Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-        return wrapper.Items;
+        GameObject obj = Instantiate(wordPrefab, wordsRow);
+        obj.GetComponentInChildren<TMP_Text>().text = item.word;
     }
 
-    [System.Serializable]
-    private class Wrapper<T>
+    IEnumerator CreateImage(VocabularyItem item)
     {
-        public T[] Items;
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageBaseUrl + item.image);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Texture2D texture = DownloadHandlerTexture.GetContent(request);
+            Sprite sprite = Sprite.Create(
+                texture,
+                new Rect(0,0, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f)
+            );
+
+            GameObject obj = Instantiate(imagePrefab, imagesRow);
+            obj.GetComponent<Image>().sprite = sprite;
+        }
+        else
+        {
+            Debug.LogError(request.error);
+        }
     }
 }

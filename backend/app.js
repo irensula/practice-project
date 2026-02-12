@@ -8,16 +8,20 @@ var validateSchema = require('./middleware/validate');
 var isAuthenticated = require('./middleware/auth');
 
 let indexRouter = require('./routes/index');
-let vocabularyRouter = require('./routes/vocabularyRouter');
+let wordsRouter = require('./routes/wordsRouter');
+let matchGameRouter = require('./routes/matchGameRouter');
 
 let app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'build')));
 
+app.use('/words', wordsRouter);
+app.use('/match-game', matchGameRouter);
 app.use('/', indexRouter);
-app.use('/vocabulary', vocabularyRouter);
+
+// app.use(express.static(path.join(__dirname, 'build')));
+app.use('/cdn-assets', express.static('cdn-assets'));
 
 module.exports = app;
