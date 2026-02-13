@@ -51,5 +51,12 @@ public class ImageItem : MonoBehaviour, IPointerClickHandler
     {
         return isMatched;
     }
+
+    public void ResetItem()
+    {
+        isMatched = false;
+        picture.color = Color.white;
+        border.color = Color.clear;
+    }
 }
 

@@ -24,9 +24,12 @@ public class VocabularyUI : MonoBehaviour
     public Transform imagesRow;
     private WordItem selectedWord;
     private ImageItem selectedImage;
+    public Button btnCloseWinPanel;
+
     void Start()
     {
         StartCoroutine(LoadVocabulary());
+        btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
     }
 
     void Shuffle<T>(List<T> list)
@@ -174,5 +177,18 @@ public class VocabularyUI : MonoBehaviour
         {
             winPanel.SetActive(true);
         }
+    }
+
+    public void CloseWinPanel()
+    {
+        winPanel.SetActive(false);
+
+        WordItem[] words = wordsRow.GetComponentsInChildren<WordItem>();
+        foreach (var w in words)
+            w.ResetItem();
+
+        ImageItem[] images = imagesRow.GetComponentsInChildren<ImageItem>();
+        foreach (var i in images)
+            i.ResetItem();
     }
 }

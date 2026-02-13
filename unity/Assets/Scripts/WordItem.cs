@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
+using System.IO.Compression;
 public class WordItem : MonoBehaviour, IPointerClickHandler
 {
     public int id;
     private VocabularyUI gameManager;
     private TMP_Text text;
     private Image background;
-    private Color normalColor = Color.white;
+    private Color normalColor = new Color32(222, 226, 255, 255);
     private Color selectedColor = new Color32(131, 106, 234, 255);
     private bool isMatched = false;
 
@@ -36,7 +37,7 @@ public class WordItem : MonoBehaviour, IPointerClickHandler
     {
         isMatched = true;
         text.color = new Color32(222, 226, 255, 255);
-    }
+    } 
 
     public void SetSelected(bool value)
     {
@@ -46,5 +47,12 @@ public class WordItem : MonoBehaviour, IPointerClickHandler
     public bool IsMatched()
     {
         return isMatched;
+    }
+
+    public void ResetItem()
+    {
+        isMatched = false;
+        background.color = normalColor;
+        text.color = Color.white;
     }
 }
