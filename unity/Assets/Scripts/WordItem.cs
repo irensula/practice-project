@@ -28,8 +28,15 @@ public class WordItem : MonoBehaviour, IPointerClickHandler
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
-        // audioSource.volume = UIAudioManager.Instance.voiceSource.volume;
     }
+
+    // void Start()
+    // {
+    //     if (UIAudioManager.Instance != null && UIAudioManager.Instance.voiceSource != null)
+    //     {
+    //         audioSource.volume = UIAudioManager.Instance.voiceSource.volume;
+    //     }
+    // }
 
     public void Setup(int itemId, string word, VocabularyUI manager, string audioUrl = null)
     {
