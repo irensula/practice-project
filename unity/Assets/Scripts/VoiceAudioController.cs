@@ -47,14 +47,7 @@ public class VoiceAudioController : MonoBehaviour
 
     public void OnSliderChanged(float value)
     {
-        AudioListener.volume = value;
-
-        if (value > 0f)
-            isMuted = false;
-        else
-            isMuted = true;
-
-        lastVolume = value > 0f ? value : lastVolume;
+        UIAudioManager.Instance.SetVoiceVolume(value / 100f);
         
         ApplyVolume();
     }

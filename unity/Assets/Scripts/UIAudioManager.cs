@@ -14,6 +14,8 @@ public class UIAudioManager : MonoBehaviour
     public float volume = 0.5f;
 
     private AudioSource audioSource;
+    public AudioSource sfxSource;
+    public AudioSource voiceSource;
 
     private HashSet<Button> registeredButtons = new HashSet<Button>();
 
@@ -89,5 +91,15 @@ public class UIAudioManager : MonoBehaviour
 
         btn.onClick.AddListener(PlayClick);
         registeredButtons.Add(btn);
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        sfxSource.volume = value;
+    }
+
+    public void SetVoiceVolume(float value)
+    {
+        voiceSource.volume = value;
     }
 }

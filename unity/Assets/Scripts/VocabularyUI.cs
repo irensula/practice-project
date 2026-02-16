@@ -12,6 +12,7 @@ public class VocabularyItem
     public int id;
     public string word;
     public string image;
+    public string audio;
 }
 public class VocabularyUI : MonoBehaviour
 {
@@ -88,7 +89,9 @@ public class VocabularyUI : MonoBehaviour
     {
         GameObject obj = Instantiate(wordPrefab, wordsRow);
         WordItem wordItem = obj.GetComponent<WordItem>();
-        wordItem.Setup(item.id, item.word, this);
+        string audioFullUrl = "http://localhost:3001/cdn-assets/" + item.audio;
+
+        wordItem.Setup(item.id, item.word, this, audioFullUrl);
     }
 
     IEnumerator CreateImage(VocabularyItem item)

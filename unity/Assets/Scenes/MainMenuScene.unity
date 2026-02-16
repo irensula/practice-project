@@ -1371,6 +1371,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIAudioManager
   clickSound: {fileID: 8300000, guid: 2a7afc28cce667343a3ea3b5f5e5ae2b, type: 3}
   volume: 0.5
+  sfxSource: {fileID: 0}
+  voiceSource: {fileID: 0}
 --- !u!4 &723493494
 Transform:
   m_ObjectHideFlags: 0

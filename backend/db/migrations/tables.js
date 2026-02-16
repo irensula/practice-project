@@ -9,6 +9,11 @@ exports.up = function(knex) {
           t.string('lang_code').notNullable().unique();
           t.string('lang_name').notNullable();
       })
+      .createTable('users', t => {
+          t.increments('id').primary()
+          t.string('useremail').notNullable().unique();
+          t.string('password').notNullable()
+      })
       .createTable('words', t => {
           t.increments('id').primary();
           t.integer('base_language_id')
@@ -36,13 +41,9 @@ exports.up = function(knex) {
             .onDelete('CASCADE');
           t.string('text').notNullable();
           t.string('audio');
-      })
-      .createTable('users', t => {
-          t.increments('id').primary()
-          t.string('useremail').notNullable().unique();
-          t.string('password').notNullable()
-      })
 
+          t.unique(['word_id', 'language_id']);
+      })
     };
 
 /**
@@ -54,6 +55,6 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('word_translations')
     .dropTableIfExists('words')
-    .dropTableIfExists('languages')
     .dropTableIfExists('users')
+    .dropTableIfExists('languages')
   };
