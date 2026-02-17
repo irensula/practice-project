@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using System.Reflection;
 
 [System.Serializable]
 public class VocabularyItem
@@ -20,6 +21,10 @@ public class VocabularyUI : MonoBehaviour
     private string imageBaseUrl = "http://localhost:3001/cdn-assets/";
     public GameObject wordPrefab;
     public GameObject imagePrefab;
+    public Sprite doneSprite;
+    public Sprite wrongSprite;
+    
+    public Image resultIcon;
     public GameObject winPanel;
     public Transform wordsRow;
     public Transform imagesRow;
@@ -31,6 +36,7 @@ public class VocabularyUI : MonoBehaviour
     {
         StartCoroutine(LoadVocabulary());
         btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
+        resultIcon.gameObject.SetActive(false);
     }
 
     void Shuffle<T>(List<T> list)
@@ -145,9 +151,10 @@ public class VocabularyUI : MonoBehaviour
             Debug.Log($"TryMatch: Word {selectedWord.id}, Image {selectedImage.id}");
             if (selectedWord.id == selectedImage.id)
             {
-                Debug.Log("Match!");
                 selectedWord.SetMatched();
                 selectedImage.SetMatched();
+                
+                StartCoroutine(ShowResult(doneSprite));
 
                 CheckAllMatched();
             }
@@ -156,6 +163,8 @@ public class VocabularyUI : MonoBehaviour
                 Debug.Log("No match");
                 selectedWord.SetSelected(false);
                 selectedImage.SetSelected(false);
+                
+                StartCoroutine(ShowResult(wrongSprite));
             }
             
             selectedWord = null;
@@ -178,8 +187,14 @@ public class VocabularyUI : MonoBehaviour
 
         if (allMatched)
         {
-            winPanel.SetActive(true);
+            StartCoroutine(ShowWinPanel());
         }
+    }
+
+    IEnumerator ShowWinPanel()
+    {
+        yield return new WaitForSeconds(1.5f);
+        winPanel.SetActive(true);
     }
 
     public void CloseWinPanel()
@@ -193,5 +208,13 @@ public class VocabularyUI : MonoBehaviour
         ImageItem[] images = imagesRow.GetComponentsInChildren<ImageItem>();
         foreach (var i in images)
             i.ResetItem();
+    }
+
+    IEnumerator ShowResult(Sprite sprite)
+    {
+        resultIcon.sprite = sprite;
+        resultIcon.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        resultIcon.gameObject.SetActive(false);
     }
 }
