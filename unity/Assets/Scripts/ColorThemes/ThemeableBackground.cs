@@ -25,10 +25,44 @@ public class ThemeableBackground : MonoBehaviour, IThemeable
     {
         if (image != null)
         {
-            image.color = theme.background;
-            Debug.Log("ApplyTheme: color = " + theme.background, this);
+            image.color = theme.primary;
         }
         else
             Debug.LogWarning("Image не присвоен!", this);
     }
-} 
+}
+// using UnityEngine;
+// using UnityEngine.UI;
+
+// public class ThemeableBackground : MonoBehaviour, IThemeable
+// {
+//     [SerializeField] private Image image;
+
+//     private void Awake()
+//     {
+//         if (image == null)
+//             image = GetComponent<Image>();
+
+//         Debug.Log("Image assigned: " + (image != null));
+
+//     }
+
+//     private void OnEnable()
+//     {
+//         ThemeManager.Instance?.Register(this);
+//     }
+
+//     private void OnDisable()
+//     {
+//         ThemeManager.Instance?.Unregister(this);
+//     }
+
+//     public void ApplyTheme(UITheme theme)
+//     {
+//         if (image != null)
+//             image.color = theme.primary;
+
+//         Debug.Log("Registering themeable: " + this.name, this);
+//         Debug.Log("Applying theme: " + ThemeManager.Instance.CurrentTheme.primary);
+//     }
+// } 

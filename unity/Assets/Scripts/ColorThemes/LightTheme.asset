@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fc7705328c131458cf9837412bfaf6, type: 3}
   m_Name: LightTheme
   m_EditorClassIdentifier: Assembly-CSharp::UITheme
-  background: {r: 0.87058824, g: 0.8862745, b: 1, a: 1}
-  textPrimary: {r: 0.16078432, g: 0.15686275, b: 0.18039216, a: 1}
+  primary: {r: 0.87058824, g: 0.8862745, b: 1, a: 1}
+  text: {r: 0.16078432, g: 0.15686275, b: 0.18039216, a: 1}
+  secondary: {r: 0.49803922, g: 0.21568628, b: 0.57254905, a: 1}
+  accent: {r: 1, g: 0.54901963, b: 0, a: 1}
+  royalPlum: {r: 0.5529412, g: 0.19607843, b: 0.83137256, a: 1}
+  lavanderIndigo: {r: 0.5137255, g: 0.41568628, b: 0.91764706, a: 1}
+  success: {r: 0.10980392, g: 0.8392157, b: 0.17254902, a: 1}
+  error: {r: 0.8627451, g: 0.078431375, b: 0.23529412, a: 1}
+  warning: {r: 1, g: 0.64705884, b: 0, a: 1}
