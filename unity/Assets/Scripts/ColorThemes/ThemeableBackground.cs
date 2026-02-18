@@ -16,7 +16,7 @@ public class ThemeableBackground : MonoBehaviour, IThemeable
         } 
         else
         {
-            Debug.LogWarning("ThemeManager.Instance ещё не готов!", this);
+            Debug.LogWarning("ThemeManager.Instance is not ready yet!", this);
         }
     }
 
@@ -28,7 +28,7 @@ public class ThemeableBackground : MonoBehaviour, IThemeable
             image.color = theme.primary;
         }
         else
-            Debug.LogWarning("Image не присвоен!", this);
+            Debug.LogWarning("Image not assigned!", this);
     }
 }
 // using UnityEngine;

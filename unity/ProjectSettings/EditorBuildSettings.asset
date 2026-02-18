@@ -10,12 +10,15 @@ EditorBuildSettings:
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/RegistrationScene.unity
-    guid: 8bccd2717fed23c43b1a8d335415c65f
+    guid: c524afde6d03bf346aae738e704e85c9
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 32cb01951cb7181488977aad3ed63775
   - enabled: 1
     path: Assets/Scenes/LessonScene.unity
+    guid: e0a232d7552ab9c4480c6a2b9a0ced46
+  - enabled: 1
+    path: Assets/Scenes/MatchGame.unity
     guid: 244bfdd217630d442a4d9340a25d4543
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
