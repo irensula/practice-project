@@ -1051,7 +1051,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 275982971}
         m_TargetAssemblyTypeName: MiniGamesUIController, Assembly-CSharp
-        m_MethodName: StartPracticePictureToSound
+        m_MethodName: StartPictureToSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1371,9 +1371,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchGame
   primaryContainer: {fileID: 1812425401}
   secondaryContainer: {fileID: 753071854}
-  textPrefab: {fileID: -633242358221231676, guid: 9774bddf1fc5cec42984db913c9ae4e0, type: 3}
-  imagePrefab: {fileID: 2984354546031136219, guid: 061ee8bbf26e2da4195356aaaa865be2, type: 3}
-  soundPrefab: {fileID: 6084214835679956222, guid: 0e5eb1dc11d835244b1eda71ed96362a, type: 3}
+  itemPrefab: {fileID: 26852685154772316, guid: cb97ed99c75fb8b4b8074c24f12aceaa, type: 3}
+  primaryType: 0
+  secondaryType: 0
+  myVocabularyList: []
 --- !u!4 &1301836209
 Transform:
   m_ObjectHideFlags: 0
@@ -1474,7 +1475,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 275982971}
         m_TargetAssemblyTypeName: MiniGamesUIController, Assembly-CSharp
-        m_MethodName: StartPracticeTextToPicture
+        m_MethodName: StartTextToPicture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1607,7 +1608,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 275982971}
         m_TargetAssemblyTypeName: MiniGamesUIController, Assembly-CSharp
-        m_MethodName: StartPracticeSoundToText
+        m_MethodName: StartSoundToText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -28,12 +28,14 @@ public interface IThemeable
 //     --text: #DEE2FF rgb(222, 226, 255);
 //     light:
 //     --primary: #DEE2FF rgb(222, 226, 255);
+
 //     --text: #29282E rgb(41, 40, 46);
 
 //     --secondary: #7F3792 rgb(127, 55, 146);
 //     --accent: #FF8C00 rgb(255, 140, 0);
 //     --royal-plum: #8D32D4 rgb(141, 50, 212);
 //     --lavander-indigo: #836AEA rgb(131, 106, 234);
+//     --light-text: #ECEFFF rgb(236, 239, 255)
 
 //     --success: #1cd62c rgb(28, 214, 44);
 //     --error: #DC143C rgb(220, 20, 60);

@@ -20,7 +20,23 @@
         {
         "lessonID": 1,
         "courseID": 1,
-        "title": "Lesson 1: Basics",
+        "title": "Lesson 1",
+        "visualNovel": [
+            { "contentID": 1, "text": "Welcome to Customer Service!" }
+        ],
+        "exercises": [
+            { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
+        ],
+        "miniGames": [
+            { "miniGameID": 1, "title": "Match Game (images + words)" },
+            { "miniGameID": 2, "title": "Match Game (words + sounds)" },
+            { "miniGameID": 3, "title": "Match Game (images + sounds)" }
+        ]
+        },
+        {
+        "lessonID": 2,
+        "courseID": 1,
+        "title": "Lesson 2",
         "visualNovel": [
             { "contentID": 1, "text": "Welcome to Customer Service!" }
         ],
@@ -33,5 +49,55 @@
             { "miniGameID": 3, "title": "Match Game (images + sounds)" }
         ]
         }
-    ]
+    ],
+    "words": [
+    {
+      "id": 1,
+      "image": "images/food.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "ruoka",
+          "audio": "audio/fi/ruoka.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "food",
+          "audio": "audio/en/food.mp3"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "image": "images/menu.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "ruokalista",
+          "audio": "audio/fi/ruokalista.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "menu",
+          "audio": "audio/en/menu.mp3"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "image": "images/table.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "pöytä",
+          "audio": "audio/fi/poyta.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "table",
+          "audio": "audio/en/table.mp3"
+        }
+      ]
+    }
+  ]
 }
