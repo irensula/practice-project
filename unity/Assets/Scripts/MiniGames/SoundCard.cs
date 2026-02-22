@@ -1,30 +1,23 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SoundCard : MonoBehaviour, IPointerClickHandler
+public class SoundCard : BaseMatchCard
 {
-    private int wordId;
-    private MatchGame manager;
-
-    [SerializeField] private AudioSource audioSource;
-    public void Setup(int id, MatchGame gameManager)
-    {
-        wordId = id;
-        manager = gameManager;
-    }
+    private AudioClip clip;
 
     public void SetSound(AudioClip clip)
     {
-        if (audioSource != null)
-            audioSource.clip = clip;
+        this.clip = clip;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public override void SetSelected(bool value)
     {
-        if (audioSource != null)
-            audioSource.Play();
+        base.SetSelected(value);
 
-        manager?.OnCardSelected(wordId);
+        if (value && clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
+        }
     }
 }
 

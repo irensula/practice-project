@@ -1371,9 +1371,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MatchGame
   primaryContainer: {fileID: 1812425401}
   secondaryContainer: {fileID: 753071854}
-  textPrefab: {fileID: -633242358221231676, guid: 9774bddf1fc5cec42984db913c9ae4e0, type: 3}
+  textPrefab: {fileID: 6929868230853148108, guid: 9774bddf1fc5cec42984db913c9ae4e0, type: 3}
   imagePrefab: {fileID: 2984354546031136219, guid: 061ee8bbf26e2da4195356aaaa865be2, type: 3}
-  soundPrefab: {fileID: 6084214835679956222, guid: 0e5eb1dc11d835244b1eda71ed96362a, type: 3}
+  soundPrefab: {fileID: 4590607092829402259, guid: 0e5eb1dc11d835244b1eda71ed96362a, type: 3}
 --- !u!4 &1301836209
 Transform:
   m_ObjectHideFlags: 0

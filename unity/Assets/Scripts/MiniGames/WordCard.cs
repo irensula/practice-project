@@ -3,27 +3,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class WordCard : MonoBehaviour, IPointerClickHandler
+public class WordCard : BaseMatchCard
 {
-    private int wordId;
-    private MatchGame manager;
-
     [SerializeField] private TMP_Text text;
-    public void Setup(int id, MatchGame gameManager)
-    {
-        wordId = id;
-        manager = gameManager;
-    }
 
     public void SetText(string value)
     {
         if (text != null)
             text.text = value;
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        manager?.OnCardSelected(wordId);
     }
 }
 
