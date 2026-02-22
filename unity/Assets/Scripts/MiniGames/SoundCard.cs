@@ -3,20 +3,34 @@ using UnityEngine.EventSystems;
 
 public class SoundCard : BaseMatchCard
 {
-    private AudioClip clip;
+    private string wordKey;
 
-    public void SetSound(AudioClip clip)
+    public void SetupSound(int wordId, string wordKey, MatchGame game)
     {
-        this.clip = clip;
+        base.Setup(wordId, game);
+        this.wordKey = wordKey.ToLower();
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    private void PlaySound()
+    {
+        Debug.Log($"PlaySound called for {wordKey}");
+        if (!string.IsNullOrEmpty(wordKey))
+        {
+            UIAudioManager.Instance.PlayWord(wordKey);
+        }
+    }
     public override void SetSelected(bool value)
     {
         base.SetSelected(value);
 
-        if (value && clip != null)
+        if (value)
         {
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
+            PlaySound();
         }
     }
 }

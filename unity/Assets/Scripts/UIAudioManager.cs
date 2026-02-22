@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 
 public class UIAudioManager : MonoBehaviour
 {
@@ -101,5 +102,22 @@ public class UIAudioManager : MonoBehaviour
     public void SetVoiceVolume(float value)
     {
         voiceSource.volume = value;
+    }
+
+    // play sound of word in MatchGame
+    public void PlayWord(string wordKey)
+    {
+        Debug.Log("Trying to load audio: " + wordKey);
+        AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{wordKey}");
+
+        if (clip == null)
+        {
+            Debug.LogError($"Word audio not found: {wordKey}");
+            return;
+        }
+
+        if (voiceSource != null)
+            voiceSource.clip = clip;
+            voiceSource.Play();
     }
 }

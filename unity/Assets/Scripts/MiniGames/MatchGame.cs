@@ -30,6 +30,14 @@ public class MatchGame : MonoBehaviour
     // private MatchContentType secondaryType;
     // private const int currentLanguageId = 1;
 
+    void Start()
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/fi/ruoka");
+        if (clip == null)
+            Debug.LogError("Cannot load ruoka.mp3");
+        else
+            Debug.Log("AudioClip loaded successfully: " + clip.name);
+    }
     public void Setup(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
     {
         this.words = vocabulary;
@@ -62,34 +70,40 @@ public class MatchGame : MonoBehaviour
                 switch (currentType)
                 {
                     case MatchGameType.TextToPicture:
-                        WordCard textCard = Instantiate(textPrefab, primaryContainer);
-                        textCard.Setup(word.id, this);
-                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
-                        if (finnish != null)
-                            textCard.SetText(finnish.text);
-                        break;
+                        {
+                            WordCard textCard = Instantiate(textPrefab, primaryContainer);
+                            textCard.Setup(word.id, this);
+                            var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
+                            if (finnish != null)
+                                textCard.SetText(finnish.text);
+                            break;
+                        }
 
                     case MatchGameType.PictureToSound:
-                        ImageCard imgCard = Instantiate(imagePrefab, primaryContainer);
-                        imgCard.Setup(word.id, this);
-                        Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
-                        if (sprite != null)
-                            imgCard.SetImage(sprite);
+                        {
+                            ImageCard imgCard = Instantiate(imagePrefab, primaryContainer);
+                            imgCard.Setup(word.id, this);
+                            Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
+                            if (sprite != null)
+                                imgCard.SetImage(sprite);
                         break;
+                        }
 
                     case MatchGameType.SoundToText:
+                    {
                         SoundCard soundCard = Instantiate(soundPrefab, primaryContainer);
-                        soundCard.Setup(word.id, this);
-                        var sound = word.translations.FirstOrDefault(t => t.languageId == 1);
-                        if (sound != null)
-                        {
-                            AudioClip clip = Resources.Load<AudioClip>(sound.audio.Replace(".mp3", ""));
-                            if (clip != null)
-                                soundCard.SetSound(clip);
-                        }
-                        break;
-                }
+                        
+                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
 
+                        if (finnish != null)
+                        {
+                            string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
+                            soundCard.SetupSound(word.id, fileName, this);
+                        }
+
+                        break;
+                    } 
+                }
                 Debug.Log($"Created primary item: {word.id}");
             }
     }
@@ -119,32 +133,40 @@ public class MatchGame : MonoBehaviour
             switch (secondaryContentType)
             {
                 case MatchContentType.Text:
-                    WordCard textCard = Instantiate(textPrefab, secondaryContainer);
-                    textCard.Setup(word.id, this);
-                    var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
-                    if (finnish != null)
-                        textCard.SetText(finnish.text);
-                    break;
+                    {
+                        WordCard textCard = Instantiate(textPrefab, secondaryContainer);
+                        textCard.Setup(word.id, this);
+                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
+                        if (finnish != null)
+                            textCard.SetText(finnish.text);
+                        break;   
+                    }
 
                 case MatchContentType.Picture:
-                    ImageCard imgCard = Instantiate(imagePrefab, secondaryContainer);
-                    imgCard.Setup(word.id, this);
-                    Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
-                    if (sprite != null)
-                        imgCard.SetImage(sprite);
-                    break;
+                    {
+                        ImageCard imgCard = Instantiate(imagePrefab, secondaryContainer);
+                        imgCard.Setup(word.id, this);
+                        Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
+                        if (sprite != null)
+                            imgCard.SetImage(sprite);
+                        break;
+                    }
 
                 case MatchContentType.Sound:
+                {
                     SoundCard soundCard = Instantiate(soundPrefab, secondaryContainer);
-                    soundCard.Setup(word.id, this);
-                    var sound = word.translations.FirstOrDefault(t => t.languageId == 1);
-                    if (sound != null)
+
+                    var finnish = word.translations
+                        .FirstOrDefault(t => t.languageId == 1);
+
+                    if (finnish != null)
                     {
-                        AudioClip clip = Resources.Load<AudioClip>(sound.audio.Replace(".mp3", ""));
-                        if (clip != null)
-                            soundCard.SetSound(clip);
+                        string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
+                        soundCard.SetupSound(word.id, fileName, this);
                     }
+
                     break;
+                }
             }
 
             Debug.Log($"Created primary item: {word.id}");
