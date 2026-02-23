@@ -23,12 +23,6 @@ public class MatchGame : MonoBehaviour
 
     private BaseMatchCard firstSelected = null;
     private bool isChecking = false;
-    // private MatchItem firstSelected;
-    // private MatchItem secondSelected;
-
-    // private MatchContentType primaryType;
-    // private MatchContentType secondaryType;
-    // private const int currentLanguageId = 1;
 
     void Start()
     {
@@ -38,34 +32,52 @@ public class MatchGame : MonoBehaviour
         else
             Debug.Log("AudioClip loaded successfully: " + clip.name);
     }
-    public void Setup(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
+
+    void Shuffle<T>(List<T> list)
     {
-        this.words = vocabulary;
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = UnityEngine.Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+    public void Setup(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
+    {        
+        var selectedWords = vocabulary.OrderBy(x => UnityEngine.Random.value).Take(8).ToList();;
+
+        var primaryWords = new List<WordData>(selectedWords);
+        var secondaryWords = new List<WordData>(selectedWords);
+
+        Shuffle(primaryWords);
+        Shuffle(secondaryWords);
+
+        this.words = selectedWords;
         this.currentMode = mode;
         this.currentType = type;
 
         Debug.Log("Vocabulary: " + words.Count + ", Mode: " + mode + ", Type: " + type);
         
-        PopulatePrimaryRow();
-        PopulateSecondaryRow();
+        PopulatePrimaryRow(primaryWords);
+        PopulateSecondaryRow(secondaryWords);
     }
 
-    private void PopulatePrimaryRow()
+    private void PopulatePrimaryRow(List<WordData> rowWords)
     {
-        if (words == null || words.Count == 0)
+        if (rowWords == null || rowWords.Count == 0)
         {
-            Debug.LogError("No words to display in primary row!");
+            Debug.LogError("No rowWords to display in primary row!");
             return;
         }
-
-        
 
         // clean the container
         foreach (Transform child in primaryContainer)
             Destroy(child.gameObject);
 
         
-        foreach (var word in words)
+        foreach (var word in rowWords)
             {
                 switch (currentType)
                 {
@@ -90,29 +102,33 @@ public class MatchGame : MonoBehaviour
                         }
 
                     case MatchGameType.SoundToText:
-                    {
-                        SoundCard soundCard = Instantiate(soundPrefab, primaryContainer);
-                        
-                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
-
-                        if (finnish != null)
                         {
-                            string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
-                            soundCard.SetupSound(word.id, fileName, this);
-                        }
+                            SoundCard soundCard = Instantiate(soundPrefab, primaryContainer);
+                            
+                            var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
 
-                        break;
-                    } 
+                            if (finnish != null)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
+                                AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
+                                
+                                if (clip != null)
+                                    soundCard.SetupSound(word.id, fileName, clip, this);
+                                else
+                                    Debug.LogError($"AudioClip not found: {fileName}");
+                            }
+                            break;
+                        } 
                 }
                 Debug.Log($"Created primary item: {word.id}");
             }
     }
 
-    private void PopulateSecondaryRow()
+    private void PopulateSecondaryRow(List<WordData> rowWords)
     {
-        if (words == null || words.Count == 0)
+        if (rowWords == null || rowWords.Count == 0)
         {
-            Debug.LogError("No words to display in secondary row!");
+            Debug.LogError("No rowWords to display in secondary row!");
             return;
         }
 
@@ -128,7 +144,7 @@ public class MatchGame : MonoBehaviour
             _ => MatchContentType.Picture
         };
 
-        foreach (var word in words)
+        foreach (var word in rowWords)
         {
             switch (secondaryContentType)
             {
@@ -155,15 +171,19 @@ public class MatchGame : MonoBehaviour
                 case MatchContentType.Sound:
                 {
                     SoundCard soundCard = Instantiate(soundPrefab, secondaryContainer);
+                        
+                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
 
-                    var finnish = word.translations
-                        .FirstOrDefault(t => t.languageId == 1);
-
-                    if (finnish != null)
-                    {
-                        string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
-                        soundCard.SetupSound(word.id, fileName, this);
-                    }
+                        if (finnish != null)
+                        {
+                            string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
+                            AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
+                            
+                            if (clip != null)
+                                soundCard.SetupSound(word.id, fileName, clip, this);
+                            else
+                                Debug.LogError($"AudioClip not found: {fileName}");
+                        }
 
                     break;
                 }
@@ -189,7 +209,6 @@ public class MatchGame : MonoBehaviour
             return;
 
         StartCoroutine(CheckMatch(firstSelected, card));
-        Debug.Log("The item was selected");
     }    
 
     private IEnumerator CheckMatch(BaseMatchCard first, BaseMatchCard second)

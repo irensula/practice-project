@@ -98,6 +98,118 @@
           "audio": "audio/en/table.mp3"
         }
       ]
+    },
+    {
+      "id": 4,
+      "image": "images/waiter.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "tarjoilija",
+          "audio": "audio/fi/tarjoilija.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "waiter",
+          "audio": "audio/en/waiter.mp3"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "image": "images/customer.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "asiakas",
+          "audio": "audio/fi/asiakas.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "cudtomer",
+          "audio": "audio/en/customer.mp3"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "image": "images/order.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "tilaus",
+          "audio": "audio/fi/tilaus.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "order",
+          "audio": "audio/en/order.mp3"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "image": "images/restaurant.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "ravintola",
+          "audio": "audio/fi/ravintola.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "restaurant",
+          "audio": "audio/en/restaurant.mp3"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "image": "images/coffee_shop.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "kahvila",
+          "audio": "audio/fi/kahvila.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "coffee_shop",
+          "audio": "audio/en/coffee_shop.mp3"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "image": "images/tray.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "tarjotin",
+          "audio": "audio/fi/tarjotin.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "tray",
+          "audio": "audio/en/tray.mp3"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "image": "images/plate.jpg",
+      "translations": [
+        {
+          "languageId": 1,
+          "text": "lautanen",
+          "audio": "audio/fi/lautanen.mp3"
+        },
+        {
+          "languageId": 2,
+          "text": "plate",
+          "audio": "audio/en/plate.mp3"
+        }
+      ]
     }
   ]
 }
