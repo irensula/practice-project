@@ -23,8 +23,13 @@ public class MatchGame : MonoBehaviour
 
     private BaseMatchCard firstSelected = null;
     private bool isChecking = false;
+    
+    public Sprite correctSprite;
+    public Sprite wrongSprite;
+    public Image resultIcon;
     public GameObject winPanel;
     public Button btnCloseWinPanel;
+
 
     void Start()
     {
@@ -226,6 +231,7 @@ public class MatchGame : MonoBehaviour
         {
             first.SetMatched();
             second.SetMatched();
+            StartCoroutine(ShowResult(correctSprite));
 
             CheckAllMatched();
         }
@@ -233,10 +239,19 @@ public class MatchGame : MonoBehaviour
         {
             first.SetSelected(false);
             second.SetSelected(false);
+            StartCoroutine(ShowResult(wrongSprite));
         }
 
         firstSelected = null;
         isChecking = false;
+    }
+
+    IEnumerator ShowResult(Sprite sprite)
+    {
+        resultIcon.sprite = sprite;
+        resultIcon.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        resultIcon.gameObject.SetActive(false);
     }
 
     void ClearContainers()
