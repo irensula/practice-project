@@ -39,4 +39,11 @@ public class BaseMatchCard : MonoBehaviour
         button.interactable = false;
         transform.localScale = Vector3.one;
     }
+
+    public void ResetItem()
+    {
+        IsMatched = false;
+        // background.color = normalColor;
+        // text.color = Color.white;
+    }
 }

@@ -23,6 +23,8 @@ public class MatchGame : MonoBehaviour
 
     private BaseMatchCard firstSelected = null;
     private bool isChecking = false;
+    public GameObject winPanel;
+    public Button btnCloseWinPanel;
 
     void Start()
     {
@@ -31,6 +33,8 @@ public class MatchGame : MonoBehaviour
             Debug.LogError("Cannot load ruoka.mp3");
         else
             Debug.Log("AudioClip loaded successfully: " + clip.name);
+
+        btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
     }
 
     void Shuffle<T>(List<T> list)
@@ -222,6 +226,8 @@ public class MatchGame : MonoBehaviour
         {
             first.SetMatched();
             second.SetMatched();
+
+            CheckAllMatched();
         }
         else
         {
@@ -240,5 +246,42 @@ public class MatchGame : MonoBehaviour
 
         foreach (Transform child in secondaryContainer)
             Destroy(child.gameObject);
+    }
+
+    void CheckAllMatched()
+    {
+        // create a variable for children in primaryContainer and secondaryContainer
+        BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
+        BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();
+        
+        foreach (var card in primaryCards)
+            if (!card.IsMatched) 
+                return;
+
+        foreach (var card in secondaryCards)
+            if (!card.IsMatched) 
+                return;
+
+        StartCoroutine(ShowWinPanel());
+    }
+
+    IEnumerator ShowWinPanel()
+    {
+        yield return new WaitForSeconds(1.5f);
+        winPanel.SetActive(true);
+    }
+
+    public void CloseWinPanel()
+    {
+        winPanel.SetActive(false);
+
+        BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
+        BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();
+
+        foreach (var card in primaryCards)
+            card.ResetItem();
+
+        foreach (var card in secondaryCards)
+            card.ResetItem();
     }
 }
