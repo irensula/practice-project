@@ -25,7 +25,6 @@ public class DatabaseService
         }
             
         string json = File.ReadAllText(dbPath);
-        Debug.Log("JSON loaded" + json);
 
         Database db = JsonUtility.FromJson<Database>(json);
         return Normalize(db);

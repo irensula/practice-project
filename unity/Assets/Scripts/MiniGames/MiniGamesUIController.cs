@@ -20,12 +20,10 @@ public class MiniGamesUIController : MonoBehaviour
         var db = DatabaseService.Load();
 
         vocabularyList = new List<WordData>(db.words);
-        Debug.Log("Loaded " + vocabularyList.Count + " words from db.json");
 
         foreach (var word in vocabularyList)
         {
             string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
-            Debug.Log($"Word ID: {word.id}, Image: {word.image}, Translations: {translations}");
         }
     }
     public void OpenMatchGame(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
@@ -40,8 +38,6 @@ public class MiniGamesUIController : MonoBehaviour
         matchGamePanel.SetActive(true);
 
         matchGame.Setup(vocabulary, mode, type);
-
-        Debug.Log($"Opened MatchGame: Mode={mode}, Type={type}, Words={vocabulary.Count}");
     }
 
     public void StartPracticeTextToPicture()

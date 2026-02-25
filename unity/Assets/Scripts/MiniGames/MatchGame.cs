@@ -15,11 +15,14 @@ public class MatchGame : MonoBehaviour
     [Header("Containers")]
     [SerializeField] private Transform primaryContainer;
     [SerializeField] private Transform secondaryContainer;
+    [SerializeField] private Transform slotContainer;
 
     [Header("Prefabs")]
     [SerializeField] private WordCard textPrefab;
     [SerializeField] private ImageCard imagePrefab;
     [SerializeField] private SoundCard soundPrefab;
+    
+    [SerializeField] private DropSlot slotPrefab;
 
     private BaseMatchCard firstSelected = null;
     private bool isChecking = false;
@@ -36,8 +39,6 @@ public class MatchGame : MonoBehaviour
         AudioClip clip = Resources.Load<AudioClip>("Sounds/fi/ruoka");
         if (clip == null)
             Debug.LogError("Cannot load ruoka.mp3");
-        else
-            Debug.Log("AudioClip loaded successfully: " + clip.name);
 
         btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
     }
@@ -71,6 +72,7 @@ public class MatchGame : MonoBehaviour
         
         PopulatePrimaryRow(primaryWords);
         PopulateSecondaryRow(secondaryWords);
+        PopulateSlots(selectedWords);
     }
 
     private void PopulatePrimaryRow(List<WordData> rowWords)
@@ -129,7 +131,6 @@ public class MatchGame : MonoBehaviour
                             break;
                         } 
                 }
-                Debug.Log($"Created primary item: {word.id}");
             }
     }
 
@@ -197,12 +198,21 @@ public class MatchGame : MonoBehaviour
                     break;
                 }
             }
-
-            Debug.Log($"Created primary item: {word.id}");
         }
 
     }
 
+    private void PopulateSlots(List<WordData> words)
+    {
+        foreach (Transform child in slotContainer)
+            Destroy(child.gameObject);
+        
+        foreach (var word in words)
+        {
+            DropSlot slot = Instantiate(slotPrefab, slotContainer);
+            slot.Setup(word.id);
+        }
+    }
     public void SelectCard(BaseMatchCard card)
     {
         if (isChecking) return;
@@ -263,7 +273,7 @@ public class MatchGame : MonoBehaviour
             Destroy(child.gameObject);
     }
 
-    void CheckAllMatched()
+    public void CheckAllMatched()
     {
         // create a variable for children in primaryContainer and secondaryContainer
         BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
