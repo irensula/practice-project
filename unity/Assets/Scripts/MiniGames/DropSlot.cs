@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour, IDropHandler
+public class DropSlot : MonoBehaviour, 
+    IDropHandler
 {
     public int ExpectedWordId;
     private WordCard currentWord;
@@ -13,8 +14,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop triggered on: " + gameObject.name);
-
         WordCard dropped = eventData.pointerDrag.GetComponent<WordCard>();
 
         if (dropped == null)
@@ -36,10 +35,5 @@ public class DropSlot : MonoBehaviour, IDropHandler
         {
             dropped.ReturnToStart();
         }
-    }
-
-    void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Pointer entered slot: " + gameObject.name);
     }
 }

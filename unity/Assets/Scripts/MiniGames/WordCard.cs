@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public class WordCard : BaseMatchCard,
+public class WordCard : BaseMatchCard, 
     IBeginDragHandler,
     IDragHandler,
     IEndDragHandler
@@ -13,6 +13,7 @@ public class WordCard : BaseMatchCard,
     private CanvasGroup canvasGroup;
     private Vector2 startPosition;
     private Transform startParent;
+    private Canvas canvas;
 
     public void SetText(string value)
     {
@@ -25,6 +26,8 @@ public class WordCard : BaseMatchCard,
         base.Awake();
         rectTransform = GetComponent<RectTransform>();
 
+        canvas = GetComponentInParent<Canvas>();
+
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
@@ -32,26 +35,24 @@ public class WordCard : BaseMatchCard,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         if (IsMatched) return;
 
         startPosition = rectTransform.anchoredPosition;
         startParent = transform.parent;
 
-        transform.SetParent(transform.root);
+        transform.SetParent(canvas.transform);
         canvasGroup.blocksRaycasts = false;
     }
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta;
+        rectTransform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         canvasGroup.blocksRaycasts = true;
 
-        if (transform.parent == transform.root)
+        if (transform.parent == canvas.transform)
         {
             transform.SetParent(startParent);
             rectTransform.anchoredPosition = startPosition;
@@ -60,7 +61,6 @@ public class WordCard : BaseMatchCard,
 
     public void ReturnToStart()
     {
-        Debug.Log("ReturnToStart");
         transform.SetParent(startParent);
         rectTransform.anchoredPosition = startPosition;
     }
