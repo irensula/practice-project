@@ -62,7 +62,7 @@ public class MatchGame : MonoBehaviour
 
         this.currentMode = mode;
         this.currentType = type;
-        
+
         Shuffle(primaryWords);
         
         PopulatePrimaryRow(primaryWords);
@@ -84,21 +84,28 @@ public class MatchGame : MonoBehaviour
         
         foreach (var word in rowWords)
             {
+                BaseMatchCard cardInstance = null;
+
                 switch (currentType)
                 {
                     case MatchGameType.TextToPicture:
                     case MatchGameType.TextToSound:
-                        {
+                        {   
+                            // create text card
                             WordCard textCard = Instantiate(textPrefab, primaryContainer);
                             textCard.Setup(word.id, this);
+                            // add text
                             var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
                             if (finnish != null)
                                 textCard.SetText(finnish.text);
+                            
+                            cardInstance = textCard;
                             break;
                         }
 
                     case MatchGameType.SoundToPicture:
                         {
+                            // create sound card
                             SoundCard soundCard = Instantiate(soundPrefab, primaryContainer);
                             
                             var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
@@ -113,9 +120,13 @@ public class MatchGame : MonoBehaviour
                                 else
                                     Debug.LogError($"AudioClip not found: {fileName}");
                             }
+                            cardInstance = soundCard;
                             break;
                         } 
                 }
+                // make it draggable
+                if (cardInstance != null && cardInstance.GetComponent<DraggableItem>() == null)
+                    cardInstance.gameObject.AddComponent<DraggableItem>();
             }
     }
 

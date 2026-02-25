@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour, 
-    IDropHandler
+public class DropSlot : MonoBehaviour, IDropHandler
 {
     public int ExpectedWordId;
-    private WordCard currentWord;
+    private DraggableItem currentWord;
 
     public void Setup(int wordId)
     {
@@ -14,7 +13,7 @@ public class DropSlot : MonoBehaviour,
 
     public void OnDrop(PointerEventData eventData)
     {
-        WordCard dropped = eventData.pointerDrag.GetComponent<WordCard>();
+        DraggableItem dropped = eventData.pointerDrag.GetComponent<DraggableItem>();
 
         if (dropped == null)
             return;
@@ -24,10 +23,11 @@ public class DropSlot : MonoBehaviour,
 
         if (dropped.WordId == ExpectedWordId)
         {
+            dropped.SetMatched();
             currentWord = dropped;
             dropped.transform.SetParent(transform);
             dropped.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            dropped.SetMatched();
+            
 
             FindObjectOfType<MatchGame>().CheckAllMatched();
         }
