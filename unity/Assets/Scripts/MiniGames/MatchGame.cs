@@ -59,20 +59,14 @@ public class MatchGame : MonoBehaviour
         var selectedWords = vocabulary.OrderBy(x => UnityEngine.Random.value).Take(8).ToList();;
 
         var primaryWords = new List<WordData>(selectedWords);
-        var secondaryWords = new List<WordData>(selectedWords);
 
-        Shuffle(primaryWords);
-        Shuffle(secondaryWords);
-
-        this.words = selectedWords;
         this.currentMode = mode;
         this.currentType = type;
-
-        Debug.Log("Vocabulary: " + words.Count + ", Mode: " + mode + ", Type: " + type);
+        
+        Shuffle(primaryWords);
         
         PopulatePrimaryRow(primaryWords);
-        PopulateSecondaryRow(secondaryWords);
-        PopulateSlots(selectedWords);
+        PopulateSecondaryRowAndSlots(selectedWords);
     }
 
     private void PopulatePrimaryRow(List<WordData> rowWords)
@@ -93,6 +87,7 @@ public class MatchGame : MonoBehaviour
                 switch (currentType)
                 {
                     case MatchGameType.TextToPicture:
+                    case MatchGameType.TextToSound:
                         {
                             WordCard textCard = Instantiate(textPrefab, primaryContainer);
                             textCard.Setup(word.id, this);
@@ -102,17 +97,7 @@ public class MatchGame : MonoBehaviour
                             break;
                         }
 
-                    case MatchGameType.PictureToSound:
-                        {
-                            ImageCard imgCard = Instantiate(imagePrefab, primaryContainer);
-                            imgCard.Setup(word.id, this);
-                            Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
-                            if (sprite != null)
-                                imgCard.SetImage(sprite);
-                        break;
-                        }
-
-                    case MatchGameType.SoundToText:
+                    case MatchGameType.SoundToPicture:
                         {
                             SoundCard soundCard = Instantiate(soundPrefab, primaryContainer);
                             
@@ -134,7 +119,7 @@ public class MatchGame : MonoBehaviour
             }
     }
 
-    private void PopulateSecondaryRow(List<WordData> rowWords)
+    private void PopulateSecondaryRowAndSlots(List<WordData> rowWords)
     {
         if (rowWords == null || rowWords.Count == 0)
         {
@@ -146,11 +131,14 @@ public class MatchGame : MonoBehaviour
         foreach (Transform child in secondaryContainer)
             Destroy(child.gameObject);
 
+        foreach (Transform child in slotContainer) 
+            Destroy(child.gameObject);
+
         MatchContentType secondaryContentType = currentType switch
         {
             MatchGameType.TextToPicture => MatchContentType.Picture,   // top - text, bottom - picture
-            MatchGameType.PictureToSound => MatchContentType.Sound,   // top - picture, bottom - sound
-            MatchGameType.SoundToText => MatchContentType.Text,       // top - sound, bottom - text
+            MatchGameType.SoundToPicture => MatchContentType.Picture,   // top - picture, bottom - sound
+            MatchGameType.TextToSound => MatchContentType.Sound,       // top - sound, bottom - text
             _ => MatchContentType.Picture
         };
 
@@ -158,16 +146,6 @@ public class MatchGame : MonoBehaviour
         {
             switch (secondaryContentType)
             {
-                case MatchContentType.Text:
-                    {
-                        WordCard textCard = Instantiate(textPrefab, secondaryContainer);
-                        textCard.Setup(word.id, this);
-                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
-                        if (finnish != null)
-                            textCard.SetText(finnish.text);
-                        break;   
-                    }
-
                 case MatchContentType.Picture:
                     {
                         ImageCard imgCard = Instantiate(imagePrefab, secondaryContainer);
@@ -179,40 +157,30 @@ public class MatchGame : MonoBehaviour
                     }
 
                 case MatchContentType.Sound:
-                {
-                    SoundCard soundCard = Instantiate(soundPrefab, secondaryContainer);
-                        
-                        var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
-
-                        if (finnish != null)
-                        {
-                            string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
-                            AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
+                    {
+                        SoundCard soundCard = Instantiate(soundPrefab, secondaryContainer);
                             
-                            if (clip != null)
-                                soundCard.SetupSound(word.id, fileName, clip, this);
-                            else
-                                Debug.LogError($"AudioClip not found: {fileName}");
-                        }
+                            var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
 
-                    break;
-                }
+                            if (finnish != null)
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
+                                AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
+                                
+                                if (clip != null)
+                                    soundCard.SetupSound(word.id, fileName, clip, this);
+                                else
+                                    Debug.LogError($"AudioClip not found: {fileName}");
+                            }
+
+                        break;
+                    }
             }
-        }
-
-    }
-
-    private void PopulateSlots(List<WordData> words)
-    {
-        foreach (Transform child in slotContainer)
-            Destroy(child.gameObject);
-        
-        foreach (var word in words)
-        {
             DropSlot slot = Instantiate(slotPrefab, slotContainer);
             slot.Setup(word.id);
         }
     }
+
     public void SelectCard(BaseMatchCard card)
     {
         if (isChecking) return;

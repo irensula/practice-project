@@ -45,14 +45,14 @@ public class MiniGamesUIController : MonoBehaviour
         OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.TextToPicture);
     }
 
-    public void StartPracticePictureToSound()
+    public void StartPracticeSoundToPicture()
     {
-        OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.PictureToSound);
+        OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.SoundToPicture);
     }
 
-    public void StartPracticeSoundToText()
+    public void StartPracticeTextToSound()
     {
-        OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.SoundToText);
+        OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.TextToSound);
     }
 
     public void StartTestTextToPicture()
@@ -60,14 +60,14 @@ public class MiniGamesUIController : MonoBehaviour
         OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.TextToPicture);
     }
 
-    public void StartTestPictureToSound()
+    public void StartTestSoundToPicture()
     {
-        OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.PictureToSound);
+        OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.SoundToPicture);
     }
 
-    public void StartTestSoundToText()
+    public void StartTestTextToSound()
     {
-        OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.SoundToText);
+        OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.TextToSound);
     }
 
     public void BackToMenu()
