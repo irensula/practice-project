@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class SoundCard : BaseMatchCard
+public class SoundCard : BaseMatchCard, IPointerClickHandler
 {
     private string wordKey;
     private AudioClip clip;
@@ -42,11 +43,11 @@ public class SoundCard : BaseMatchCard
     public override void SetSelected(bool value)
     {
         base.SetSelected(value);
+    }
 
-        if (value)
-        {
-            PlaySound();
-        }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        PlaySound();
     }
 }
 

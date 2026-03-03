@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
 
 public class MatchGame : MonoBehaviour
 {
@@ -30,15 +31,27 @@ public class MatchGame : MonoBehaviour
     public Sprite correctSprite;
     public Sprite wrongSprite;
     public Image resultIcon;
+    public GameObject blockerPanel;
     public GameObject winPanel;
     public Button btnCloseWinPanel;
+
+    public event Action OnGameFinished;
+
+    [Header("Result Sounds")]
+    [SerializeField] private AudioClip correctClip;
+    [SerializeField] private AudioClip wrongClip;
+    [SerializeField] private AudioClip winClip;
+    private AudioSource audioSource;
 
 
     void Start()
     {
-        AudioClip clip = Resources.Load<AudioClip>("Sounds/fi/ruoka");
-        if (clip == null)
-            Debug.LogError("Cannot load ruoka.mp3");
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0;
 
         btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
     }
@@ -188,7 +201,7 @@ public class MatchGame : MonoBehaviour
                     }
             }
             DropSlot slot = Instantiate(slotPrefab, slotContainer);
-            slot.Setup(word.id);
+            slot.Setup(word.id, this);
         }
     }
 
@@ -220,7 +233,6 @@ public class MatchGame : MonoBehaviour
         {
             first.SetMatched();
             second.SetMatched();
-            StartCoroutine(ShowResult(correctSprite));
 
             CheckAllMatched();
         }
@@ -228,11 +240,38 @@ public class MatchGame : MonoBehaviour
         {
             first.SetSelected(false);
             second.SetSelected(false);
-            StartCoroutine(ShowResult(wrongSprite));
+            
         }
 
         firstSelected = null;
         isChecking = false;
+    }
+
+    private void PlayResultSound(AudioClip clip)
+    {
+        Debug.Log($"PlaySound called correct or wrong");
+        if (clip != null)
+            {
+                audioSource.Stop();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Result sound not assigned!");
+            }
+    }
+    
+    public void ShowCorrect()
+    {
+        StartCoroutine(ShowResult(correctSprite));
+        PlayResultSound(correctClip);
+    }
+
+    public void ShowWrong()
+    {
+        StartCoroutine(ShowResult(wrongSprite));
+        PlayResultSound(wrongClip);
     }
 
     IEnumerator ShowResult(Sprite sprite)
@@ -255,15 +294,10 @@ public class MatchGame : MonoBehaviour
     public void CheckAllMatched()
     {
         // create a variable for children in primaryContainer and secondaryContainer
-        BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
-        BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();
+        DropSlot[] slots = slotContainer.GetComponentsInChildren<DropSlot>();
         
-        foreach (var card in primaryCards)
-            if (!card.IsMatched) 
-                return;
-
-        foreach (var card in secondaryCards)
-            if (!card.IsMatched) 
+        foreach (var slot in slots)
+            if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
                 return;
 
         StartCoroutine(ShowWinPanel());
@@ -272,11 +306,14 @@ public class MatchGame : MonoBehaviour
     IEnumerator ShowWinPanel()
     {
         yield return new WaitForSeconds(1.5f);
+        blockerPanel.SetActive(true);
         winPanel.SetActive(true);
+        PlayResultSound(winClip);
     }
 
     public void CloseWinPanel()
     {
+        blockerPanel.SetActive(false);
         winPanel.SetActive(false);
 
         BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
@@ -287,5 +324,7 @@ public class MatchGame : MonoBehaviour
 
         foreach (var card in secondaryCards)
             card.ResetItem();
+
+        OnGameFinished?.Invoke();
     }
 }

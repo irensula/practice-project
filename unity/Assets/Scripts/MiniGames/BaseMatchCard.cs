@@ -22,15 +22,19 @@ public class BaseMatchCard : MonoBehaviour
         this.game = game;
     }
 
+    // reference to MatchGame for DraggableItem
+    public MatchGame MatchGame => game;
+
     private void OnClicked()
     {
         if (IsMatched) return;
-        game.SelectCard(this);
+            game.SelectCard(this);
     }
 
     public virtual void SetSelected(bool value)
     {
         transform.localScale = value ? Vector3.one * 1.1f : Vector3.one;
+        Debug.Log("The selected card is scaled");
     }
 
     public virtual void SetMatched()

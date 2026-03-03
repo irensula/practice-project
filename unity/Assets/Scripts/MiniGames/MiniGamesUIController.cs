@@ -38,6 +38,8 @@ public class MiniGamesUIController : MonoBehaviour
         matchGamePanel.SetActive(true);
 
         matchGame.Setup(vocabulary, mode, type);
+
+        matchGame.OnGameFinished += BackToMenu;
     }
 
     public void StartPracticeTextToPicture()

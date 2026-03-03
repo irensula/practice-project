@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: "S\xE4hk\xF6posti"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
@@ -1522,7 +1522,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 750, y: -559}
-  m_SizeDelta: {x: 130, y: 30}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990090306
 MonoBehaviour:
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: or login with
+  m_text: "tai k\xE4yt\xE4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23490438b132539499a179a9b2419dfd, type: 2}
   m_sharedMaterial: {fileID: -5312500422584576197, guid: 23490438b132539499a179a9b2419dfd, type: 2}
@@ -2118,7 +2118,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Login
+  m_text: Kirjaudu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
   m_sharedMaterial: {fileID: 118104909457566289, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
@@ -2145,8 +2145,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2463,7 +2463,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 755, y: -135}
-  m_SizeDelta: {x: 150, y: 50}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1477584913
 MonoBehaviour:
@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOGIN
+  m_text: KIRJAUTUMINEN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
@@ -2512,8 +2512,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2738,7 +2738,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 11, y: -335.41934}
-  m_SizeDelta: {x: 480, y: 50}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1538253175
 MonoBehaviour:
@@ -2760,7 +2760,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Don't have an account? <link="register"><color=#FF8C00>Create Account</color></link>
+  m_text: "Eik\xF6 sinulla ole tili\xE4? <link=\"register\"><color=#FF8C00>Luo tili</color></link>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23490438b132539499a179a9b2419dfd, type: 2}
   m_sharedMaterial: {fileID: -5312500422584576197, guid: 23490438b132539499a179a9b2419dfd, type: 2}
@@ -3110,7 +3110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Password
+  m_text: Salasana
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}

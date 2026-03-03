@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4054254313664116689}
   - component: {fileID: 2115902145241834068}
   - component: {fileID: 5085102482269190975}
+  - component: {fileID: 1542217767443529379}
   - component: {fileID: 773236327891629974}
   m_Layer: 5
   m_Name: btnMiniGame
@@ -26,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2286740748920552055}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77,6 +78,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1542217767443529379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286740748920552055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1112333bdda2b479f8560dec1bddc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTextHover
+  buttonText: {fileID: 2079861264370258558}
+  button: {fileID: 0}
+  normalColor: {r: 0.16078432, g: 0.15686275, b: 0.18039216, a: 1}
+  hoverColor: {r: 1, g: 0.54901963, b: 0, a: 1}
 --- !u!114 &773236327891629974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +161,7 @@ GameObject:
   - component: {fileID: 7744896371727493129}
   - component: {fileID: 1409543862114297777}
   - component: {fileID: 2079861264370258558}
+  - component: {fileID: 7652861285062535893}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -200,8 +218,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
+  m_sharedMaterial: {fileID: 118104909457566289, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -270,3 +288,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7652861285062535893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521528474559108842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1112333bdda2b479f8560dec1bddc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTextHover
+  buttonText: {fileID: 2079861264370258558}
+  button: {fileID: 773236327891629974}
+  normalColor: {r: 0.16078432, g: 0.15686275, b: 0.18039216, a: 1}
+  hoverColor: {r: 1, g: 0.54901963, b: 0, a: 1}

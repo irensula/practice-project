@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: "S\xE4hk\xF6posti"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
@@ -2025,7 +2025,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1, y: -200}
-  m_SizeDelta: {x: 150, y: 30}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990090306
 MonoBehaviour:
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: or signup with
+  m_text: "tai k\xE4yt\xE4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 23490438b132539499a179a9b2419dfd, type: 2}
   m_sharedMaterial: {fileID: -5312500422584576197, guid: 23490438b132539499a179a9b2419dfd, type: 2}
@@ -2797,7 +2797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Signup
+  m_text: "Rekister\xF6idy"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
   m_sharedMaterial: {fileID: 118104909457566289, guid: be9959296302d7d4784eefa68d3d446e, type: 2}
@@ -2824,8 +2824,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3142,7 +3142,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 755, y: -135}
-  m_SizeDelta: {x: 150, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1477584913
 MonoBehaviour:
@@ -3164,7 +3164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SIGNUP
+  m_text: "REKISTER\xD6ITYMINEN"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
@@ -3191,8 +3191,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3627,7 +3627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Password
+  m_text: Salasana
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}
   m_sharedMaterial: {fileID: -5244924318518749371, guid: 200265eecdfa0664c9e31fe663b62551, type: 2}

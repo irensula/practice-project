@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Reflection;
 
 public class MenuController : MonoBehaviour
 {
@@ -15,8 +16,7 @@ public class MenuController : MonoBehaviour
     private Stack<GameObject> panelStack = new Stack<GameObject>();
 
     public GameObject languageButtonPrefab;
-    public GameObject courseButtonPrefab;
-    public GameObject lessonButtonPrefab;
+    public GameObject baseButtonPrefab;
     public Transform languagesContainer;
     public Transform coursesContainer;
     public Transform lessonsContainer; 
@@ -82,14 +82,17 @@ public class MenuController : MonoBehaviour
         // create new buttons
         foreach (var course in db.courses)
         {
-            GameObject newCourseObj = Instantiate(courseButtonPrefab, coursesContainer);
+            GameObject newButton = Instantiate(baseButtonPrefab, coursesContainer);
 
-            newCourseObj.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
 
-            Button btn = newCourseObj.GetComponent<Button>();
+            Button btn = newButton.GetComponent<Button>();
+            
             UIAudioManager.Instance.RegisterButton(btn);
+            
+            // newButton.GetComponent<Image>().sprite.icon;            
 
-            if(course.locked == false)
+            if(!course.locked)
             {
                 btn.interactable = true;
                 btn.onClick.AddListener(() => SelectCourse(course));
@@ -113,11 +116,12 @@ public class MenuController : MonoBehaviour
         // create new buttons
         foreach (var lesson in db.lessons) // !!! add filter !!!
         {
-            GameObject newLessonObj = Instantiate(lessonButtonPrefab, lessonsContainer);
+            GameObject newButton = Instantiate(baseButtonPrefab, lessonsContainer);
             
-            newLessonObj.GetComponentInChildren<TextMeshProUGUI>().text = lesson.title;
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = lesson.title;
 
-            Button btn = newLessonObj.GetComponent<Button>();
+            Button btn = newButton.GetComponent<Button>();
+
             UIAudioManager.Instance.RegisterButton(btn);
 
             btn.onClick.AddListener(() => OnLessonClicked(lesson));
