@@ -7,24 +7,28 @@ using System.Reflection;
 
 public class MenuController : MonoBehaviour
 {
+    [Header("UI Panels")]
     public GameObject languagePanel;
     public GameObject mainMenuPanel;
     public GameObject coursesPanel;
     public GameObject lessonsPanel;
     public GameObject optionsPanel;
-
-    private Stack<GameObject> panelStack = new Stack<GameObject>();
-
+    
+    [Header("Buttons")]
     public GameObject languageButtonPrefab;
     public GameObject baseButtonPrefab;
+
+    [Header("Button Containers")]
     public Transform languagesContainer;
     public Transform coursesContainer;
     public Transform lessonsContainer; 
 
+    [Header("Languages")]
     public List<LanguageData> languages;
 
     public TextMeshProUGUI languageText;
 
+    [Header("Database JSON")]
     private Database db;
 
     void Start()
@@ -32,15 +36,60 @@ public class MenuController : MonoBehaviour
         DatabaseService.Init();
         db = DatabaseService.Load();
 
-        ShowLanguage();
+        if (MenuState.PanelToOpen != null)
+        {
+            switch (MenuState.PanelToOpen)
+            {
+                case MenuState.PanelType.Language:
+                    ShowLanguage();
+                    break;
+                case MenuState.PanelType.MainMenu:
+                    ShowMainMenu();
+                    break;
+                case MenuState.PanelType.Courses:
+                    ShowCourses();
+                    break;
+                case MenuState.PanelType.Lessons:
+                    CourseData course = System.Array.Find(db.courses, c => c.courseName == MenuBootstrap.Instance.CourseSelected);
+                    if(course != null)
+                        SelectCourse(course);
+                    break;
+                case MenuState.PanelType.Options:
+                    ShowOptions();
+                    break;
+            }
+            MenuState.PanelToOpen = null;
+        }
+        else
+        {
+            ShowLanguage();
+        }
     }
 
-    // Update is called once per frame
+    public static MenuController Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+    }
+
+    private void HideAllPanels()
+    {
+        languagePanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
+        coursesPanel.SetActive(false);
+        lessonsPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+    }
 
     public void ShowLanguage()
     {
-        panelStack.Clear();
-        ShowPanel(languagePanel); 
+        HideAllPanels();
+        languagePanel.SetActive(true);
+        MenuState.SetLevel(MenuState.PanelLevel.Language); 
 
         // clear the previous buttons
         foreach (Transform child in languagesContainer)
@@ -63,15 +112,21 @@ public class MenuController : MonoBehaviour
         }
 
     }
+
     public void ShowMainMenu()
     {
        
-        ShowPanel(mainMenuPanel);
+        HideAllPanels();
+        mainMenuPanel.SetActive(true);
+        MenuState.SetLevel(MenuState.PanelLevel.MainMenu);
     }
+
     public void ShowCourses()
     {
         
-        ShowPanel(coursesPanel); 
+        HideAllPanels();
+        coursesPanel.SetActive(true);
+        MenuState.SetLevel(MenuState.PanelLevel.Courses); 
 
         // clear the previous buttons
         foreach (Transform child in coursesContainer)
@@ -103,9 +158,12 @@ public class MenuController : MonoBehaviour
             }
         }
     }
+
     public void ShowCourseLessons()
     {
-        ShowPanel(lessonsPanel);   
+        HideAllPanels();
+        lessonsPanel.SetActive(true);
+        MenuState.SetLevel(MenuState.PanelLevel.Lessons);   
 
         // clear the previous buttons
         foreach (Transform child in lessonsContainer)
@@ -130,7 +188,8 @@ public class MenuController : MonoBehaviour
 
     public void ShowOptions()
     {
-        ShowPanel(optionsPanel);
+        HideAllPanels();
+        optionsPanel.SetActive(true);
     }
 
     public void SelectLanguage(string lang)
@@ -164,28 +223,31 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("LessonScene");
     }
-
-    // go back to the previos menu panel
-    public void ShowPanel(GameObject panel)
-    {
-        if (panelStack.Count > 0)
-            panelStack.Peek().SetActive(false);
-
-        panelStack.Push(panel);
-        panel.SetActive(true);
-
-        UpdateProgressUI();
-    }
-
+    
     public void GoBack()
     {
-        if (panelStack.Count <= 1)
+        MenuState.PanelLevel? level = MenuState.GetLevel();
+        
+        if(level == null)
             return;
-            
-        GameObject current = panelStack.Pop();
-        current.SetActive(false);
 
-        panelStack.Peek().SetActive(true);
+        switch(level)
+        {
+            case MenuState.PanelLevel.Lessons:
+                ShowCourses();
+                MenuState.SetLevel(MenuState.PanelLevel.Courses);
+                break;
+            case MenuState.PanelLevel.Courses:
+                ShowMainMenu();
+                MenuState.SetLevel(MenuState.PanelLevel.MainMenu);
+                break;
+            case MenuState.PanelLevel.MainMenu:
+                ShowLanguage();
+                MenuState.SetLevel(MenuState.PanelLevel.Language);
+                break;
+            case MenuState.PanelLevel.Language:
+                break;
+        }
     }
 
     public void OnBackButton()

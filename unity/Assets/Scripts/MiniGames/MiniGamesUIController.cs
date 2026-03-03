@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class MiniGamesUIController : MonoBehaviour
 {
@@ -74,7 +75,16 @@ public class MiniGamesUIController : MonoBehaviour
 
     public void BackToMenu()
     {
-        matchGamePanel.SetActive(false);
-        miniGameButtonsPanel.SetActive(true);
+        if (matchGamePanel.activeSelf)
+        {
+            matchGamePanel.SetActive(false);
+            miniGameButtonsPanel.SetActive(true);
+        }
+        else
+        {
+            MenuState.PanelToOpen = MenuState.PanelType.Lessons; 
+            MenuState.SetLevel(MenuState.PanelLevel.Lessons);
+            SceneManager.LoadScene("MainMenuScene");   
+        }
     }
 }
