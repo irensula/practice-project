@@ -37,6 +37,9 @@ public class MatchGame : MonoBehaviour
 
     public event Action OnGameFinished;
 
+    [Header("Animated Icons")]
+    [SerializeField] private PopAnimation resultPop;
+    
     [Header("Result Sounds")]
     [SerializeField] private AudioClip correctClip;
     [SerializeField] private AudioClip wrongClip;
@@ -264,23 +267,27 @@ public class MatchGame : MonoBehaviour
     
     public void ShowCorrect()
     {
-        StartCoroutine(ShowResult(correctSprite));
+        // StartCoroutine(ShowResult(correctSprite));
+        resultIcon.sprite = correctSprite;
+        resultPop.Play();
         PlayResultSound(correctClip);
     }
 
     public void ShowWrong()
     {
-        StartCoroutine(ShowResult(wrongSprite));
+        // StartCoroutine(ShowResult(wrongSprite));
+        resultIcon.sprite = wrongSprite;
+        resultPop.Play();
         PlayResultSound(wrongClip);
     }
 
-    IEnumerator ShowResult(Sprite sprite)
-    {
-        resultIcon.sprite = sprite;
-        resultIcon.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        resultIcon.gameObject.SetActive(false);
-    }
+    // IEnumerator ShowResult(Sprite sprite)
+    // {
+    //     resultIcon.sprite = sprite;
+    //     resultIcon.gameObject.SetActive(true);
+    //     yield return new WaitForSeconds(1f);
+    //     resultIcon.gameObject.SetActive(false);
+    // }
 
     void ClearContainers()
     {

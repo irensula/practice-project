@@ -1651,7 +1651,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1353560269}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EffectsAudioController, Assembly-CSharp
         m_MethodName: ToggleMute
         m_Mode: 1
@@ -4342,7 +4342,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 708703131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
         m_MethodName: ToggleMute
         m_Mode: 1
