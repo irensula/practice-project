@@ -28,7 +28,6 @@ public class SoundCard : BaseMatchCard, IPointerClickHandler
 
     private void PlaySound()
     {
-        Debug.Log($"PlaySound called for {wordKey}");
         if (clip != null)
         {
             audioSource.Stop();

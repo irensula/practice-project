@@ -1,11 +1,20 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
     public int ExpectedWordId;
     private DraggableItem currentWord;
     private MatchGame matchGame;
+    private Image slotImage;
+    public bool IsMatched { get; private set; }
+    [SerializeField] private Color matchedColor = new Color32(131, 106, 234, 50);
+
+    private void Awake()
+    {
+        slotImage = GetComponent<Image>();
+    }
 
     public void Setup(int wordId, MatchGame game)
     {
@@ -20,9 +29,6 @@ public class DropSlot : MonoBehaviour, IDropHandler
         if (dropped == null)
             return;
 
-        Debug.Log("Dropped word id: " + dropped.WordId + 
-              " | Expected: " + ExpectedWordId);
-
         if (dropped.WordId == ExpectedWordId)
         {
             currentWord = dropped;
@@ -36,6 +42,8 @@ public class DropSlot : MonoBehaviour, IDropHandler
             dropped.transform.localScale = Vector3.one;
 
             dropped.SetMatched();
+            SetMatched();
+
             matchGame.ShowCorrect();
             matchGame.CheckAllMatched();
         }
@@ -46,6 +54,10 @@ public class DropSlot : MonoBehaviour, IDropHandler
     }
 
     public DraggableItem CurrentWord => currentWord;
-}
 
-// using UnityEngine; using UnityEngine.EventSystems; public class DropSlot : MonoBehaviour, IDropHandler { public int ExpectedWordId; private DraggableItem currentWord; public void Setup(int wordId) { ExpectedWordId = wordId; } public void OnDrop(PointerEventData eventData) { DraggableItem dropped = eventData.pointerDrag.GetComponent<DraggableItem>(); if (dropped == null) return; Debug.Log("Dropped word id: " + dropped.WordId + " | Expected: " + ExpectedWordId); if (dropped.WordId == ExpectedWordId) { currentWord = dropped; dropped.transform.SetParent(transform, false); dropped.transform.localPosition = Vector3.zero; dropped.SetMatched(); FindObjectOfType<MatchGame>().CheckAllMatched(); } else { dropped.ReturnToStart(); } } }
+    public void SetMatched()
+    {
+        IsMatched = true;
+        slotImage.color = matchedColor;
+    }
+}

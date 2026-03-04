@@ -39,8 +39,6 @@ public class MiniGamesUIController : MonoBehaviour
         matchGamePanel.SetActive(true);
 
         matchGame.Setup(vocabulary, mode, type);
-
-        matchGame.OnGameFinished += BackToMenu;
     }
 
     public void StartPracticeTextToPicture()
@@ -73,6 +71,11 @@ public class MiniGamesUIController : MonoBehaviour
         OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.TextToSound);
     }
 
+    public void ShowMiniGameMenu()
+    {
+        matchGamePanel.SetActive(false);
+        miniGameButtonsPanel.SetActive(true);
+    }
     public void BackToMenu()
     {
         if (matchGamePanel.activeSelf)
@@ -80,11 +83,11 @@ public class MiniGamesUIController : MonoBehaviour
             matchGamePanel.SetActive(false);
             miniGameButtonsPanel.SetActive(true);
         }
-        else
+        else if (miniGameButtonsPanel.activeSelf)
         {
             MenuState.PanelToOpen = MenuState.PanelType.Lessons; 
             MenuState.SetLevel(MenuState.PanelLevel.Lessons);
-            SceneManager.LoadScene("MainMenuScene");   
+            SceneManager.LoadScene("MainMenuScene"); 
         }
     }
 }

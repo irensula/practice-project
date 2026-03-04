@@ -48,6 +48,22 @@
             { "miniGameID": 2, "title": "Match Game (words + sounds)" },
             { "miniGameID": 3, "title": "Match Game (images + sounds)" }
         ]
+        },
+        {
+          "lessonID": 3,
+          "courseID": 1,
+          "title": "Lesson 3",
+          "visualNovel": [
+              { "contentID": 1, "text": "Welcome to Customer Service!" }
+          ],
+          "exercises": [
+              { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
+          ],
+          "miniGames": [
+              { "miniGameID": 1, "title": "Match Game (images + words)" },
+              { "miniGameID": 2, "title": "Match Game (words + sounds)" },
+              { "miniGameID": 3, "title": "Match Game (images + sounds)" }
+          ]
         }
     ],
     "words": [

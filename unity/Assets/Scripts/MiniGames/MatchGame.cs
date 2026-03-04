@@ -35,8 +35,6 @@ public class MatchGame : MonoBehaviour
     public GameObject winPanel;
     public Button btnCloseWinPanel;
 
-    public event Action OnGameFinished;
-
     [Header("Animated Icons")]
     [SerializeField] private PopAnimation resultPop;
     
@@ -46,6 +44,7 @@ public class MatchGame : MonoBehaviour
     [SerializeField] private AudioClip winClip;
     private AudioSource audioSource;
 
+    public MiniGamesUIController miniGamesUIController;
 
     void Start()
     {
@@ -57,6 +56,9 @@ public class MatchGame : MonoBehaviour
         audioSource.spatialBlend = 0;
 
         btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
+
+        if (miniGamesUIController == null)
+            miniGamesUIController = FindObjectOfType<MiniGamesUIController>();
     }
 
     void Shuffle<T>(List<T> list)
@@ -109,6 +111,7 @@ public class MatchGame : MonoBehaviour
                         {   
                             // create text card
                             WordCard textCard = Instantiate(textPrefab, primaryContainer);
+                            
                             textCard.Setup(word.id, this);
                             // add text
                             var finnish = word.translations.FirstOrDefault(t => t.languageId == 1);
@@ -176,6 +179,7 @@ public class MatchGame : MonoBehaviour
                 case MatchContentType.Picture:
                     {
                         ImageCard imgCard = Instantiate(imagePrefab, secondaryContainer);
+                        Debug.Log("Created card type: " + imgCard.GetType());
                         imgCard.Setup(word.id, this);
                         Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
                         if (sprite != null)
@@ -252,7 +256,6 @@ public class MatchGame : MonoBehaviour
 
     private void PlayResultSound(AudioClip clip)
     {
-        Debug.Log($"PlaySound called correct or wrong");
         if (clip != null)
             {
                 audioSource.Stop();
@@ -267,7 +270,6 @@ public class MatchGame : MonoBehaviour
     
     public void ShowCorrect()
     {
-        // StartCoroutine(ShowResult(correctSprite));
         resultIcon.sprite = correctSprite;
         resultPop.Play();
         PlayResultSound(correctClip);
@@ -275,19 +277,10 @@ public class MatchGame : MonoBehaviour
 
     public void ShowWrong()
     {
-        // StartCoroutine(ShowResult(wrongSprite));
         resultIcon.sprite = wrongSprite;
         resultPop.Play();
         PlayResultSound(wrongClip);
     }
-
-    // IEnumerator ShowResult(Sprite sprite)
-    // {
-    //     resultIcon.sprite = sprite;
-    //     resultIcon.gameObject.SetActive(true);
-    //     yield return new WaitForSeconds(1f);
-    //     resultIcon.gameObject.SetActive(false);
-    // }
 
     void ClearContainers()
     {
@@ -332,6 +325,6 @@ public class MatchGame : MonoBehaviour
         foreach (var card in secondaryCards)
             card.ResetItem();
 
-        OnGameFinished?.Invoke();
+        miniGamesUIController.ShowMiniGameMenu();
     }
 }

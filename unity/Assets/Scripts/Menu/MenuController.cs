@@ -106,11 +106,11 @@ public class MenuController : MonoBehaviour
             img.sprite = language.languageFlag;
 
             Button btn = newLanguageObj.GetComponent<Button>();
-            UIAudioManager.Instance.RegisterButton(btn);
             string langCode = language.code;
             btn.onClick.AddListener(() => SelectLanguage(langCode));
+            
         }
-
+        RegisterPanelButtons(languagePanel);
     }
 
     public void ShowMainMenu()
@@ -119,6 +119,8 @@ public class MenuController : MonoBehaviour
         HideAllPanels();
         mainMenuPanel.SetActive(true);
         MenuState.SetLevel(MenuState.PanelLevel.MainMenu);
+
+        RegisterPanelButtons(mainMenuPanel);
     }
 
     public void ShowCourses()
@@ -141,11 +143,7 @@ public class MenuController : MonoBehaviour
 
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = course.courseName;
 
-            Button btn = newButton.GetComponent<Button>();
-            
-            UIAudioManager.Instance.RegisterButton(btn);
-            
-            // newButton.GetComponent<Image>().sprite.icon;            
+            Button btn = newButton.GetComponent<Button>();            
 
             if(!course.locked)
             {
@@ -157,6 +155,7 @@ public class MenuController : MonoBehaviour
                 btn.interactable = false;
             }
         }
+        RegisterPanelButtons(coursesPanel);
     }
 
     public void ShowCourseLessons()
@@ -180,18 +179,22 @@ public class MenuController : MonoBehaviour
 
             Button btn = newButton.GetComponent<Button>();
 
-            UIAudioManager.Instance.RegisterButton(btn);
-
             btn.onClick.AddListener(() => OnLessonClicked(lesson));
         }
+        RegisterPanelButtons(lessonsPanel);
     }
 
     public void ShowOptions()
     {
         HideAllPanels();
         optionsPanel.SetActive(true);
+        RegisterPanelButtons(optionsPanel);
     }
 
+    public void CloseOptionsPanel()
+    {
+        ShowMainMenu();
+    }
     public void SelectLanguage(string lang)
     {
         MenuBootstrap.Instance.LanguageSelected = lang;
@@ -253,5 +256,16 @@ public class MenuController : MonoBehaviour
     public void OnBackButton()
     {
         GoBack();
+    }
+
+    private void RegisterPanelButtons(GameObject panel)
+    {
+        if (AudioManager.Instance == null) return;
+
+        Button[] buttons = panel.GetComponentsInChildren<Button>(true);
+        foreach (Button btn in buttons)
+        {
+            AudioManager.Instance.RegisterButton(btn);
+        }
     }
 }

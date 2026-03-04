@@ -34,7 +34,6 @@ public class BaseMatchCard : MonoBehaviour
     public virtual void SetSelected(bool value)
     {
         transform.localScale = value ? Vector3.one * 1.1f : Vector3.one;
-        Debug.Log("The selected card is scaled");
     }
 
     public virtual void SetMatched()
