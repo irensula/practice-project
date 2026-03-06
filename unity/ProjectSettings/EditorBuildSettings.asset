@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MatchGame.unity
     guid: 244bfdd217630d442a4d9340a25d4543
+  - enabled: 1
+    path: Assets/Scenes/V2LessonScene.unity
+    guid: 6c47c78e423e4b544ade9428a14c930f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
