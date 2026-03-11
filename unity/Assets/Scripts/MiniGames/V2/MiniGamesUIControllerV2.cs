@@ -17,18 +17,18 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
     [Header("Vocabulary")]
     public List<WordData> vocabularyList; 
 
-    // private void Awake()
-    // {
-    //     DatabaseService.Init();
-    //     var db = DatabaseService.Load();
+    private void Awake()
+    {
+        DatabaseService.Init();
+        var db = DatabaseService.Load();
 
-    //     vocabularyList = new List<WordData>(db.words);
+        vocabularyList = new List<WordData>(db.words);
 
-    //     foreach (var word in vocabularyList)
-    //     {
-    //         string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
-    //     }
-    // }
+        foreach (var word in vocabularyList)
+        {
+            string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
+        }
+    }
     public void StartTextToPictureGame()
     {
         miniGameButtonsPanel.SetActive(false);
@@ -41,6 +41,7 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
         // create a new game
         currentGame = Instantiate(textToPicturePrefab, matchGamePanel.transform);
         currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.TextToPicture);
+        Debug.Log("StartTextToPictureGame startetd");    
     }
 
     public void ShowMiniGameMenu()

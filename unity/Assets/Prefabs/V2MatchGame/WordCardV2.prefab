@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c766a1806be268442ac047810453babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WordCardV2
+  text: {fileID: 5090868730706589000}
 --- !u!1 &8280166669818594972
 GameObject:
   m_ObjectHideFlags: 0
