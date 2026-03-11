@@ -43,8 +43,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(i, list.Count);
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
-        }
-        Debug.Log("Shuffle called");  
+        }  
     }
 
     protected void ClearContainers()
@@ -57,12 +56,10 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
 
         foreach(Transform child in slotContainer)
             Destroy(child.gameObject);
-            Debug.Log("ClearContainers called");
     }
 
     public WordData GetWordById(int id)
     {
-        Debug.Log("GetWordById");
         return words.Find(w => w.id == id);
     }
 }

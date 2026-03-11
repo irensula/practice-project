@@ -285,3 +285,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e9be058f9d8a148ac32a27ce8aa815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImageCardV2
+  image: {fileID: 4006422733850517157}
+  overlayImage: {fileID: 5119396101636388526}

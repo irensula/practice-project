@@ -10,7 +10,6 @@ public class WordCardV2 : BaseMatchCardV2
 
     public override void Setup(int wordId, BaseMatchGameV2 game)
     {
-        Debug.Log("WordCardV2 Setup called for wordId: " + wordId);
         base.Setup(wordId, game);
 
         var wordData = game.GetWordById(wordId);
@@ -20,7 +19,6 @@ public class WordCardV2 : BaseMatchCardV2
             if (translation != null && text != null)
             {
                 text.text = translation.text;
-                Debug.Log($"SetText: {translation.text}");
             }
         }
     }

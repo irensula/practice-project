@@ -11,8 +11,10 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
 
     [Header("Game Prefabs")]
     public TextToPictureGameV2 textToPicturePrefab;
+    public SoundToTextGameV2 soundToTextPrefab;
 
-     private BaseMatchGameV2 currentGame;
+    public SoundToPictureGameV2 soundToPicturePrefab;
+    private BaseMatchGameV2 currentGame;
 
     [Header("Vocabulary")]
     public List<WordData> vocabularyList; 
@@ -40,8 +42,35 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
 
         // create a new game
         currentGame = Instantiate(textToPicturePrefab, matchGamePanel.transform);
-        currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.TextToPicture);
-        Debug.Log("StartTextToPictureGame startetd");    
+        currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.TextToPicture);   
+    }
+
+    public void StartSoundToPictureGame()
+    {
+        miniGameButtonsPanel.SetActive(false);
+        matchGamePanel.SetActive(true);
+
+        // delete the previous game
+        if (currentGame != null)
+            Destroy(currentGame.gameObject);
+
+        // create a new game
+        currentGame = Instantiate(soundToPicturePrefab, matchGamePanel.transform);
+        currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.SoundToPicture);
+    }
+
+    public void StartSoundToTextGame()
+    {
+        miniGameButtonsPanel.SetActive(false);
+        matchGamePanel.SetActive(true);
+
+        // delete the previous game
+        if (currentGame != null)
+            Destroy(currentGame.gameObject);
+
+        // create a new game
+        currentGame = Instantiate(soundToTextPrefab, matchGamePanel.transform);
+        currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.SoundToText);  
     }
 
     public void ShowMiniGameMenu()
