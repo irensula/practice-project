@@ -15,6 +15,7 @@ public class TextToPictureGameV2 : BaseMatchGameV2
         {
             var textCard = Instantiate(textPrefab, primaryContainer);
             textCard.Setup(word.id, this);
+            textCard.gameObject.AddComponent<DraggableItemV2>();
 
             var imageCard = Instantiate(imagePrefab, secondaryContainer);
             imageCard.Setup(word.id, this);

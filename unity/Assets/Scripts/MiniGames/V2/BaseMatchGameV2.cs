@@ -18,6 +18,19 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     protected MatchGameModeV2 currentMode;
     protected MatchGameTypeV2 currentType;
 
+    public Sprite correctSprite;
+    public Sprite wrongSprite;
+    public Image resultIcon;
+
+    [Header("Animated Icons")]
+    [SerializeField] private PopAnimation resultPop;
+    
+    [Header("Result Sounds")]
+    [SerializeField] private AudioClip correctClip;
+    [SerializeField] private AudioClip wrongClip;
+    [SerializeField] private AudioClip winClip;
+    private AudioSource audioSource;
+
     public virtual void Setup(List<WordData> vocabulary, MatchGameModeV2 mode, MatchGameTypeV2 type)
     {        
         words = vocabulary
@@ -61,6 +74,45 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     {
         return words.Find(w => w.id == id);
     }
+
+    public void CheckAllMatched()
+    {
+        // create a variable for children in primaryContainer and secondaryContainer
+        // DropSlot[] slots = slotContainer.GetComponentsInChildren<DropSlot>();
+        
+        // foreach (var slot in slots)
+        //     if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
+        //         return;
+
+        // StartCoroutine(ShowWinPanel());
+    }
+    public void ShowCorrect()
+    {
+        resultIcon.sprite = correctSprite;
+        resultPop.Play();
+        PlayResultSound(correctClip);
+    }
+
+    public void ShowWrong()
+    {
+        resultIcon.sprite = wrongSprite;
+        resultPop.Play();
+        PlayResultSound(wrongClip);
+    }
+
+    private void PlayResultSound(AudioClip clip)
+    {
+        // if (clip != null)
+        // {
+        //     audioSource.Stop();
+        //     audioSource.clip = clip;
+        //     audioSource.Play();
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("Result sound not assigned!");
+        // }
+    }
 }
 
     // protected bool isChecking = false;
@@ -79,9 +131,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     // private BaseMatchCard firstSelected = null;
     
     
-    // public Sprite correctSprite;
-    // public Sprite wrongSprite;
-    // public Image resultIcon;
+    
     // public GameObject blockerPanel;
     // public GameObject winPanel;
     // public Button btnCloseWinPanel;
@@ -143,47 +193,12 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     //     isChecking = false;
     // }
 
-    // private void PlayResultSound(AudioClip clip)
-    // {
-    //     if (clip != null)
-    //         {
-    //             audioSource.Stop();
-    //             audioSource.clip = clip;
-    //             audioSource.Play();
-    //         }
-    //         else
-    //         {
-    //             Debug.LogWarning("Result sound not assigned!");
-    //         }
-    // }
+  
     
-    // public void ShowCorrect()
-    // {
-    //     resultIcon.sprite = correctSprite;
-    //     resultPop.Play();
-    //     PlayResultSound(correctClip);
-    // }
 
-    // public void ShowWrong()
-    // {
-    //     resultIcon.sprite = wrongSprite;
-    //     resultPop.Play();
-    //     PlayResultSound(wrongClip);
-    // }
 
     
 
-    // public void CheckAllMatched()
-    // {
-    //     // create a variable for children in primaryContainer and secondaryContainer
-    //     DropSlot[] slots = slotContainer.GetComponentsInChildren<DropSlot>();
-        
-    //     foreach (var slot in slots)
-    //         if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
-    //             return;
-
-    //     StartCoroutine(ShowWinPanel());
-    // }
 
     // IEnumerator ShowWinPanel()
     // {

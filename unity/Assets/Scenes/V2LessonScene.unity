@@ -151,6 +151,13 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
+  correctSprite: {fileID: 0}
+  wrongSprite: {fileID: 0}
+  resultIcon: {fileID: 0}
+  resultPop: {fileID: 0}
+  correctClip: {fileID: 0}
+  wrongClip: {fileID: 0}
+  winClip: {fileID: 0}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
@@ -1017,6 +1024,13 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
+  correctSprite: {fileID: 0}
+  wrongSprite: {fileID: 0}
+  resultIcon: {fileID: 0}
+  resultPop: {fileID: 0}
+  correctClip: {fileID: 0}
+  wrongClip: {fileID: 0}
+  winClip: {fileID: 0}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
@@ -1755,6 +1769,13 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
+  correctSprite: {fileID: 137542842360294689, guid: 5a64cc5051588a749bc8295b213cf5c6, type: 3}
+  wrongSprite: {fileID: -1447605698058687634, guid: dc5421aaff8f2ee4790264427c8f28f7, type: 3}
+  resultIcon: {fileID: 0}
+  resultPop: {fileID: 0}
+  correctClip: {fileID: 8300000, guid: 85725a0fb02d26144af19623cfeb9b40, type: 3}
+  wrongClip: {fileID: 8300000, guid: 40f0ffcea4bc4574fb97c51b9ca10de1, type: 3}
+  winClip: {fileID: 8300000, guid: c320295d0a7ec1e4980aa85c7688b429, type: 3}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
