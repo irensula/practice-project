@@ -8,7 +8,6 @@ public class ImageCardV2 : BaseMatchCardV2
 
     public override void Setup(int wordId, BaseMatchGameV2 game)
     {
-        Debug.Log("ImageCardV2 Setup called for wordId: " + wordId);
         base.Setup(wordId, game);
 
         var wordData = game.GetWordById(wordId);
@@ -18,7 +17,6 @@ public class ImageCardV2 : BaseMatchCardV2
             if (sprite != null)
             {
                 image.sprite = sprite;
-                Debug.Log($"ImageCardV2: {wordData.image}");
             }
         }
     }

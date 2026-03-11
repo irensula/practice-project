@@ -29,8 +29,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         currentType = type;
 
         Shuffle(words);
-        BuildBoard();  
-        Debug.Log("Setup called");      
+        BuildBoard();    
     }
 
     protected abstract void BuildBoard();

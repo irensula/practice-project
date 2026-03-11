@@ -13,8 +13,6 @@ public class TextToPictureGameV2 : BaseMatchGameV2
 
         foreach (var word in words)
         {
-            Debug.Log("Building card for word id: " + word.id);
-
             var textCard = Instantiate(textPrefab, primaryContainer);
             textCard.Setup(word.id, this);
 
