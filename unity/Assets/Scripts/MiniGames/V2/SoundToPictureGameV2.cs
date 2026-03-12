@@ -16,6 +16,7 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
         {
             var soundCard = Instantiate(soundPrefab, primaryContainer);
             soundCard.Setup(word.id, this);
+            soundCard.gameObject.AddComponent<DraggableItemV2>(); 
 
             var imageCard = Instantiate(imagePrefab, secondaryContainer);
             imageCard.Setup(word.id, this);            

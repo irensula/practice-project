@@ -18,18 +18,31 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     protected MatchGameModeV2 currentMode;
     protected MatchGameTypeV2 currentType;
 
-    public Sprite correctSprite;
-    public Sprite wrongSprite;
-    public Image resultIcon;
+    [SerializeField] private MatchGameUI ui;
 
-    [Header("Animated Icons")]
-    [SerializeField] private PopAnimation resultPop;
-    
-    [Header("Result Sounds")]
-    [SerializeField] private AudioClip correctClip;
-    [SerializeField] private AudioClip wrongClip;
-    [SerializeField] private AudioClip winClip;
     private AudioSource audioSource;
+
+    private BaseMatchCardV2 firstSelected = null;
+    protected bool isChecking = false;
+    private Coroutine currentResultRoutine;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0;
+
+        if (ui == null)
+            ui = GetComponentInChildren<MatchGameUI>();
+
+        // btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
+
+        // if (miniGamesUIController == null)
+        //     miniGamesUIController = FindObjectOfType<MiniGamesUIController>();
+    }
 
     public virtual void Setup(List<WordData> vocabulary, MatchGameModeV2 mode, MatchGameTypeV2 type)
     {        
@@ -75,6 +88,48 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         return words.Find(w => w.id == id);
     }
 
+    public void SelectCard(BaseMatchCardV2 card)
+    {
+        if (isChecking) return;
+
+        if (firstSelected == null)
+        {
+            firstSelected = card;
+            card.SetSelected(true);
+            return;
+        }
+
+        if (firstSelected == card)
+            return;
+
+        StartCoroutine(CheckMatch(firstSelected, card));
+    }  
+
+    private IEnumerator CheckMatch(BaseMatchCardV2 first, BaseMatchCardV2 second)
+    {
+        isChecking = true;
+        second.SetSelected(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (first.WordId == second.WordId)
+        {
+            first.SetMatched();
+            second.SetMatched();
+
+            CheckAllMatched();
+        }
+        else
+        {
+            first.SetSelected(false);
+            second.SetSelected(false);
+            
+        }
+
+        firstSelected = null;
+        isChecking = false;
+    }
+
     public void CheckAllMatched()
     {
         // create a variable for children in primaryContainer and secondaryContainer
@@ -86,119 +141,60 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
 
         // StartCoroutine(ShowWinPanel());
     }
+
     public void ShowCorrect()
     {
-        resultIcon.sprite = correctSprite;
-        resultPop.Play();
-        PlayResultSound(correctClip);
+        if (currentResultRoutine != null) StopCoroutine(currentResultRoutine);
+        currentResultRoutine = StartCoroutine(ShowResultRoutine(ui.correctSprite, ui.correctClip));
     }
 
     public void ShowWrong()
     {
-        resultIcon.sprite = wrongSprite;
-        resultPop.Play();
-        PlayResultSound(wrongClip);
+        if (currentResultRoutine != null) StopCoroutine(currentResultRoutine);
+        currentResultRoutine = StartCoroutine(ShowResultRoutine(ui.wrongSprite, ui.wrongClip));
+    }
+
+    private void OnEnable()
+    {
+        if (ui != null)
+        {
+            ui.ResultPanel.SetActive(false);
+            ui.blockerPanel.SetActive(false);
+        }
+    }
+
+    private IEnumerator ShowResultRoutine(Sprite icon, AudioClip clip)
+    {
+        ui.blockerPanel.SetActive(true);
+        ui.ResultPanel.SetActive(true);
+        ui.resultIcon.sprite = icon;
+        ui.resultPop.Play();
+        PlayResultSound(clip);
+
+        yield return new WaitForSeconds(1f);
+
+        ui.blockerPanel.SetActive(false);
+        ui.ResultPanel.SetActive(false);
     }
 
     private void PlayResultSound(AudioClip clip)
     {
-        // if (clip != null)
-        // {
-        //     audioSource.Stop();
-        //     audioSource.clip = clip;
-        //     audioSource.Play();
-        // }
-        // else
-        // {
-        //     Debug.LogWarning("Result sound not assigned!");
-        // }
+        if (clip != null)
+        {
+            audioSource.Stop();
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Result sound not assigned!");
+        }
     }
 }
-
-    // protected bool isChecking = false;
-
-    // [Header("Animated Icons")]
-    // [SerializeField] private PopAnimation resultPop;
-    
-    // [Header("Result Sounds")]
-    // [SerializeField] private AudioClip correctClip;
-    // [SerializeField] private AudioClip wrongClip;
-    // [SerializeField] private AudioClip winClip;
-    // private AudioSource audioSource;
-
-    // [SerializeField] private SoundCard soundPrefab; 
-
-    // private BaseMatchCard firstSelected = null;
-    
-    
-    
-    // public GameObject blockerPanel;
-    // public GameObject winPanel;
-    // public Button btnCloseWinPanel;
-
-    // void Start()
-    // {
-    //     audioSource = GetComponent<AudioSource>();
-    //     if (audioSource == null)
-    //         audioSource = gameObject.AddComponent<AudioSource>();
-
-    //     audioSource.playOnAwake = false;
-    //     audioSource.spatialBlend = 0;
-
-    //     btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
-
-    //     if (miniGamesUIController == null)
-    //         miniGamesUIController = FindObjectOfType<MiniGamesUIController>();
-    // }
-
-    // public void SelectCard(BaseMatchCard card)
-    // {
-    //     if (isChecking) return;
-
-    //     if (firstSelected == null)
-    //     {
-    //         firstSelected = card;
-    //         card.SetSelected(true);
-    //         return;
-    //     }
-
-    //     if (firstSelected == card)
-    //         return;
-
-    //     StartCoroutine(CheckMatch(firstSelected, card));
-    // }    
-
-    // private IEnumerator CheckMatch(BaseMatchCard first, BaseMatchCard second)
-    // {
-    //     isChecking = true;
-    //     second.SetSelected(true);
-
-    //     yield return new WaitForSeconds(0.5f);
-
-    //     if (first.WordId == second.WordId)
-    //     {
-    //         first.SetMatched();
-    //         second.SetMatched();
-
-    //         CheckAllMatched();
-    //     }
-    //     else
-    //     {
-    //         first.SetSelected(false);
-    //         second.SetSelected(false);
-            
-    //     }
-
-    //     firstSelected = null;
-    //     isChecking = false;
-    // }
-
-  
-    
-
-
-    
-
+   
+    // [SerializeField] private SoundCard soundPrefab;     
+   
+   
 
     // IEnumerator ShowWinPanel()
     // {

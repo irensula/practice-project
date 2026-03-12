@@ -16,6 +16,7 @@ public class SoundToTextGameV2 : BaseMatchGameV2
         {
             var soundCard = Instantiate(soundPrefab, primaryContainer);
             soundCard.Setup(word.id, this);
+            soundCard.gameObject.AddComponent<DraggableItemV2>();
 
             var textCard = Instantiate(textPrefab, secondaryContainer);
             textCard.Setup(word.id, this);           
