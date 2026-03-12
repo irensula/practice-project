@@ -33,6 +33,12 @@ public class DraggableItemV2 : MonoBehaviour,
         matchGame = card.BaseMatchGameV2;
     }
 
+    public void Init(BaseMatchCardV2 card)
+    {
+        this.card = card;
+        matchGame = card.BaseMatchGameV2;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (card != null && card.IsMatched) 

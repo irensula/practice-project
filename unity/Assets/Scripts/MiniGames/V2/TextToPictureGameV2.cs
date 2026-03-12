@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class TextToPictureGameV2 : BaseMatchGameV2
 {
@@ -11,12 +12,24 @@ public class TextToPictureGameV2 : BaseMatchGameV2
     {
         ClearContainers();
 
-        foreach (var word in words)
+        var textWords = new List<WordData>(words);
+        Shuffle(textWords);
+        
+        var imageWords = new List<WordData>(words);
+        Shuffle(imageWords);
+
+        // create text cards
+        foreach (var word in textWords)
         {
             var textCard = Instantiate(textPrefab, primaryContainer);
             textCard.Setup(word.id, this);
-            textCard.gameObject.AddComponent<DraggableItemV2>();
+            var draggable = textCard.gameObject.AddComponent<DraggableItemV2>();
+            draggable.Init(textCard);
+        }
 
+        // create image cards
+        foreach (var word in imageWords)
+        {
             var imageCard = Instantiate(imagePrefab, secondaryContainer);
             imageCard.Setup(word.id, this);
 

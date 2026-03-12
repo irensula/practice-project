@@ -25,6 +25,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     private BaseMatchCardV2 firstSelected = null;
     protected bool isChecking = false;
     private Coroutine currentResultRoutine;
+    public MiniGamesUIControllerV2 miniGamesUIController;
 
     void Start()
     {
@@ -38,10 +39,10 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         if (ui == null)
             ui = GetComponentInChildren<MatchGameUI>();
 
-        // btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
+        ui.btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
 
-        // if (miniGamesUIController == null)
-        //     miniGamesUIController = FindObjectOfType<MiniGamesUIController>();
+        if (miniGamesUIController == null)
+            miniGamesUIController = FindObjectOfType<MiniGamesUIControllerV2>();
     }
 
     public virtual void Setup(List<WordData> vocabulary, MatchGameModeV2 mode, MatchGameTypeV2 type)
@@ -130,18 +131,6 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         isChecking = false;
     }
 
-    public void CheckAllMatched()
-    {
-        // create a variable for children in primaryContainer and secondaryContainer
-        // DropSlot[] slots = slotContainer.GetComponentsInChildren<DropSlot>();
-        
-        // foreach (var slot in slots)
-        //     if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
-        //         return;
-
-        // StartCoroutine(ShowWinPanel());
-    }
-
     public void ShowCorrect()
     {
         if (currentResultRoutine != null) StopCoroutine(currentResultRoutine);
@@ -190,33 +179,44 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
             Debug.LogWarning("Result sound not assigned!");
         }
     }
+
+    public void CheckAllMatched()
+    {
+        // create a variable for children in primaryContainer and secondaryContainer
+        DropSlotV2[] slots = slotContainer.GetComponentsInChildren<DropSlotV2>();
+        
+        foreach (var slot in slots)
+            if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
+                return;
+
+        StartCoroutine(ShowWinPanel());
+    }
+
+    
+    IEnumerator ShowWinPanel()
+    {
+        yield return new WaitForSeconds(1.5f);
+        ui.blockerPanel.SetActive(true);
+        ui.winPanel.SetActive(true);
+        PlayResultSound(ui.winClip);
+    }
+
+    public void CloseWinPanel()
+    {
+        ui.blockerPanel.SetActive(false);
+        ui.winPanel.SetActive(false);
+
+        BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
+        BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();
+
+        foreach (var card in primaryCards)
+            card.ResetItem();
+
+        foreach (var card in secondaryCards)
+            card.ResetItem();
+
+        miniGamesUIController.ShowMiniGameMenu();
+    }
 }
    
     // [SerializeField] private SoundCard soundPrefab;     
-   
-   
-
-    // IEnumerator ShowWinPanel()
-    // {
-    //     yield return new WaitForSeconds(1.5f);
-    //     blockerPanel.SetActive(true);
-    //     winPanel.SetActive(true);
-    //     PlayResultSound(winClip);
-    // }
-
-    // public void CloseWinPanel()
-    // {
-    //     blockerPanel.SetActive(false);
-    //     winPanel.SetActive(false);
-
-    //     BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
-    //     BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();
-
-    //     foreach (var card in primaryCards)
-    //         card.ResetItem();
-
-    //     foreach (var card in secondaryCards)
-    //         card.ResetItem();
-
-    //     miniGamesUIController.ShowMiniGameMenu();
-    // }

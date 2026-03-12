@@ -11,9 +11,9 @@ public class MatchGameUI : MonoBehaviour
     public PopAnimationV2 resultPop;
     public GameObject blockerPanel;
 
-    // [Header("Win UI")]
-    // public GameObject winPanel;
-    // public Button btnCloseWinPanel;
+    [Header("Win UI")]
+    public GameObject winPanel;
+    public Button btnCloseWinPanel;
 
     [Header("Result Sounds")]
     public AudioClip correctClip;
