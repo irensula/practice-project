@@ -23,6 +23,7 @@ public class TextToPictureGameV2 : BaseMatchGameV2
         {
             var textCard = Instantiate(textPrefab, primaryContainer);
             textCard.Setup(word.id, this);
+            
             var draggable = textCard.gameObject.AddComponent<DraggableItemV2>();
             draggable.Init(textCard);
         }

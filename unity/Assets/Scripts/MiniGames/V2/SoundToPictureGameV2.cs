@@ -8,10 +8,14 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
     public SoundCardV2 soundPrefab;
     public ImageCardV2 imagePrefab;
     public DropSlotV2 slotPrefab;
+    public WordCardV2 textPrefab;
+    private Dictionary<int, WordCardV2> textCards = new Dictionary<int, WordCardV2>();
+    private Dictionary<int, SoundCardV2> soundCards = new Dictionary<int, SoundCardV2>();
     
     protected override void BuildBoard()
     {
         ClearContainers();
+        textCards.Clear();
 
         var soundWords = new List<WordData>(words);
         Shuffle(soundWords);
@@ -23,8 +27,11 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
         {
             var soundCard = Instantiate(soundPrefab, primaryContainer);
             soundCard.Setup(word.id, this);
+
             var draggeble = soundCard.gameObject.AddComponent<DraggableItemV2>(); 
             draggeble.Init(soundCard);
+
+            soundCards[word.id] = soundCard;
         }
 
         foreach (var word in imageWords)
@@ -34,6 +41,33 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
 
             var slot = Instantiate(slotPrefab, slotContainer);
             slot.Setup(word.id, this);
+
+            var textCard = Instantiate(textPrefab, resultContainer);
+            textCard.Setup(word.id, this);
+            textCard.gameObject.SetActive(false);
+
+            textCards[word.id] = textCard;
+        }
+    }
+
+    public override void OnCorrectMatch(int wordId, DropSlotV2 slot)
+    {
+        // correct/wrong icon and sound
+        base.OnCorrectMatch(wordId, slot);
+
+        // change soundCard on textCard
+        if (soundCards.TryGetValue(wordId, out var soundCard))
+        {
+            // скрываем звуковую карточку
+            soundCard.gameObject.SetActive(false);
+
+            // создаем текстовую карточку
+            var textCard = Instantiate(textPrefab, slot.transform);
+            textCard.Setup(wordId, this);
+
+            // показываем её на слоте
+            var slotComponent = slot as DropSlotV2;
+            slotComponent.SetCurrentWord(textCard.gameObject);
         }
     }
 }

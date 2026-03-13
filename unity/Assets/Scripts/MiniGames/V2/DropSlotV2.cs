@@ -43,8 +43,8 @@ public class DropSlotV2 : BaseMatchCardV2, IDropHandler
 
             dropped.SetMatched();
             SetMatched();
-
-            matchGame.ShowCorrect();
+            
+            matchGame.OnCorrectMatch(ExpectedWordId, this);   
             matchGame.CheckAllMatched();
         }
         else
@@ -59,5 +59,15 @@ public class DropSlotV2 : BaseMatchCardV2, IDropHandler
     {
         IsMatched = true;
         slotImage.color = matchedColor;
+    }
+
+    // for SoundToPicture
+    public void SetCurrentWord(GameObject wordObject)
+    {
+        currentWord = null;
+        IsMatched = true;
+        slotImage.color = matchedColor;
+
+        wordObject.SetActive(true);
     }
 }

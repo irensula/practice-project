@@ -41,6 +41,5 @@ public class BaseMatchCardV2 : MonoBehaviour
         isMatched = true;
         button.interactable = false;
         transform.localScale = Vector3.one;
-        Debug.Log("SetMatched is called");
     }
 }

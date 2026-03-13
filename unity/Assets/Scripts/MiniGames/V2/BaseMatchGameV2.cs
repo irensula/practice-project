@@ -14,6 +14,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     public Transform primaryContainer;
     public Transform secondaryContainer;
     public Transform slotContainer;
+    public Transform resultContainer;
 
     protected MatchGameModeV2 currentMode;
     protected MatchGameTypeV2 currentType;
@@ -81,6 +82,9 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
             Destroy(child.gameObject);
 
         foreach(Transform child in slotContainer)
+            Destroy(child.gameObject);
+
+        foreach(Transform child in resultContainer)
             Destroy(child.gameObject);
     }
 
@@ -180,6 +184,14 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         }
     }
 
+    public void ShowWordCard(int wordId, WordCardV2 textPrefab)
+    {
+        if (resultContainer == null) return;
+
+        var card = Instantiate(textPrefab, resultContainer);
+        card.Setup(wordId, this);
+    }
+
     public void CheckAllMatched()
     {
         // create a variable for children in primaryContainer and secondaryContainer
@@ -188,8 +200,6 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         foreach (var slot in slots)
             if (slot.CurrentWord == null || !slot.CurrentWord.IsMatched) 
                 return;
-
-        StartCoroutine(ShowWinPanel());
     }
 
     
@@ -217,6 +227,33 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
 
         miniGamesUIController.ShowMiniGameMenu();
     }
-}
-   
-    // [SerializeField] private SoundCard soundPrefab;     
+
+    public virtual void OnCorrectMatch(int wordId, DropSlotV2 slot)
+    {
+        ShowCorrect();
+        StartCoroutine(CheckAndShowWin(slotContainer));
+    }
+
+    private IEnumerator CheckAndShowWin(Transform slotContainer)
+    {
+        // даём анимации/звукам завершиться
+        yield return new WaitForSeconds(0.5f);
+
+        // проверяем все слоты
+        DropSlotV2[] slots = slotContainer.GetComponentsInChildren<DropSlotV2>();
+        bool allMatched = true;
+        foreach (var slot in slots)
+        {
+            if (!slot.IsMatched)
+            {
+                allMatched = false;
+                break;
+            }
+        }
+
+        if (allMatched)
+        {
+            yield return StartCoroutine(ShowWinPanel());
+        }
+    }
+}  
