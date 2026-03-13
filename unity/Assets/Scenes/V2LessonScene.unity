@@ -151,12 +151,13 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
-  resultContainer: {fileID: 727933307}
+  resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
+  imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
 --- !u!4 &148006206
 Transform:
   m_ObjectHideFlags: 0
@@ -446,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1695259444849328413, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3448977524782150133, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -454,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3448977524782150133, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4935089261427831203, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -462,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4935089261427831203, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6211340633745236585, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       propertyPath: m_Pivot.x
@@ -549,7 +550,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6211340633745236585, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 727933307}
+      addedObject: {fileID: 702326345}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 379b06c7451f71d49a6d4be338df848d, type: 3}
 --- !u!224 &325424170 stripped
@@ -1038,7 +1039,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 151569069732744249, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
   m_PrefabInstance: {fileID: 645934221}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &727933306
+--- !u!1 &702326344
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1046,11 +1047,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 727933307}
-  - component: {fileID: 727933311}
-  - component: {fileID: 727933310}
-  - component: {fileID: 727933309}
-  - component: {fileID: 727933308}
+  - component: {fileID: 702326345}
+  - component: {fileID: 702326349}
+  - component: {fileID: 702326348}
+  - component: {fileID: 702326347}
+  - component: {fileID: 702326346}
   m_Layer: 5
   m_Name: ResultContainer
   m_TagString: Untagged
@@ -1058,13 +1059,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &727933307
+--- !u!224 &702326345
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727933306}
+  m_GameObject: {fileID: 702326344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1074,16 +1075,16 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -899.99994, y: -300}
+  m_AnchoredPosition: {x: -899.9999, y: -250}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &727933308
+--- !u!114 &702326346
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727933306}
+  m_GameObject: {fileID: 702326344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
@@ -1091,13 +1092,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &727933309
+--- !u!114 &702326347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727933306}
+  m_GameObject: {fileID: 702326344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
@@ -1117,13 +1118,13 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &727933310
+--- !u!114 &702326348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727933306}
+  m_GameObject: {fileID: 702326344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1147,13 +1148,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!222 &727933311
+--- !u!222 &702326349
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727933306}
+  m_GameObject: {fileID: 702326344}
   m_CullTransparentMesh: 1
 --- !u!1001 &811673175
 PrefabInstance:
@@ -1432,7 +1433,7 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
-  resultContainer: {fileID: 727933307}
+  resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
@@ -2360,7 +2361,7 @@ MonoBehaviour:
   primaryContainer: {fileID: 375629122}
   secondaryContainer: {fileID: 1279639711}
   slotContainer: {fileID: 2145683811}
-  resultContainer: {fileID: 727933307}
+  resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}

@@ -184,14 +184,6 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         }
     }
 
-    public void ShowWordCard(int wordId, WordCardV2 textPrefab)
-    {
-        if (resultContainer == null) return;
-
-        var card = Instantiate(textPrefab, resultContainer);
-        card.Setup(wordId, this);
-    }
-
     public void CheckAllMatched()
     {
         // create a variable for children in primaryContainer and secondaryContainer

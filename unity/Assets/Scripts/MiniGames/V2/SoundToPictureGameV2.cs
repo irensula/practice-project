@@ -58,14 +58,14 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
         // change soundCard on textCard
         if (soundCards.TryGetValue(wordId, out var soundCard))
         {
-            // скрываем звуковую карточку
+            // hide soundCard
             soundCard.gameObject.SetActive(false);
 
-            // создаем текстовую карточку
+            // create textCard
             var textCard = Instantiate(textPrefab, slot.transform);
             textCard.Setup(wordId, this);
 
-            // показываем её на слоте
+            // show textCard
             var slotComponent = slot as DropSlotV2;
             slotComponent.SetCurrentWord(textCard.gameObject);
         }
