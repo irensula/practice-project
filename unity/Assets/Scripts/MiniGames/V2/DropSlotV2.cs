@@ -49,6 +49,7 @@ public class DropSlotV2 : BaseMatchCardV2, IDropHandler
         }
         else
         {
+            matchGame.ShowWrong();
             dropped.ReturnToStart();
         }
     }
