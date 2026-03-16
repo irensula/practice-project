@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEditor.Timeline;
 public class CDNLoader : MonoBehaviour
 {
     public string imageUrl = "https://cdn.jsdelivr.net/gh/irensula/practice-unity-game-assets@main/images/character.png";

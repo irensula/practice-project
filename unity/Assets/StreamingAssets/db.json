@@ -12,57 +12,57 @@
         { "languageID": 3, "code": "en-GB", "languageName": "UK English", "languageFlag": { "instanceID": 0 }}
     ],
     "courses": [
-        { "courseID": 1, "courseName": "Customer Service", "locked": false },
-        { "courseID": 2, "courseName": "Hospitality", "locked": true },
-        { "courseID": 3, "courseName": "Health Care", "locked": true }
+        { "courseID": 1, "courseName": "Ravintola-ala", "locked": false },
+        { "courseID": 2, "courseName": "Asiakaspalvelu", "locked": true },
+        { "courseID": 3, "courseName": "Terveydenhuolto", "locked": true }
     ],
     "lessons": [
         {
         "lessonID": 1,
         "courseID": 1,
-        "title": "Lesson 1",
+        "title": "Kappale 1",
         "visualNovel": [
-            { "contentID": 1, "text": "Welcome to Customer Service!" }
+            { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
         ],
         "exercises": [
             { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
         ],
         "miniGames": [
-            { "miniGameID": 1, "title": "Match Game (images + words)" },
-            { "miniGameID": 2, "title": "Match Game (words + sounds)" },
-            { "miniGameID": 3, "title": "Match Game (images + sounds)" }
+            { "miniGameID": 1, "title": "Yhdistä peli (kuvat + sanat)" },
+            { "miniGameID": 2, "title": "Yhdistä peli (sanat + äänet)" },
+            { "miniGameID": 3, "title": "Yhdistä peli (kuvat + äänet)" }
         ]
         },
         {
         "lessonID": 2,
         "courseID": 1,
-        "title": "Lesson 2",
+        "title": "Kappale 2",
         "visualNovel": [
-            { "contentID": 1, "text": "Welcome to Customer Service!" }
+            { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
         ],
         "exercises": [
             { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
         ],
         "miniGames": [
-            { "miniGameID": 1, "title": "Match Game (images + words)" },
-            { "miniGameID": 2, "title": "Match Game (words + sounds)" },
-            { "miniGameID": 3, "title": "Match Game (images + sounds)" }
+            { "miniGameID": 1, "title": "Yhdistä peli (kuvat + sanat)" },
+            { "miniGameID": 2, "title": "Yhdistä peli (sanat + äänet)" },
+            { "miniGameID": 3, "title": "Yhdistä peli (kuvat + äänet)" }
         ]
         },
         {
           "lessonID": 3,
           "courseID": 1,
-          "title": "Lesson 3",
+          "title": "Kappale 3",
           "visualNovel": [
-              { "contentID": 1, "text": "Welcome to Customer Service!" }
+              { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
           ],
           "exercises": [
               { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
           ],
           "miniGames": [
-              { "miniGameID": 1, "title": "Match Game (images + words)" },
-              { "miniGameID": 2, "title": "Match Game (words + sounds)" },
-              { "miniGameID": 3, "title": "Match Game (images + sounds)" }
+              { "miniGameID": 1, "title": "Yhdistä peli (images + words)" },
+              { "miniGameID": 2, "title": "Yhdistä peli (words + sounds)" },
+              { "miniGameID": 3, "title": "Yhdistä peli (images + sounds)" }
           ]
         }
     ],

@@ -238,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5536267326545998706, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_text
-      value: Match Game V0
+      value: "Yhdist\xE4 peli V0"
       objectReference: {fileID: 0}
     - target: {fileID: 8842748032005284662, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_AnchorMax.x
@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2360838651736422343, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 2360838651736422343, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -406,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760400509167781825, guid: 3516f278d1704f0428cd5c1f4147d630, type: 3}
       propertyPath: m_text
-      value: Match Game
+      value: "Yhdist\xE4 peli"
       objectReference: {fileID: 0}
     - target: {fileID: 6287920419498908862, guid: 3516f278d1704f0428cd5c1f4147d630, type: 3}
       propertyPath: m_Pivot.x
@@ -660,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 151569069732744249, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 285.01
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 151569069732744249, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_SizeDelta.y
@@ -732,9 +732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5536267326545998706, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_text
-      value: 'Match Game V1
-
-        (images and sounds)'
+      value: "Yhdist\xE4 peli V1\n(kuvat ja \xE4\xE4net)"
       objectReference: {fileID: 0}
     - target: {fileID: 8842748032005284662, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1149,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5536267326545998706, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_text
-      value: Match Games V2
+      value: "Yhdist\xE4 peli V2"
       objectReference: {fileID: 0}
     - target: {fileID: 8842748032005284662, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1874,9 +1872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5536267326545998706, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_text
-      value: 'Match Game V1
-
-        (images and words)'
+      value: "Yhdist\xE4 peli V1\n(kuvat ja sanat)"
       objectReference: {fileID: 0}
     - target: {fileID: 8842748032005284662, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2150,9 +2146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5536267326545998706, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_text
-      value: 'Match Game V1
-
-        (words and sounds)'
+      value: "Yhdist\xE4 peli V1\n(sanat ja \xE4\xE4net)"
       objectReference: {fileID: 0}
     - target: {fileID: 8842748032005284662, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
       propertyPath: m_AnchorMax.x
