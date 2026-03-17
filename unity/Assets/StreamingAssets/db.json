@@ -4,16 +4,6 @@
             "userID": 1,
             "email": "user@gmail.com",
             "password": "password"
-        },
-        {
-            "userID": 2,
-            "email": "test9@gmail.com",
-            "password": "password"
-        },
-        {
-            "userID": 3,
-            "email": "test8@gmail.com",
-            "password": "password"
         }
     ],
     "languages": [
