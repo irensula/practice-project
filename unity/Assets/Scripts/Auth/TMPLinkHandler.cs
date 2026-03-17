@@ -23,6 +23,11 @@ public class TMPLinkHandler : MonoBehaviour, IPointerClickHandler
             {
                 SceneManager.LoadScene("RegistrationScene");
             }
+
+            if (linkId == "login")
+            {
+                SceneManager.LoadScene("LoginScene");
+            }
         }
     }
 }

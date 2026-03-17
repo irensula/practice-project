@@ -48,6 +48,5 @@ public class LoginScript : AuthUIHelper
         {
             ShowMessage("Incorrect email address or password");
         }
-    }
-    
+    } 
 }

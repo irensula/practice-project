@@ -81,4 +81,9 @@ public class RegistrationScript : AuthUIHelper
         // go to the next scene
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    public void BackToLogin()
+    {
+        SceneManager.LoadScene("LoginScene");
+    }
 }
