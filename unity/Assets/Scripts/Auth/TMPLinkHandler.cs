@@ -2,32 +2,53 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Runtime.CompilerServices;
 public class TMPLinkHandler : MonoBehaviour, IPointerClickHandler
 {
-    public TMP_Text linkRegistration;
+    public TMP_Text textComponent;
+    public GameObject loginPanel;
+    public GameObject registerPanel;
+    
+    void Awake()
+    {
+        textComponent = GetComponent<TMP_Text>();
+    }
     
     public void OnPointerClick(PointerEventData eventData)
     {
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(
-            linkRegistration,
+            textComponent,
             eventData.position,
-            null
+            eventData.pressEventCamera
         );
+
 
         if (linkIndex != -1)
         {
-            TMP_LinkInfo linkInfo = linkRegistration.textInfo.linkInfo[linkIndex];
-            string linkId = linkInfo.GetLinkID();
-
-            if (linkId == "register")
+            string linkId = textComponent.textInfo.linkInfo[linkIndex].GetLinkID();
+            
+            switch (linkId)
             {
-                SceneManager.LoadScene("RegistrationScene");
-            }
+                case "register":
+                    ShowRegister();
+                    break;
 
-            if (linkId == "login")
-            {
-                SceneManager.LoadScene("LoginScene");
+                case "login":
+                    ShowLogin();
+                    break;
             }
         }
+    }
+
+    private void ShowRegister()
+    {
+        loginPanel.SetActive(false);
+        registerPanel.SetActive(true);
+}
+
+    private void ShowLogin()
+    {
+        loginPanel.SetActive(true);
+        registerPanel.SetActive(false);
     }
 }

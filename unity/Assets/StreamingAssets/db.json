@@ -1,231 +1,325 @@
 {
     "users": [
-        { "userID": 1, "email": "user@gmail.com", "password": "password" },
-        { "userID": 2, "email": "test1@gmail.com", "password": "password1" },
-        { "userID": 3, "email": "test2@gmail.com", "password": "password" },
-        { "userID": 4, "email": "user1@gmail.com", "password": "password1" },
-        { "userID": 5, "email": "test4@gmail.com", "password": "password" }
+        {
+            "userID": 1,
+            "email": "user@gmail.com",
+            "password": "password"
+        },
+        {
+            "userID": 2,
+            "email": "test9@gmail.com",
+            "password": "password"
+        },
+        {
+            "userID": 3,
+            "email": "test8@gmail.com",
+            "password": "password"
+        }
     ],
     "languages": [
-        { "languageID": 1, "code": "fi", "languageName": "Finnish", "languageFlag": { "instanceID": 0 }},
-        { "languageID": 2, "code": "en-US", "languageName": "US English", "languageFlag": { "instanceID": 0 }},
-        { "languageID": 3, "code": "en-GB", "languageName": "UK English", "languageFlag": { "instanceID": 0 }}
+        {
+            "languageID": 1,
+            "code": "fi",
+            "languageName": "Finnish",
+            "languageFlag": {
+                "instanceID": 0
+            }
+        },
+        {
+            "languageID": 2,
+            "code": "en-US",
+            "languageName": "US English",
+            "languageFlag": {
+                "instanceID": 0
+            }
+        },
+        {
+            "languageID": 3,
+            "code": "en-GB",
+            "languageName": "UK English",
+            "languageFlag": {
+                "instanceID": 0
+            }
+        }
     ],
     "courses": [
-        { "courseID": 1, "courseName": "Ravintola-ala", "locked": false },
-        { "courseID": 2, "courseName": "Asiakaspalvelu", "locked": true },
-        { "courseID": 3, "courseName": "Terveydenhuolto", "locked": true }
+        {
+            "courseID": 1,
+            "courseName": "Ravintola-ala",
+            "locked": false
+        },
+        {
+            "courseID": 2,
+            "courseName": "Asiakaspalvelu",
+            "locked": true
+        },
+        {
+            "courseID": 3,
+            "courseName": "Terveydenhuolto",
+            "locked": true
+        }
     ],
     "lessons": [
         {
-        "lessonID": 1,
-        "courseID": 1,
-        "title": "Kappale 1",
-        "visualNovel": [
-            { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
-        ],
-        "exercises": [
-            { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
-        ],
-        "miniGames": [
-            { "miniGameID": 1, "title": "Yhdistä peli (kuvat + sanat)" },
-            { "miniGameID": 2, "title": "Yhdistä peli (sanat + äänet)" },
-            { "miniGameID": 3, "title": "Yhdistä peli (kuvat + äänet)" }
-        ]
+            "lessonID": 1,
+            "courseID": 1,
+            "title": "Kappale 1",
+            "visualNovel": [
+                {
+                    "contentID": 1,
+                    "text": "Tervetuloa ravintola-alalle!"
+                }
+            ],
+            "exercises": [
+                {
+                    "exerciseID": 1,
+                    "type": "fill-in",
+                    "question": "Translate 'Hello'",
+                    "answer": "Hei"
+                }
+            ],
+            "miniGames": [
+                {
+                    "miniGameID": 1,
+                    "title": "Yhdistä peli (kuvat + sanat)"
+                },
+                {
+                    "miniGameID": 2,
+                    "title": "Yhdistä peli (sanat + äänet)"
+                },
+                {
+                    "miniGameID": 3,
+                    "title": "Yhdistä peli (kuvat + äänet)"
+                }
+            ]
         },
         {
-        "lessonID": 2,
-        "courseID": 1,
-        "title": "Kappale 2",
-        "visualNovel": [
-            { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
-        ],
-        "exercises": [
-            { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
-        ],
-        "miniGames": [
-            { "miniGameID": 1, "title": "Yhdistä peli (kuvat + sanat)" },
-            { "miniGameID": 2, "title": "Yhdistä peli (sanat + äänet)" },
-            { "miniGameID": 3, "title": "Yhdistä peli (kuvat + äänet)" }
-        ]
+            "lessonID": 2,
+            "courseID": 1,
+            "title": "Kappale 2",
+            "visualNovel": [
+                {
+                    "contentID": 1,
+                    "text": "Tervetuloa ravintola-alalle!"
+                }
+            ],
+            "exercises": [
+                {
+                    "exerciseID": 1,
+                    "type": "fill-in",
+                    "question": "Translate 'Hello'",
+                    "answer": "Hei"
+                }
+            ],
+            "miniGames": [
+                {
+                    "miniGameID": 1,
+                    "title": "Yhdistä peli (kuvat + sanat)"
+                },
+                {
+                    "miniGameID": 2,
+                    "title": "Yhdistä peli (sanat + äänet)"
+                },
+                {
+                    "miniGameID": 3,
+                    "title": "Yhdistä peli (kuvat + äänet)"
+                }
+            ]
         },
         {
-          "lessonID": 3,
-          "courseID": 1,
-          "title": "Kappale 3",
-          "visualNovel": [
-              { "contentID": 1, "text": "Tervetuloa ravintola-alalle!" }
-          ],
-          "exercises": [
-              { "exerciseID": 1, "type": "fill-in", "question": "Translate 'Hello'", "answer": "Hei" }
-          ],
-          "miniGames": [
-              { "miniGameID": 1, "title": "Yhdistä peli (images + words)" },
-              { "miniGameID": 2, "title": "Yhdistä peli (words + sounds)" },
-              { "miniGameID": 3, "title": "Yhdistä peli (images + sounds)" }
-          ]
+            "lessonID": 3,
+            "courseID": 1,
+            "title": "Kappale 3",
+            "visualNovel": [
+                {
+                    "contentID": 1,
+                    "text": "Tervetuloa ravintola-alalle!"
+                }
+            ],
+            "exercises": [
+                {
+                    "exerciseID": 1,
+                    "type": "fill-in",
+                    "question": "Translate 'Hello'",
+                    "answer": "Hei"
+                }
+            ],
+            "miniGames": [
+                {
+                    "miniGameID": 1,
+                    "title": "Yhdistä peli (images + words)"
+                },
+                {
+                    "miniGameID": 2,
+                    "title": "Yhdistä peli (words + sounds)"
+                },
+                {
+                    "miniGameID": 3,
+                    "title": "Yhdistä peli (images + sounds)"
+                }
+            ]
         }
     ],
     "words": [
-    {
-      "id": 1,
-      "image": "images/food.jpg",
-      "translations": [
         {
-          "languageId": 1,
-          "text": "ruoka",
-          "audio": "audio/fi/ruoka.mp3"
+            "id": 1,
+            "image": "images/food.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "ruoka",
+                    "audio": "audio/fi/ruoka.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "food",
+                    "audio": "audio/en/food.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "food",
-          "audio": "audio/en/food.mp3"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "image": "images/menu.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "ruokalista",
-          "audio": "audio/fi/ruokalista.mp3"
+            "id": 2,
+            "image": "images/menu.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "ruokalista",
+                    "audio": "audio/fi/ruokalista.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "menu",
+                    "audio": "audio/en/menu.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "menu",
-          "audio": "audio/en/menu.mp3"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "image": "images/table.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "pöytä",
-          "audio": "audio/fi/poyta.mp3"
+            "id": 3,
+            "image": "images/table.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "pöytä",
+                    "audio": "audio/fi/poyta.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "table",
+                    "audio": "audio/en/table.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "table",
-          "audio": "audio/en/table.mp3"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "image": "images/waiter.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "tarjoilija",
-          "audio": "audio/fi/tarjoilija.mp3"
+            "id": 4,
+            "image": "images/waiter.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "tarjoilija",
+                    "audio": "audio/fi/tarjoilija.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "waiter",
+                    "audio": "audio/en/waiter.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "waiter",
-          "audio": "audio/en/waiter.mp3"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "image": "images/customer.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "asiakas",
-          "audio": "audio/fi/asiakas.mp3"
+            "id": 5,
+            "image": "images/customer.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "asiakas",
+                    "audio": "audio/fi/asiakas.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "customer",
+                    "audio": "audio/en/customer.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "customer",
-          "audio": "audio/en/customer.mp3"
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "image": "images/order.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "tilaus",
-          "audio": "audio/fi/tilaus.mp3"
+            "id": 6,
+            "image": "images/order.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "tilaus",
+                    "audio": "audio/fi/tilaus.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "order",
+                    "audio": "audio/en/order.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "order",
-          "audio": "audio/en/order.mp3"
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "image": "images/restaurant.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "ravintola",
-          "audio": "audio/fi/ravintola.mp3"
+            "id": 7,
+            "image": "images/restaurant.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "ravintola",
+                    "audio": "audio/fi/ravintola.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "restaurant",
+                    "audio": "audio/en/restaurant.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "restaurant",
-          "audio": "audio/en/restaurant.mp3"
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "image": "images/coffee_shop.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "kahvila",
-          "audio": "audio/fi/kahvila.mp3"
+            "id": 8,
+            "image": "images/coffee_shop.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "kahvila",
+                    "audio": "audio/fi/kahvila.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "coffee_shop",
+                    "audio": "audio/en/coffee_shop.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "coffee_shop",
-          "audio": "audio/en/coffee_shop.mp3"
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "image": "images/tray.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "tarjotin",
-          "audio": "audio/fi/tarjotin.mp3"
+            "id": 9,
+            "image": "images/tray.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "tarjotin",
+                    "audio": "audio/fi/tarjotin.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "tray",
+                    "audio": "audio/en/tray.mp3"
+                }
+            ]
         },
         {
-          "languageId": 2,
-          "text": "tray",
-          "audio": "audio/en/tray.mp3"
+            "id": 10,
+            "image": "images/plate.jpg",
+            "translations": [
+                {
+                    "languageId": 1,
+                    "text": "lautanen",
+                    "audio": "audio/fi/lautanen.mp3"
+                },
+                {
+                    "languageId": 2,
+                    "text": "plate",
+                    "audio": "audio/en/plate.mp3"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": 10,
-      "image": "images/plate.jpg",
-      "translations": [
-        {
-          "languageId": 1,
-          "text": "lautanen",
-          "audio": "audio/fi/lautanen.mp3"
-        },
-        {
-          "languageId": 2,
-          "text": "plate",
-          "audio": "audio/en/plate.mp3"
-        }
-      ]
-    }
-  ]
+    ]
 }

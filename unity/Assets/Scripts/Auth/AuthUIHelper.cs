@@ -43,5 +43,4 @@ public class AuthUIHelper : MonoBehaviour
         yield return new WaitForSeconds(delay);
         txtMessage.gameObject.SetActive(false);
     }
-    
 }
