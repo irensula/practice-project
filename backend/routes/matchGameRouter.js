@@ -11,7 +11,7 @@ router.get('/lang/:language', async (req, res) => {
       .first();
 
     if (!language) {
-      return res.status(400).json({ error: 'Invalid language code' });
+      return res.status(404).json({ error: 'Language not found' });
     }
 
     const words = await knex('words')
@@ -27,7 +27,7 @@ router.get('/lang/:language', async (req, res) => {
     res.json(words);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server fail' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 })
 
