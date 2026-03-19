@@ -14,6 +14,7 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
     public SoundToTextGameV2 soundToTextPrefab;
 
     public SoundToPictureGameV2 soundToPicturePrefab;
+    public PictureCardGame pictureCardPrefab;
     private BaseMatchGameV2 currentGame;
 
     [Header("Vocabulary")]
@@ -24,7 +25,7 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
         DatabaseService.Init();
         var db = DatabaseService.Load();
 
-        vocabularyList = new List<WordData>(db.words);
+        vocabularyList = new List<WordData>(db.words);  
 
         foreach (var word in vocabularyList)
         {
@@ -71,6 +72,20 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
         // create a new game
         currentGame = Instantiate(soundToTextPrefab, matchGamePanel.transform);
         currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.SoundToText);  
+    }
+
+    public void StartPictureCardGame()
+    {
+        miniGameButtonsPanel.SetActive(false);
+        matchGamePanel.SetActive(true);
+
+        // delete the previous game
+        if (currentGame != null)
+            Destroy(currentGame.gameObject);
+
+        // create a new game
+        currentGame = Instantiate(pictureCardPrefab, matchGamePanel.transform);
+        currentGame.Setup(vocabularyList, MatchGameModeV2.Practice, MatchGameTypeV2.PictureCard);   
     }
 
     public void ShowMiniGameMenu()
