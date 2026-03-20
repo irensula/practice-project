@@ -31,7 +31,6 @@ public class PictureCardGame : BaseMatchGameV2
         if (currentIndex >= words.Count)
         {
             StartCoroutine(ShowWinPanel());
-            Debug.Log("Game finished!");
             return;
         }
 
