@@ -27,6 +27,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     protected bool isChecking = false;
     private Coroutine currentResultRoutine;
     public MiniGamesUIControllerV2 miniGamesUIController;
+    [SerializeField] protected RectTransform matchGameContentRect;
 
     void Start()
     {
@@ -247,5 +248,28 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         {
             yield return StartCoroutine(ShowWinPanel());
         }
+    }
+
+    protected void RebuildLayout()
+    {
+        if (matchGameContentRect != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(matchGameContentRect);
+        }
+        else
+        {
+            Debug.LogWarning("matchGameContentRect is not assigned!");
+        }
+    }
+    protected void RebuildLayoutDelayed()
+    {
+        StartCoroutine(RebuildNextFrame());
+        Debug.Log("RebuildLayoutDelayed");
+    }
+
+    private IEnumerator RebuildNextFrame()
+    {
+        yield return null;
+        RebuildLayout();
     }
 }  

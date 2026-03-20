@@ -48,6 +48,7 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
 
             textCards[word.id] = textCard;
         }
+        RebuildLayoutDelayed();
     }
 
     public override void OnCorrectMatch(int wordId, DropSlotV2 slot)

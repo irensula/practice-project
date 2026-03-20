@@ -55,6 +55,7 @@ public class SoundToTextGameV2 : BaseMatchGameV2
             var draggable = textCard.gameObject.AddComponent<DraggableItemV2>();
             draggable.Init(textCard);
         }
+        RebuildLayoutDelayed();
     }
 
     public override void OnCorrectMatch(int wordId, DropSlotV2 slot)

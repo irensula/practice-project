@@ -154,6 +154,7 @@ MonoBehaviour:
   resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
+  matchGameContentRect: {fileID: 325424170}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
@@ -1667,6 +1668,7 @@ MonoBehaviour:
   resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
+  matchGameContentRect: {fileID: 325424170}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
@@ -1823,6 +1825,7 @@ MonoBehaviour:
   resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
+  matchGameContentRect: {fileID: 325424170}
   largeImagePrefab: {fileID: 7865320567139384725, guid: 75e0f68b3fd641643a503b2c8654f39a, type: 3}
   wordInputPrefab: {fileID: 551788280034931854, guid: fb5e19f31b224494ab81e3367de196f1, type: 3}
 --- !u!1001 &1271360445
@@ -2970,6 +2973,7 @@ MonoBehaviour:
   resultContainer: {fileID: 702326345}
   ui: {fileID: 173091253}
   miniGamesUIController: {fileID: 561411627}
+  matchGameContentRect: {fileID: 325424170}
   textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
