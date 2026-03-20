@@ -9,8 +9,8 @@ public class PictureCardGame : BaseMatchGameV2
     public WordInput wordInputPrefab;
 
     [Header("UI")]
-    public Button nextButton;
-    // public Button playSoundButton;
+    private Button nextButton;
+    private Button playSoundButton;
 
     private LargeImageCard currentImageCard;
     private WordInput currentInput;
@@ -21,10 +21,7 @@ public class PictureCardGame : BaseMatchGameV2
     {
         ClearContainers();
 
-        ShowNextWord();
-
-        nextButton.onClick.RemoveAllListeners();
-        nextButton.onClick.AddListener(OnNextClicked);       
+        ShowNextWord();       
     }
 
     private void ShowNextWord()
@@ -33,6 +30,7 @@ public class PictureCardGame : BaseMatchGameV2
 
         if (currentIndex >= words.Count)
         {
+            StartCoroutine(ShowWinPanel());
             Debug.Log("Game finished!");
             return;
         }
@@ -46,6 +44,11 @@ public class PictureCardGame : BaseMatchGameV2
         // create input
         currentInput = Instantiate(wordInputPrefab, secondaryContainer);
         currentInput.Setup(word.id, this);
+
+        Button btn = currentInput.nextButton;
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(OnNextClicked);
     }
 
     public void OnNextClicked()
@@ -57,11 +60,11 @@ public class PictureCardGame : BaseMatchGameV2
 
         if (isCorrect)
         {
-            Debug.Log("Correct!");
+            ShowCorrect();
         }
         else
         {
-            Debug.Log("Wrong!");
+            ShowWrong();
         }
         currentIndex++;
         ShowNextWord();

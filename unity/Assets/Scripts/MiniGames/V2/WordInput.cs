@@ -1,12 +1,14 @@
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class WordInput : MonoBehaviour
 {
     [SerializeField] private TMP_InputField inputField;
     private int wordId;
     private BaseMatchGameV2 game;
+    public Button nextButton;
 
     public void Setup(int wordId, BaseMatchGameV2 game)
     {

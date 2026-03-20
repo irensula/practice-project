@@ -195,7 +195,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     }
 
     
-    IEnumerator ShowWinPanel()
+    protected IEnumerator ShowWinPanel()
     {
         yield return new WaitForSeconds(1.5f);
         ui.blockerPanel.SetActive(true);
