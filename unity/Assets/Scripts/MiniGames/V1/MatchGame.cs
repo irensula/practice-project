@@ -74,6 +74,8 @@ public class MatchGame : MonoBehaviour
 
     public void Setup(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
     {        
+        resultIcon.gameObject.SetActive(false);
+
         var selectedWords = vocabulary.OrderBy(x => UnityEngine.Random.value).Take(8).ToList();;
 
         var primaryWords = new List<WordData>(selectedWords);
@@ -270,6 +272,8 @@ public class MatchGame : MonoBehaviour
     
     public void ShowCorrect()
     {
+        resultIcon.gameObject.SetActive(true);
+
         resultIcon.sprite = correctSprite;
         resultPop.Play();
         PlayResultSound(correctClip);
@@ -277,6 +281,8 @@ public class MatchGame : MonoBehaviour
 
     public void ShowWrong()
     {
+        resultIcon.gameObject.SetActive(true);
+
         resultIcon.sprite = wrongSprite;
         resultPop.Play();
         PlayResultSound(wrongClip);
@@ -315,6 +321,8 @@ public class MatchGame : MonoBehaviour
     {
         blockerPanel.SetActive(false);
         winPanel.SetActive(false);
+
+        resultIcon.gameObject.SetActive(false);
 
         BaseMatchCard[] primaryCards = primaryContainer.GetComponentsInChildren<BaseMatchCard>();
         BaseMatchCard[] secondaryCards = secondaryContainer.GetComponentsInChildren<BaseMatchCard>();

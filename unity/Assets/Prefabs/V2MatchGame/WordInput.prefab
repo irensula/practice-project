@@ -138,7 +138,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -207,7 +219,7 @@ RectTransform:
   m_GameObject: {fileID: 434932326729498621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1564413, y: 1.1564413, z: 1.1564413}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 707672347370411271}
@@ -678,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1505622343355002093, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1505622343355002093, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
       propertyPath: m_SizeDelta.y
@@ -750,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4342078704634663794, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4342078704634663794, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -772,6 +784,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5242171156492096666, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242171156492096666, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5030487743290287612, guid: b923a452e8cb119489d52ffa6a128a29, type: 3}
     - target: {fileID: 7759634158711902838, guid: 4b00d6835d7fa5049ac66d911922b0dd, type: 3}
       propertyPath: m_text
       value: 
