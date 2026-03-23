@@ -24,12 +24,23 @@ public class SoundToTextGameV2 : BaseMatchGameV2
         var textWords = new List<WordData>(words);
         Shuffle(textWords);
 
+        for (int i = 0; i < textWords.Count; i++)
+        {
+            var word = textWords[i];
+
+            var textCard = Instantiate(textPrefab, primaryContainer);
+            textCard.Setup(word.id, this);
+
+            var draggable = textCard.gameObject.AddComponent<DraggableItemV2>();
+            draggable.Init(textCard);
+        }
+
         for (int i = 0; i < soundWords.Count; i++)
         {
             var word = soundWords[i];
 
             // Sound card
-            var soundCard = Instantiate(soundPrefab, primaryContainer);
+            var soundCard = Instantiate(soundPrefab, secondaryContainer);
             soundCard.Setup(word.id, this);
 
             // Drop slot
@@ -45,17 +56,6 @@ public class SoundToTextGameV2 : BaseMatchGameV2
             imageCard.transform.SetSiblingIndex(i); // under the corresponding word
             imageCards[word.id] = imageCard;
         }
-         for (int i = 0; i < textWords.Count; i++)
-        {
-            var word = textWords[i];
-
-            var textCard = Instantiate(textPrefab, secondaryContainer);
-            textCard.Setup(word.id, this);
-
-            var draggable = textCard.gameObject.AddComponent<DraggableItemV2>();
-            draggable.Init(textCard);
-        }
-        RebuildLayoutDelayed();
     }
 
     public override void OnCorrectMatch(int wordId, DropSlotV2 slot)

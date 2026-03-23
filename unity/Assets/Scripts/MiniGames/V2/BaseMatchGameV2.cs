@@ -27,7 +27,11 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     protected bool isChecking = false;
     private Coroutine currentResultRoutine;
     public MiniGamesUIControllerV2 miniGamesUIController;
-    [SerializeField] protected RectTransform matchGameContentRect;
+
+    protected HorizontalLayoutGroup primaryLayout;
+    protected HorizontalLayoutGroup secondaryLayout;
+    [SerializeField] private int picturePrimaryTopPadding = 300;
+    [SerializeField] private int pictureSecondaryTopPadding = 300;
 
     void Start()
     {
@@ -58,7 +62,9 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         currentType = type;
 
         Shuffle(words);
-        BuildBoard();    
+        BuildBoard(); 
+
+        SetupLayoutForGame();   
     }
 
     protected abstract void BuildBoard();
@@ -250,26 +256,36 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         }
     }
 
-    protected void RebuildLayout()
+    // layout for PictureCardGame (make it in the center and with topPaddings)
+    protected void SetupLayoutForGame()
     {
-        if (matchGameContentRect != null)
+        if (primaryLayout == null)
         {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(matchGameContentRect);
+            primaryLayout = primaryContainer.GetComponentInChildren<HorizontalLayoutGroup>();
+            secondaryLayout = secondaryContainer.GetComponentInChildren<HorizontalLayoutGroup>();
         }
-        else
-        {
-            Debug.LogWarning("matchGameContentRect is not assigned!");
-        }
-    }
-    protected void RebuildLayoutDelayed()
-    {
-        StartCoroutine(RebuildNextFrame());
-        Debug.Log("RebuildLayoutDelayed");
-    }
 
-    private IEnumerator RebuildNextFrame()
-    {
-        yield return null;
-        RebuildLayout();
+        if (primaryLayout == null)
+        {
+            Debug.Log("PrimaryLayout not found!");
+            return;
+        }
+
+        switch (currentType)
+        {
+            case MatchGameTypeV2.PictureCard:
+                primaryLayout.childAlignment = TextAnchor.MiddleCenter;
+                secondaryLayout.childAlignment = TextAnchor.MiddleCenter;
+                primaryLayout.padding.top = picturePrimaryTopPadding;
+                secondaryLayout.padding.top = pictureSecondaryTopPadding;
+                break;
+
+            default:
+                primaryLayout.childAlignment = TextAnchor.MiddleLeft;
+                secondaryLayout.childAlignment = TextAnchor.MiddleLeft;
+                primaryLayout.padding.top = 0;
+                secondaryLayout.padding.top = 0;
+                break;
+        }
     }
 }  

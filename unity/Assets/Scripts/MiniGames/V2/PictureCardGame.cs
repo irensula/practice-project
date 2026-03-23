@@ -48,8 +48,6 @@ public class PictureCardGame : BaseMatchGameV2
 
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(OnNextClicked);
-
-        RebuildLayoutDelayed();
     }
 
     public void OnNextClicked()

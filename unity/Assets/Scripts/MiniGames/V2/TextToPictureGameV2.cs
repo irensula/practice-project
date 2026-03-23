@@ -37,6 +37,5 @@ public class TextToPictureGameV2 : BaseMatchGameV2
             var slot = Instantiate(slotPrefab, slotContainer);
             slot.Setup(word.id, this);
         }
-        RebuildLayoutDelayed();
     }
 }
