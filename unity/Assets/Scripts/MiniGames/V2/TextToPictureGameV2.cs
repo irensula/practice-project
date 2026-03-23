@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TextToPictureGameV2 : BaseMatchGameV2
 {
     [Header("Card Prefabs")]
-    public WordCardV2 textPrefab;
+    public WordSoundCard textPrefab;
     public ImageCardV2 imagePrefab;
     public DropSlotV2 slotPrefab;
 

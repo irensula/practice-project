@@ -156,7 +156,7 @@ MonoBehaviour:
   miniGamesUIController: {fileID: 561411627}
   picturePrimaryTopPadding: 300
   pictureSecondaryTopPadding: 300
-  textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
+  textPrefab: {fileID: 1983387089496819796, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   soundPrefab: {fileID: 3847781625836075523, guid: c004b6cc870328f4585252781dc55025, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
-  textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
+  textPrefab: {fileID: 6794489557617208342, guid: da15424a5bf7d62418fddb4ebe9479d7, type: 3}
 --- !u!1 &1228586950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,7 +3254,7 @@ MonoBehaviour:
   miniGamesUIController: {fileID: 561411627}
   picturePrimaryTopPadding: 300
   pictureSecondaryTopPadding: 300
-  textPrefab: {fileID: 9154256621251266853, guid: 73dc4839808a9ca44871da53ed302458, type: 3}
+  textPrefab: {fileID: 6794489557617208342, guid: da15424a5bf7d62418fddb4ebe9479d7, type: 3}
   imagePrefab: {fileID: 1648561830192278975, guid: 2b8c845537f82204e9e0652b175f5b6f, type: 3}
   slotPrefab: {fileID: 2502143015200820343, guid: 348344519e1bacd44865999888fb0268, type: 3}
 --- !u!4 &1869787163

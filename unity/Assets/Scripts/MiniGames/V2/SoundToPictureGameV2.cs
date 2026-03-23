@@ -8,8 +8,8 @@ public class SoundToPictureGameV2 : BaseMatchGameV2
     public SoundCardV2 soundPrefab;
     public ImageCardV2 imagePrefab;
     public DropSlotV2 slotPrefab;
-    public WordCardV2 textPrefab;
-    private Dictionary<int, WordCardV2> textCards = new Dictionary<int, WordCardV2>();
+    public WordSoundCard textPrefab;
+    private Dictionary<int, WordSoundCard> textCards = new Dictionary<int, WordSoundCard>();
     private Dictionary<int, SoundCardV2> soundCards = new Dictionary<int, SoundCardV2>();
     
     protected override void BuildBoard()
