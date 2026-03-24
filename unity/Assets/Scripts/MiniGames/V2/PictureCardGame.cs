@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
@@ -20,6 +21,10 @@ public class PictureCardGame : BaseMatchGameV2
     private WordInput currentInput;
 
     private int currentIndex = 0;
+    private bool autoPlayEnabled = true;
+    [SerializeField] private Image autoPlayIcon;
+    [SerializeField] private Sprite soundOn;
+    [SerializeField] private Sprite soundOff;
 
     void Update()
     {
@@ -46,6 +51,7 @@ public class PictureCardGame : BaseMatchGameV2
         ShowNextWord();   
     }
 
+    // show next word: create picture and input
     private void ShowNextWord()
     {
         ClearContainers();
@@ -67,11 +73,14 @@ public class PictureCardGame : BaseMatchGameV2
 
         // create image
         currentImageCard = Instantiate(largeImagePrefab, primaryContainer);
-        currentImageCard.Setup(word.id, this);
+        currentImageCard.Setup(word.id, this, autoPlayEnabled);
 
         // create input
         currentInput = Instantiate(wordInputPrefab, secondaryContainer);
-        currentInput.Setup(word.id, this);        
+        currentInput.Setup(word.id, this);  
+
+        // call UpdateAutoPlayUI to change icons for auto play
+        currentImageCard.SetCardAutoPlayUI(autoPlayEnabled);      
 
         TMP_InputField inputField = currentInput.GetComponentInChildren<TMP_InputField>();
 
@@ -85,6 +94,7 @@ public class PictureCardGame : BaseMatchGameV2
         btn.onClick.AddListener(ProcessAnswerAndNext);
     }
 
+    // show correct or wrong icon after submit
     public void ProcessAnswerAndNext()
     {
         if (currentInput == null) return;
@@ -96,7 +106,35 @@ public class PictureCardGame : BaseMatchGameV2
         else
             ShowWrong();
 
+        StartCoroutine(NextAfterDelay(1.5f));
+    }
+
+    // show next word after 1,5 sec
+    private IEnumerator NextAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         currentIndex++;
         ShowNextWord();
+    }
+
+    // turn on or turn off autoplay
+    public void ToggleAutoPlay()
+    {
+        autoPlayEnabled = !autoPlayEnabled;
+
+        if (currentImageCard != null)
+            currentImageCard.SetCardAutoPlayUI(autoPlayEnabled);
+
+        SetGlobalAutoPlayUI(autoPlayEnabled);
+    }
+
+    // change autoplay icon: sound on or sound off
+    public void SetGlobalAutoPlayUI(bool enabled)
+    {
+        if (autoPlayIcon != null)
+        {
+            autoPlayIcon.sprite = enabled ? soundOn : soundOff;
+        }
     }
 }

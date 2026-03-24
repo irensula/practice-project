@@ -5,15 +5,20 @@ using System.Linq;
 public class LargeImageCard : BaseMatchCardV2
 {
     [SerializeField] private Image image;
+    [SerializeField] private Image autoPlayIcon;
+    [SerializeField] private Sprite soundOn;
+    [SerializeField] private Sprite soundOff;
     public Button PlayIcon;
+    public Button autoPlayToggleButton;
     private AudioSource audioSource;
     private AudioClip audioClip;
 
-    public override void Setup(int wordId, BaseMatchGameV2 game)
+    public void Setup(int wordId, BaseMatchGameV2 game,  bool autoPlayEnabled)
     {
         base.Setup(wordId, game);
 
         var wordData = game.GetWordById(wordId);
+
         if (wordData != null && image != null)
         {
             Sprite sprite = Resources.Load<Sprite>(wordData.image.Replace(".jpg", "").Replace(".png", ""));
@@ -35,6 +40,14 @@ public class LargeImageCard : BaseMatchCardV2
 
             if(audioClip == null)
                 Debug.LogError("Audio NOT FOUND: " + path);
+
+        }
+
+        SetCardAutoPlayUI(autoPlayEnabled);
+
+        if (autoPlayEnabled)
+            {
+                PlaySound();
             }
     }
 
@@ -59,9 +72,25 @@ public class LargeImageCard : BaseMatchCardV2
     {
         if (audioClip == null) return;
 
-        audioSource.Stop();
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClip);
         Debug.Log("Play the sound");
+    }
+
+    public void OnToggleAutoPlayClicked()
+    {
+        PictureCardGame pictureGame = game as PictureCardGame;
+
+        if (pictureGame != null)
+        {
+            pictureGame.ToggleAutoPlay();
+        } 
+    }
+
+    public void SetCardAutoPlayUI(bool enabled)
+    {
+        if (autoPlayIcon != null)
+        {
+            autoPlayIcon.sprite = enabled ? soundOn : soundOff;
+        }
     }
 }
