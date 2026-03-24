@@ -43,41 +43,57 @@ public class MiniGamesUIController : MonoBehaviour
 
     public void StartPracticeTextToPicture()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.TextToPicture);
     }
 
     public void StartPracticeSoundToPicture()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.SoundToPicture);
     }
 
     public void StartPracticeTextToSound()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Practice, MatchGameType.TextToSound);
     }
 
     public void StartTestTextToPicture()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.TextToPicture);
     }
 
     public void StartTestSoundToPicture()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.SoundToPicture);
     }
 
     public void StartTestTextToSound()
     {
+        AudioManager.Instance.PlayClick();
+
         OpenMatchGame(vocabularyList, MatchGameMode.Test, MatchGameType.TextToSound);
     }
 
     public void ShowMiniGameMenu()
     {
+        AudioManager.Instance.PlayClick();
+
         matchGamePanel.SetActive(false);
         miniGameButtonsPanel.SetActive(true);
     }
     public void BackToMenu()
     {
+        AudioManager.Instance.PlayClick();
+        
         if (matchGamePanel.activeSelf)
         {
             matchGamePanel.SetActive(false);

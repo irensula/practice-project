@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)]
     public float voiceVolume = 0.5f;
 
+    private bool effectsMuted;
+    private bool voiceMuted;
+
     private HashSet<Button> registeredButtons = new HashSet<Button>();
 
     void Awake()
@@ -79,15 +82,15 @@ public class AudioManager : MonoBehaviour
     public void SetEffectsVolume(float value)
     {
         effectsVolume = value;
-        if (effectsSource != null) effectsSource.volume = effectsVolume;
         PlayerPrefs.SetFloat("EffectsVolume", effectsVolume);
+        UpdateAudioSources();
     }
 
     public void SetVoiceVolume(float value)
     {
         voiceVolume = value;
-        if (voiceSource != null) voiceSource.volume = voiceVolume;
         PlayerPrefs.SetFloat("VoiceVolume", voiceVolume);
+        UpdateAudioSources();
     }
 
     private void ApplySavedVolumes()
@@ -95,7 +98,32 @@ public class AudioManager : MonoBehaviour
         effectsVolume = PlayerPrefs.GetFloat("EffectsVolume", effectsVolume);
         voiceVolume = PlayerPrefs.GetFloat("VoiceVolume", voiceVolume);
 
-        if (effectsSource != null) effectsSource.volume = effectsVolume;
-        if (voiceSource != null) voiceSource.volume = voiceVolume;
+        effectsMuted = PlayerPrefs.GetInt("EffectsMuted", 0) == 1;
+        voiceMuted = PlayerPrefs.GetInt("VoiceMuted", 0) == 1;
+
+        UpdateAudioSources();
+    }
+
+    public void ToggleEffectsMute()
+    {
+        effectsMuted = !effectsMuted;
+        PlayerPrefs.SetInt("EffectsMuted", effectsMuted ? 1 : 0);
+        UpdateAudioSources();
+    }
+
+    public void ToggleVoiceMute()
+    {
+        voiceMuted = !voiceMuted;
+        PlayerPrefs.SetInt("VoiceMuted", voiceMuted ? 1 : 0);
+        UpdateAudioSources();
+    }
+
+    private void UpdateAudioSources()
+    {
+        if (effectsSource != null)
+            effectsSource.volume = effectsMuted ? 0f : effectsVolume;
+
+        if (voiceSource != null)
+            voiceSource.volume = voiceMuted ? 0f : voiceVolume;
     }
 }

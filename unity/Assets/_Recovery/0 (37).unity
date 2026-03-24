@@ -1356,17 +1356,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4759368633615222168, guid: a49bbf7f30b44d14ca6f34ebef491ec8, type: 3}
   m_PrefabInstance: {fileID: 466491193}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &472175693 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7102854193492166260, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
-  m_PrefabInstance: {fileID: 136202500}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &479555862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1495,6 @@ MonoBehaviour:
   optionsPanel: {fileID: 67233518}
   languageButtonPrefab: {fileID: 2286740748920552055, guid: 57acb17fc80568643aedc801beaabb63, type: 3}
   baseButtonPrefab: {fileID: 1033473664633253678, guid: afee9a9c98ba48e4db66ef3e06fea5ce, type: 3}
-  backButton: {fileID: 472175693}
   languagesContainer: {fileID: 1244687213}
   coursesContainer: {fileID: 1352895923}
   lessonsContainer: {fileID: 362002807}

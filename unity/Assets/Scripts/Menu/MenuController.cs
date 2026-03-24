@@ -17,6 +17,7 @@ public class MenuController : MonoBehaviour
     [Header("Buttons")]
     public GameObject languageButtonPrefab;
     public GameObject baseButtonPrefab;
+    public Button backButton;
 
     [Header("Button Containers")]
     public Transform languagesContainer;
@@ -64,6 +65,8 @@ public class MenuController : MonoBehaviour
         {
             ShowLanguage();
         }
+
+        AudioManager.Instance.RegisterButton(backButton);
     }
 
     public static MenuController Instance { get; private set; }
