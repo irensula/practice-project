@@ -11,9 +11,6 @@ public class AudioManager : MonoBehaviour
     public AudioSource effectsSource;
     public AudioSource voiceSource;
 
-    [Header("UI Sounds")]
-    public AudioClip clickSound;
-
     [Range(0f, 1f)]
     public float effectsVolume = 50f;
     [Range(0f, 1f)]
@@ -23,6 +20,13 @@ public class AudioManager : MonoBehaviour
     private bool voiceMuted;
 
     private HashSet<Button> registeredButtons = new HashSet<Button>();
+
+    [Header("Effects Sounds")] 
+    public AudioClip clickSound; 
+    public AudioClip correctSound; 
+    public AudioClip wrongSound; 
+    public AudioClip winSound; 
+    public enum EffectType { Click, Correct, Wrong, Win }
 
     void Awake()
     {
@@ -57,18 +61,14 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClick()
     {
-        if (clickSound != null && effectsSource != null)
-        {
-            effectsSource.clip = clickSound;
-            effectsSource.Play();
-        }
+        PlayEffect(EffectType.Click);
     }
 
     public void PlayVoice(AudioClip clip)
     {
         if (clip != null && voiceSource != null)
         {
-            effectsSource.volume = effectsMuted ? 0f : effectsVolume;
+            voiceSource.volume = voiceMuted ? 0f : voiceVolume / 100f;
             voiceSource.clip = clip;
             voiceSource.Play();
         }
@@ -81,6 +81,39 @@ public class AudioManager : MonoBehaviour
 
         btn.onClick.AddListener(PlayClick);
         registeredButtons.Add(btn);
+    }
+
+    public void PlayEffect(EffectType type)
+    {
+        if (effectsSource == null) return;
+
+        AudioClip clip = null;
+
+        switch (type)
+        {
+            case EffectType.Click:
+                clip = clickSound;
+                break;
+
+            case EffectType.Correct:
+                clip = correctSound;
+                break;
+            
+            case EffectType.Wrong:
+                clip = wrongSound;
+                break;
+            
+            case EffectType.Win:
+                clip = winSound;
+                break;
+        }
+
+        if (clip != null)
+        {
+            effectsSource.volume = effectsMuted ? 0f : effectsVolume / 100f;
+            effectsSource.clip = clip;
+            effectsSource.Play();
+        }
     }
 
     public void SetEffectsVolume(float value)

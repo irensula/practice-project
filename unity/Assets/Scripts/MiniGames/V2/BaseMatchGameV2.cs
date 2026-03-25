@@ -21,8 +21,6 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
 
     [SerializeField] private MatchGameUI ui;
 
-    private AudioSource audioSource;
-
     private BaseMatchCardV2 firstSelected = null;
     protected bool isChecking = false;
     private Coroutine currentResultRoutine;
@@ -35,13 +33,6 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0;
-
         if (ui == null)
             ui = GetComponentInChildren<MatchGameUI>();
 
@@ -146,12 +137,16 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     {
         if (currentResultRoutine != null) StopCoroutine(currentResultRoutine);
         currentResultRoutine = StartCoroutine(ShowResultRoutine(ui.correctSprite, ui.correctClip));
+    
+        AudioManager.Instance?.PlayEffect(AudioManager.EffectType.Correct);
     }
 
     public void ShowWrong()
     {
         if (currentResultRoutine != null) StopCoroutine(currentResultRoutine);
         currentResultRoutine = StartCoroutine(ShowResultRoutine(ui.wrongSprite, ui.wrongClip));
+    
+        AudioManager.Instance?.PlayEffect(AudioManager.EffectType.Wrong);
     }
 
     private void OnEnable()
@@ -181,9 +176,7 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
     {
         if (clip != null)
         {
-            audioSource.Stop();
-            audioSource.clip = clip;
-            audioSource.Play();
+            AudioManager.Instance.PlayVoice(clip);
         }
         else
         {
@@ -207,7 +200,8 @@ public abstract class BaseMatchGameV2 : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         ui.blockerPanel.SetActive(true);
         ui.winPanel.SetActive(true);
-        PlayResultSound(ui.winClip);
+        
+        AudioManager.Instance?.PlayEffect(AudioManager.EffectType.Win);
     }
 
     public void CloseWinPanel()
