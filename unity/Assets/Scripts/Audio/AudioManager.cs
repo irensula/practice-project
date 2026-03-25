@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip wrongSound; 
     public AudioClip winSound; 
     public enum EffectType { Click, Correct, Wrong, Win }
+    public enum LanguageType { En, Fi }
+
+    private Dictionary<string, AudioClip> wordCache = new Dictionary<string, AudioClip>();
 
     void Awake()
     {
@@ -57,30 +60,6 @@ public class AudioManager : MonoBehaviour
         voiceSource.spatialBlend = 0;
 
         ApplySavedVolumes();
-    }
-
-    public void PlayClick()
-    {
-        PlayEffect(EffectType.Click);
-    }
-
-    public void PlayVoice(AudioClip clip)
-    {
-        if (clip != null && voiceSource != null)
-        {
-            voiceSource.volume = voiceMuted ? 0f : voiceVolume / 100f;
-            voiceSource.clip = clip;
-            voiceSource.Play();
-        }
-    }
-
-    public void RegisterButton(Button btn)
-    {
-        if (btn == null || registeredButtons.Contains(btn))
-            return;
-
-        btn.onClick.AddListener(PlayClick);
-        registeredButtons.Add(btn);
     }
 
     public void PlayEffect(EffectType type)
@@ -114,6 +93,56 @@ public class AudioManager : MonoBehaviour
             effectsSource.clip = clip;
             effectsSource.Play();
         }
+    }
+
+    public void PlayClick()
+    {
+        PlayEffect(EffectType.Click);
+    }
+
+    public void RegisterButton(Button btn)
+    {
+        if (btn == null || registeredButtons.Contains(btn))
+            return;
+
+        btn.onClick.AddListener(PlayClick);
+        registeredButtons.Add(btn);
+    }
+
+    public void PlayVoice(AudioClip clip)
+    {
+        if (clip != null && voiceSource != null)
+        {
+            voiceSource.volume = voiceMuted ? 0f : voiceVolume / 100f;
+            voiceSource.clip = clip;
+            voiceSource.Play();
+        }
+    }
+
+    public void PlayWord(string word, LanguageType lang)
+    {
+        if (string.IsNullOrEmpty(word)) return;
+
+        string key = $"{lang}_{word}";
+
+        if (!wordCache.TryGetValue(key, out AudioClip clip))
+        {
+            string path = $"Sounds/{lang.ToString().ToLower()}/{word}";
+            clip = Resources.Load<AudioClip>(path);
+
+            if (clip == null)
+            {
+                Debug.LogWarning($"Word audio not found: {path}");
+                return;
+            }
+            else
+            {
+                Debug.Log("AudioClip FOUND: " + path);
+            }
+            wordCache[key] = clip;
+        }
+        PlayVoice(clip);
+        Debug.Log($"Playing word: {word}, path: Sounds/{lang.ToString().ToLower()}/{word}");
     }
 
     public void SetEffectsVolume(float value)

@@ -8,19 +8,11 @@ using System.Numerics;
 public class WordSoundCard : BaseMatchCardV2, IPointerClickHandler
 {
     [SerializeField] private TMP_Text text;
-    private AudioSource audioSource;
-    private AudioClip audioClip;
+    private string wordKey;
 
     protected override void Awake()
     {
         base.Awake();
-
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0;
     }
 
     public override void Setup(int wordId, BaseMatchGameV2 game)
@@ -34,15 +26,8 @@ public class WordSoundCard : BaseMatchCardV2, IPointerClickHandler
         {
             text.text = translation.text;
 
-            string path = translation.audio
-                .Replace("audio/", "Sounds/")
-                .Replace(".mp3", "");
-
-            audioClip = Resources.Load<AudioClip>(path);
-
-            if(audioClip == null)
-                Debug.LogError("Audio NOT FOUND: " + path);
-            }
+            wordKey = translation.text;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -52,11 +37,9 @@ public class WordSoundCard : BaseMatchCardV2, IPointerClickHandler
 
     public void PlaySound()
     {
-        if (audioClip == null) return;
+        if (string.IsNullOrEmpty(wordKey)) return;
 
-        audioSource.Stop();
-        audioSource.clip = audioClip;
-        audioSource.Play();
-        Debug.Log("Play the sound");
+        AudioManager.Instance.PlayWord(wordKey, AudioManager.LanguageType.Fi);
+        Debug.Log("wordKey: " + wordKey);
     }
 }
