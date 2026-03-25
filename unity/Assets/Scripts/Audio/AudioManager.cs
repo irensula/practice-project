@@ -15,9 +15,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip clickSound;
 
     [Range(0f, 1f)]
-    public float effectsVolume = 0.5f;
+    public float effectsVolume = 50f;
     [Range(0f, 1f)]
-    public float voiceVolume = 0.5f;
+    public float voiceVolume = 50f;
 
     private bool effectsMuted;
     private bool voiceMuted;
@@ -58,13 +58,17 @@ public class AudioManager : MonoBehaviour
     public void PlayClick()
     {
         if (clickSound != null && effectsSource != null)
-            effectsSource.PlayOneShot(clickSound, effectsVolume);
+        {
+            effectsSource.clip = clickSound;
+            effectsSource.Play();
+        }
     }
 
     public void PlayVoice(AudioClip clip)
     {
         if (clip != null && voiceSource != null)
         {
+            effectsSource.volume = effectsMuted ? 0f : effectsVolume;
             voiceSource.clip = clip;
             voiceSource.Play();
         }
@@ -81,7 +85,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetEffectsVolume(float value)
     {
-        effectsVolume = value;
+        effectsVolume = Mathf.Clamp(value, 0f, 100f);
         PlayerPrefs.SetFloat("EffectsVolume", effectsVolume);
         UpdateAudioSources();
     }
@@ -97,6 +101,9 @@ public class AudioManager : MonoBehaviour
     {
         effectsVolume = PlayerPrefs.GetFloat("EffectsVolume", effectsVolume);
         voiceVolume = PlayerPrefs.GetFloat("VoiceVolume", voiceVolume);
+
+        effectsVolume = Mathf.Clamp(effectsVolume, 0f, 100f);
+        voiceVolume = Mathf.Clamp(voiceVolume, 0f, 100f);
 
         effectsMuted = PlayerPrefs.GetInt("EffectsMuted", 0) == 1;
         voiceMuted = PlayerPrefs.GetInt("VoiceMuted", 0) == 1;
@@ -121,9 +128,9 @@ public class AudioManager : MonoBehaviour
     private void UpdateAudioSources()
     {
         if (effectsSource != null)
-            effectsSource.volume = effectsMuted ? 0f : effectsVolume;
+            effectsSource.volume = effectsMuted ? 0f : effectsVolume / 100f;
 
         if (voiceSource != null)
-            voiceSource.volume = voiceMuted ? 0f : voiceVolume;
+            voiceSource.volume = voiceMuted ? 0f : voiceVolume / 100f;
     }
 }

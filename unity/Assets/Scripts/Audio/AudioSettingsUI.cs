@@ -53,4 +53,11 @@ public class AudioSettingsUI : MonoBehaviour
         voiceMuteIcon.sprite = voiceMuted ? muteIcon : unmuteIcon;
 
     }
+
+    public void OnSliderChanged(float value)
+    {
+        AudioManager.Instance.SetEffectsVolume(value);
+        Debug.Log("Slider: volume was changed");
+    }
+
 }
