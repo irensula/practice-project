@@ -11,9 +11,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource effectsSource;
     public AudioSource voiceSource;
 
-    [Range(0f, 1f)]
+    [Range(0f, 100f)]
     public float effectsVolume = 50f;
-    [Range(0f, 1f)]
+    [Range(0f, 100f)]
     public float voiceVolume = 50f;
 
     private bool effectsMuted;
