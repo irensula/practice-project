@@ -10,8 +10,7 @@ public class LargeImageCard : BaseMatchCardV2
     [SerializeField] private Sprite soundOff;
     public Button PlayIcon;
     public Button autoPlayToggleButton;
-    private AudioSource audioSource;
-    private AudioClip audioClip;
+    private string wordKey;
 
     public void Setup(int wordId, BaseMatchGameV2 game,  bool autoPlayEnabled)
     {
@@ -32,15 +31,9 @@ public class LargeImageCard : BaseMatchCardV2
 
         if (translation != null)
         {
-            string path = translation.audio
-                .Replace("audio/", "Sounds/")
+            wordKey = translation.audio
+                .Replace("audio/fi/", "")
                 .Replace(".mp3", "");
-
-            audioClip = Resources.Load<AudioClip>(path);
-
-            if(audioClip == null)
-                Debug.LogError("Audio NOT FOUND: " + path);
-
         }
 
         SetCardAutoPlayUI(autoPlayEnabled);
@@ -54,13 +47,6 @@ public class LargeImageCard : BaseMatchCardV2
     protected override void Awake()
     {
         base.Awake();
-
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0;
     }
 
     public void OnPlayIconClicked()
@@ -70,10 +56,7 @@ public class LargeImageCard : BaseMatchCardV2
 
     public void PlaySound()
     {
-        if (audioClip == null) return;
-
-        audioSource.PlayOneShot(audioClip);
-        Debug.Log("Play the sound");
+        AudioManager.Instance.PlayWord(wordKey, AudioManager.LanguageType.Fi);
     }
 
     public void OnToggleAutoPlayClicked()

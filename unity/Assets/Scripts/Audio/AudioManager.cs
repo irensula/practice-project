@@ -142,7 +142,6 @@ public class AudioManager : MonoBehaviour
             wordCache[key] = clip;
         }
         PlayVoice(clip);
-        Debug.Log($"Playing word: {word}, path: Sounds/{lang.ToString().ToLower()}/{word}");
     }
 
     public void SetEffectsVolume(float value)

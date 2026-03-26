@@ -24,6 +24,7 @@ public class MatchGame : MonoBehaviour
     [SerializeField] private SoundCard soundPrefab;
     
     [SerializeField] private DropSlot slotPrefab;
+    private Coroutine currentResultRoutine;
 
     private BaseMatchCard firstSelected = null;
     private bool isChecking = false;
@@ -37,24 +38,11 @@ public class MatchGame : MonoBehaviour
 
     [Header("Animated Icons")]
     [SerializeField] private PopAnimation resultPop;
-    
-    [Header("Result Sounds")]
-    [SerializeField] private AudioClip correctClip;
-    [SerializeField] private AudioClip wrongClip;
-    [SerializeField] private AudioClip winClip;
-    private AudioSource audioSource;
 
     public MiniGamesUIController miniGamesUIController;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0;
-
         btnCloseWinPanel.onClick.AddListener(CloseWinPanel);
 
         if (miniGamesUIController == null)
@@ -134,12 +122,8 @@ public class MatchGame : MonoBehaviour
                             if (finnish != null)
                             {
                                 string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
-                                AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
                                 
-                                if (clip != null)
-                                    soundCard.SetupSound(word.id, fileName, clip, this);
-                                else
-                                    Debug.LogError($"AudioClip not found: {fileName}");
+                                soundCard.SetupSound(word.id, fileName, this);
                             }
                             cardInstance = soundCard;
                             break;
@@ -198,12 +182,8 @@ public class MatchGame : MonoBehaviour
                             if (finnish != null)
                             {
                                 string fileName = System.IO.Path.GetFileNameWithoutExtension(finnish.audio);
-                                AudioClip clip = Resources.Load<AudioClip>($"Sounds/fi/{fileName}");
                                 
-                                if (clip != null)
-                                    soundCard.SetupSound(word.id, fileName, clip, this);
-                                else
-                                    Debug.LogError($"AudioClip not found: {fileName}");
+                                soundCard.SetupSound(word.id, fileName, this);
                             }
 
                         break;
@@ -255,37 +235,37 @@ public class MatchGame : MonoBehaviour
         firstSelected = null;
         isChecking = false;
     }
-
-    private void PlayResultSound(AudioClip clip)
-    {
-        if (clip != null)
-            {
-                audioSource.Stop();
-                audioSource.clip = clip;
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("Result sound not assigned!");
-            }
-    }
     
     public void ShowCorrect()
     {
-        resultIcon.gameObject.SetActive(true);
+        if (currentResultRoutine != null)
+            StopCoroutine(currentResultRoutine);
 
-        resultIcon.sprite = correctSprite;
-        resultPop.Play();
-        PlayResultSound(correctClip);
+        currentResultRoutine = StartCoroutine(ShowResultRoutine(correctSprite, AudioManager.EffectType.Correct));
     }
 
     public void ShowWrong()
     {
-        resultIcon.gameObject.SetActive(true);
+        if (currentResultRoutine != null)
+            StopCoroutine(currentResultRoutine);
 
-        resultIcon.sprite = wrongSprite;
+        currentResultRoutine = StartCoroutine(ShowResultRoutine(wrongSprite, AudioManager.EffectType.Wrong));
+    }
+
+    private IEnumerator ShowResultRoutine(Sprite icon, AudioManager.EffectType soundType)
+    {
+        blockerPanel.SetActive(true);
+
+        resultIcon.gameObject.SetActive(true);
+        resultIcon.sprite = icon;
         resultPop.Play();
-        PlayResultSound(wrongClip);
+
+        AudioManager.Instance?.PlayEffect(soundType);
+
+        yield return new WaitForSeconds(1f);
+
+        resultIcon.gameObject.SetActive(false);
+        blockerPanel.SetActive(false);
     }
 
     void ClearContainers()
@@ -314,7 +294,7 @@ public class MatchGame : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         blockerPanel.SetActive(true);
         winPanel.SetActive(true);
-        PlayResultSound(winClip);
+        AudioManager.Instance?.PlayEffect(AudioManager.EffectType.Win);
     }
 
     public void CloseWinPanel()

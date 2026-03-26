@@ -3909,9 +3909,9 @@ MonoBehaviour:
   effectsVolume: 0.5
   voiceVolume: 0.5
   clickSound: {fileID: 8300000, guid: 2a7afc28cce667343a3ea3b5f5e5ae2b, type: 3}
-  correctSound: {fileID: 8300000, guid: 85725a0fb02d26144af19623cfeb9b40, type: 3}
-  wrongSound: {fileID: 8300000, guid: 40f0ffcea4bc4574fb97c51b9ca10de1, type: 3}
-  winSound: {fileID: 8300000, guid: c320295d0a7ec1e4980aa85c7688b429, type: 3}
+  correctSound: {fileID: 0}
+  wrongSound: {fileID: 0}
+  winSound: {fileID: 0}
 --- !u!4 &1733343121
 Transform:
   m_ObjectHideFlags: 0

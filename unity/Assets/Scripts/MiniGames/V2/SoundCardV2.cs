@@ -4,20 +4,11 @@ using System.Linq;
 
 public class SoundCardV2 : BaseMatchCardV2, IPointerClickHandler
 {
-    private AudioClip clip;
-    private AudioSource audioSource;
+    private string wordKey;
 
     protected void Awake()
     {
         base.Awake();
-
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0;
-        audioSource.volume = 1f;
     }
 
     public override void Setup(int wordId, BaseMatchGameV2 game)
@@ -30,26 +21,16 @@ public class SoundCardV2 : BaseMatchCardV2, IPointerClickHandler
             var translation = wordData.translations.FirstOrDefault(t => t.languageId == 1);
             if (translation != null && !string.IsNullOrEmpty(translation.audio))
             {
-                clip = Resources.Load<AudioClip>(translation.audio.Replace("audio/", "Sounds/").Replace(".mp3", ""));
-                if (clip != null)
-                {
-                    Debug.Log("Loaded audio clip: " + translation.audio);
-                }
-                else
-                {
-                    Debug.LogWarning("Cannot load audio clip: " + translation.audio);
-                }
+                wordKey = translation.audio.Replace("audio/fi/", "").Replace(".mp3", "");
             }
         }
     }
 
     private void PlaySound()
     {
-        if (clip != null)
+        if (wordKey != null)
         {
-            audioSource.Stop();
-            audioSource.clip = clip;
-            audioSource.Play();
+            AudioManager.Instance.PlayWord(wordKey, AudioManager.LanguageType.Fi);
         }
     }
 
