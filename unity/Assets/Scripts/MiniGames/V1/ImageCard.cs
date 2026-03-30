@@ -15,7 +15,6 @@ public class ImageCard : BaseMatchCard
 
     public override void SetMatched()
     {
-        Debug.Log("Set matched image");
         base.SetMatched();
         overlayImage.gameObject.SetActive(true);
     }

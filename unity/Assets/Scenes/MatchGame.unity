@@ -1293,6 +1293,7 @@ MonoBehaviour:
   wordsRow: {fileID: 768626190}
   imagesRow: {fileID: 1129794783}
   btnCloseWinPanel: {fileID: 2000567266}
+  txtTitle: {fileID: 574556414}
 --- !u!1 &1950118567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1599,18 @@ PrefabInstance:
     - target: {fileID: 2360838651736422343, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102854193492166260, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1574545912}
+    - target: {fileID: 7102854193492166260, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7102854193492166260, guid: dbeb8c31f23e4b54986d60a85fa7168f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VocabularyUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

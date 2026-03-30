@@ -2757,7 +2757,7 @@ MonoBehaviour:
     m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -2880,6 +2880,11 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4759368633615222168, guid: a49bbf7f30b44d14ca6f34ebef491ec8, type: 3}
   m_PrefabInstance: {fileID: 1031287099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1046795808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1523261857736506168, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
+  m_PrefabInstance: {fileID: 1244687212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1085955379
 PrefabInstance:
@@ -3257,6 +3262,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Content
       objectReference: {fileID: 0}
+    - target: {fileID: 4637866499515510986, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637866499515510986, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8375175804526697370, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3349,16 +3362,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2919139257969979067, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1523261857736506168, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1244687215}
   m_SourcePrefab: {fileID: 100100000, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
 --- !u!224 &1244687213 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8375175804526697370, guid: 3127168df9dab2e40a981f32d2f9845c, type: 3}
   m_PrefabInstance: {fileID: 1244687212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1244687215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046795808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1001 &1352895922
 PrefabInstance:
   m_ObjectHideFlags: 0

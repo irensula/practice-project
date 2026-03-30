@@ -165,7 +165,6 @@ public class MatchGame : MonoBehaviour
                 case MatchContentType.Picture:
                     {
                         ImageCard imgCard = Instantiate(imagePrefab, secondaryContainer);
-                        Debug.Log("Created card type: " + imgCard.GetType());
                         imgCard.Setup(word.id, this);
                         Sprite sprite = Resources.Load<Sprite>(word.image.Replace(".jpg", "").Replace(".png", ""));
                         if (sprite != null)

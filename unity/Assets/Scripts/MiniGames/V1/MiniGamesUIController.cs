@@ -18,20 +18,30 @@ public class MiniGamesUIController : MonoBehaviour
 
     private void Awake()
     {
+        miniGameButtonsPanel.SetActive(false);
+        matchGamePanel.SetActive(false);
+
         DatabaseService.Init(this, OnDatabaseLoaded);
-
-        vocabularyList = new List<WordData>(db.words);
-
-        foreach (var word in vocabularyList)
-        {
-            string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
-        }
     }
 
     void OnDatabaseLoaded()
     {
         db = DatabaseService.Load();
+        if (db.words != null)
+            vocabularyList = new List<WordData>(db.words);
+        else
+            vocabularyList = new List<WordData>();
+
+        foreach (var word in vocabularyList)
+        {
+            string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
+        }
+
+        miniGameButtonsPanel.SetActive(true);
     }
+
+    // check if vocabulary list is ready
+    private bool IsVocabularyReady => vocabularyList != null && vocabularyList.Count > 0;
 
     public void OpenMatchGame(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
     {

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using System.Reflection;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class VocabularyItem
@@ -31,6 +32,7 @@ public class VocabularyUI : MonoBehaviour
     private WordItem selectedWord;
     private ImageItem selectedImage;
     public Button btnCloseWinPanel;
+    public TMP_Text txtTitle;
 
     void Start()
     {
@@ -54,7 +56,6 @@ public class VocabularyUI : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
-            Debug.Log("Requesting: " + url);
             
             if(request.result == UnityWebRequest.Result.Success)
             {
@@ -86,6 +87,7 @@ public class VocabularyUI : MonoBehaviour
             }
             else
             {
+                txtTitle.text = "To play this game requires an active connection to the database";
                 Debug.LogError(request.error);
             }
         }
@@ -217,4 +219,9 @@ public class VocabularyUI : MonoBehaviour
         yield return new WaitForSeconds(1f);
         resultIcon.gameObject.SetActive(false);
     }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("LessonScene");
+    } 
 }

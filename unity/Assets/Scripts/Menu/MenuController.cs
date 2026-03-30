@@ -115,14 +115,20 @@ public class MenuController : MonoBehaviour
         {
             GameObject newLanguageObj = Instantiate(languageButtonPrefab, languagesContainer);
 
+            // set image
             Image img = newLanguageObj.GetComponent<Image>();
             img.sprite = language.languageFlag;
 
+            // set button listener
             Button btn = newLanguageObj.GetComponent<Button>();
             string langCode = language.code;
             btn.onClick.AddListener(() => SelectLanguage(langCode));
             
+            // fix layout for WebGL / dynamic instantiation
+            RectTransform rt = newLanguageObj.GetComponent<RectTransform>();
+            rt.localScale = Vector3.one;                   
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(languagesContainer.GetComponent<RectTransform>());
         RegisterPanelButtons(languagePanel);
     }
 

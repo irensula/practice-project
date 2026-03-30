@@ -23,20 +23,32 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
 
     private void Awake()
     {
+        miniGameButtonsPanel.SetActive(false);
+        matchGamePanel.SetActive(false);
+
         DatabaseService.Init(this, OnDatabaseLoaded);
-
-        vocabularyList = new List<WordData>(db.words);  
-
-        foreach (var word in vocabularyList)
-        {
-            string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
-        }
     }
 
     void OnDatabaseLoaded()
     {
         db = DatabaseService.Load();
+        if (db.words != null)
+            vocabularyList = new List<WordData>(db.words);
+        else
+            vocabularyList = new List<WordData>();
+
+        Debug.Log("Vocabulary loaded! Count: " + vocabularyList.Count);
+
+        foreach (var word in vocabularyList)
+        {
+            string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
+        }
+
+        miniGameButtonsPanel.SetActive(true);
     }
+
+    // check if vocabulary list is not empty
+    private bool IsVocabularyReady => vocabularyList != null && vocabularyList.Count > 0;
 
     public void StartTextToPictureGame()
     {
@@ -110,7 +122,7 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
         {
             MenuState.PanelToOpen = MenuState.PanelType.Lessons; 
             MenuState.SetLevel(MenuState.PanelLevel.Lessons);
-            SceneManager.LoadScene("MainMenuScene"); 
+            SceneManager.LoadScene("LessonScene"); 
         }
     }
 }
