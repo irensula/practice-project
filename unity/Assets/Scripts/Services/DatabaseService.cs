@@ -1,12 +1,23 @@
 using UnityEngine;
+using System.Collections;
 using System.IO;
+using UnityEngine.Networking;
+using System;
 
-public class DatabaseService
+public static class DatabaseService
 {
     private static string dbPath;
+    public static Database CurrentDatabase { get; private set; }
 
-    public static void Init()
+    // Инициализация
+    public static void Init(MonoBehaviour coroutineOwner = null, Action onLoaded = null)
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (coroutineOwner != null)
+        {
+            coroutineOwner.StartCoroutine(LoadWebGL("db.json", onLoaded));
+        }
+#else
         dbPath = Path.Combine(Application.streamingAssetsPath, "db.json");
 
         if (!File.Exists(dbPath))
@@ -14,26 +25,59 @@ public class DatabaseService
             Database emptyDb = CreateEmptyDatabase();
             Save(emptyDb);
         }
-    }
 
-    public static Database Load()
-    {
-        if (!File.Exists(dbPath))
-        {
-            Debug.LogWarning("db.json not found, creating empty database.");
-            return CreateEmptyDatabase();
-        }
-            
         string json = File.ReadAllText(dbPath);
-
-        Database db = JsonUtility.FromJson<Database>(json);
-        return Normalize(db);
+        CurrentDatabase = JsonUtility.FromJson<Database>(json);
+        if (CurrentDatabase == null)
+        {
+            Debug.LogWarning("Parsed DB is null, creating empty database");
+            CurrentDatabase = CreateEmptyDatabase();
+        }
+        onLoaded?.Invoke();
+#endif
     }
-    
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+    private static IEnumerator LoadWebGL(string fileName, Action onLoaded)
+    {
+        string url = Application.streamingAssetsPath + "/" + fileName;
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Failed to load database: " + www.error);
+                CurrentDatabase = CreateEmptyDatabase();
+            }
+            else
+            {
+                string json = www.downloadHandler.text;
+                Debug.Log("Database loaded:\n" + json);
+                CurrentDatabase = JsonUtility.FromJson<Database>(json);
+            }
+        }
+        onLoaded?.Invoke();
+    }
+#endif
+
     public static void Save(Database db)
     {
+#if !UNITY_WEBGL || UNITY_EDITOR
         string newJson = JsonUtility.ToJson(db, true);
         File.WriteAllText(dbPath, newJson);
+        CurrentDatabase = db;
+#else
+        Debug.LogWarning("Save not supported in WebGL!");
+#endif
+    }
+
+    // this method is for compatibility
+    public static Database Load()
+    {
+        if (CurrentDatabase == null)
+            CurrentDatabase = CreateEmptyDatabase();
+        return CurrentDatabase;
     }
 
     private static Database CreateEmptyDatabase()
@@ -45,17 +89,5 @@ public class DatabaseService
             courses = new CourseData[0],
             lessons = new LessonData[0]
         };
-    }
-
-    private static Database Normalize(Database db)
-    {
-        if (db == null) return CreateEmptyDatabase();
-
-        db.users ??= new UserData[0];
-        db.languages ??= new LanguageData[0];
-        db.courses ??= new CourseData[0];
-        db.lessons ??= new LessonData[0];
-
-        return db;
     }
 }

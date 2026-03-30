@@ -32,11 +32,21 @@ public class MenuController : MonoBehaviour
     [Header("Database JSON")]
     private Database db;
 
+
     void Start()
     {
-        DatabaseService.Init();
+        DatabaseService.Init(this, OnDatabaseLoaded);
+    }
+    void OnDatabaseLoaded()
+    {
         db = DatabaseService.Load();
+        Debug.Log("DB loaded! Languages: " + db.languages.Length);
+        ShowMenuUI();
 
+    }
+
+    void ShowMenuUI()
+    {
         if (MenuState.PanelToOpen != null)
         {
             switch (MenuState.PanelToOpen)
@@ -118,7 +128,6 @@ public class MenuController : MonoBehaviour
 
     public void ShowMainMenu()
     {
-       
         HideAllPanels();
         mainMenuPanel.SetActive(true);
         MenuState.SetLevel(MenuState.PanelLevel.MainMenu);
@@ -128,7 +137,6 @@ public class MenuController : MonoBehaviour
 
     public void ShowCourses()
     {
-        
         HideAllPanels();
         coursesPanel.SetActive(true);
         MenuState.SetLevel(MenuState.PanelLevel.Courses); 

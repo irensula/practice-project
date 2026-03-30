@@ -19,11 +19,11 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
 
     [Header("Vocabulary")]
     public List<WordData> vocabularyList; 
+    private Database db;
 
     private void Awake()
     {
-        DatabaseService.Init();
-        var db = DatabaseService.Load();
+        DatabaseService.Init(this, OnDatabaseLoaded);
 
         vocabularyList = new List<WordData>(db.words);  
 
@@ -32,6 +32,12 @@ public class MiniGamesUIControllerV2 : MonoBehaviour
             string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
         }
     }
+
+    void OnDatabaseLoaded()
+    {
+        db = DatabaseService.Load();
+    }
+
     public void StartTextToPictureGame()
     {
         miniGameButtonsPanel.SetActive(false);

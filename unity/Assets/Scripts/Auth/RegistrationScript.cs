@@ -17,7 +17,7 @@ public class RegistrationScript : AuthUIHelper
 
     void Start()
     {
-        StartCoroutine(InitDatabase());
+        DatabaseService.Init(this, OnDatabaseLoaded);
         
         // hide error message when user types in the input fields
         inputEmail.onValueChanged.AddListener(delegate { ClearMessage(); });
@@ -27,32 +27,9 @@ public class RegistrationScript : AuthUIHelper
         txtMessage.gameObject.SetActive(false);
     }
 
-    private IEnumerator InitDatabase()
+    void OnDatabaseLoaded()
     {
-        string persistentPath = Path.Combine(Application.persistentDataPath, "db.json");
-        
-        if (!File.Exists(persistentPath))
-        {
-    #if UNITY_ANDROID && !UNITY_EDITOR
-        // read on Android through UnityWebRequest
-        UnityWebRequest www = UnityWebRequest.Get(Path.Combine(Application.streamingAssetsPath, "db.json"));
-        yield return www.SendWebRequest();
-
-        if (www.result == UnityWebRequest.Result.Success)
-        {
-            File.WriteAllText(persistentPath, www.downloadHandler.text);
-        }
-    #else 
-        File.Copy(Path.Combine(Application.streamingAssetsPath, "db.json"), persistentPath);
-
-    #endif
-        }
-        string json  = File.ReadAllText(persistentPath);
-        db = JsonUtility.FromJson<Database>(json);
-
-        Debug.Log(Application.persistentDataPath);
-
-        yield break;
+        db = DatabaseService.Load();
     }
 
     public void RegisterUser()

@@ -14,11 +14,11 @@ public class MiniGamesUIController : MonoBehaviour
 
     [Header("Vocabulary List")]
     public List<WordData> vocabularyList; 
+    private Database db;
 
     private void Awake()
     {
-        DatabaseService.Init();
-        var db = DatabaseService.Load();
+        DatabaseService.Init(this, OnDatabaseLoaded);
 
         vocabularyList = new List<WordData>(db.words);
 
@@ -27,6 +27,12 @@ public class MiniGamesUIController : MonoBehaviour
             string translations = string.Join(", ", word.translations.Select(t => t.text + $"({t.languageId})"));
         }
     }
+
+    void OnDatabaseLoaded()
+    {
+        db = DatabaseService.Load();
+    }
+
     public void OpenMatchGame(List<WordData> vocabulary, MatchGameMode mode, MatchGameType type)
     {
         if (vocabulary == null || vocabulary.Count == 0)
